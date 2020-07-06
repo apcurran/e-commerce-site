@@ -1,3 +1,54 @@
-body {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --wrapper-max-width: 70rem;
+    --wrapper-width: 92.5%;
+}
+
+body,
+input,
+button {
     font-family: sans-serif;
+}
+
+body {
+    display: grid;
+    min-height: 100vh;
+    grid-auto-rows: auto 1fr auto;
+}
+
+.header {
+    padding: 2rem 0;
+
+    background-color: lightblue;
+}
+
+.nav {
+    max-width: var(--wrapper-max-width);
+    width: var(--wrapper-width);
+    margin: 0 auto;
+}
+
+.wrapper {
+    max-width: var(--wrapper-max-width);
+    width: var(--wrapper-width);
+    margin: 2rem auto;
+}
+
+.footer {
+    padding: 1.5rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #222;
+    color: #fff;
+}
+
+.footer__title {
+    opacity: .65;
 }
