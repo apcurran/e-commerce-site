@@ -40,7 +40,7 @@ body {
 }
 
 .footer {
-    padding: 1.5rem 0;
+    padding: 1.25rem 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,5 +50,6 @@ body {
 }
 
 .footer__title {
+    font-size: .9rem;
     opacity: .65;
 }
