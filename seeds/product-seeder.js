@@ -71,14 +71,12 @@ const products = [
     })
 ];
 
-let done = 0;
-
-for (let product of products) {
-    product.save(function(err, result) {
-        done++;
-
-        if (done === products.length) {
-            mongoose.disconnect();
-        }
-    });
+async function populateDB() {
+    for (let product of products) {
+        await product.save();
+    }
+    
+    mongoose.disconnect();
 }
+
+populateDB();
