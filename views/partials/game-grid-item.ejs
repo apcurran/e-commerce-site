@@ -1,4 +1,12 @@
 <article class="game-card">
-    <img src="<%= product.img_path %>" alt="Game cover art" class="game-card__img">
-    <h3 class="game-card__title"><%= product.title %></h3>
+    <figure class="game-card__fig">
+        <img src="<%= product.img_path %>" alt="Game cover art" class="game-card__fig__img">
+    </figure>
+    <div class="game-card__info">
+        <h3 class="game-card__title"><%= product.title %></h3>
+        <div class="game-card__genre-chip">
+            <span class="game-card__genre-chip-text"><%= product.genre %></span>
+        </div>
+        <p class="game-card__price">$<%= product.price %></p>
+    </div>
 </article>
