@@ -5,32 +5,79 @@
 }
 
 :root {
-    --wrapper-max-width: 70rem;
+    --wrapper-max-width: 77rem;
     --wrapper-width: 92.5%;
+
+    --light-grey: #caccce;
+}
+
+/* Global Styles */
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
 }
 
 body,
 input,
 button {
-    font-family: sans-serif;
+    font-family: 'Muli', sans-serif;
 }
 
 body {
     display: grid;
     min-height: 100vh;
     grid-auto-rows: auto 1fr auto;
+
+    background-color: #f7f7f8;
 }
 
-.header {
-    padding: 2rem 0;
+/* Component Styles */
 
-    background-color: lightblue;
+.header {
+    padding: 1.35rem 0;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .135);
+    background-color: #fff;
 }
 
 .nav {
     max-width: var(--wrapper-max-width);
     width: var(--wrapper-width);
     margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav__logo-link {
+    display: inline-block;
+}
+
+.nav__logo-img {
+    width: 100%;
+}
+
+.nav__list {
+    flex-grow: 2;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.nav__list__item:not(:last-of-type) {
+    margin-right: 1rem;
+}
+
+.nav__list__link {
+    display: inline-block;
+    padding: .25rem 0;
 }
 
 .wrapper {
@@ -39,17 +86,68 @@ body {
     margin: 2rem auto;
 }
 
+/* Game Views */
+
+.hero-container {
+    margin-bottom: 2rem;
+}
+
+.hero-img {
+    width: 100%;
+}
+
+.main--game {
+    display: flex;
+}
+
+.sidebar {
+    margin-right: 3.25rem;
+}
+
+.sidebar__list--top {
+    padding-bottom: .75rem;
+    border-bottom: 1px solid var(--light-grey);
+}
+
+.sidebar__list--bottom {
+    padding-top: .75rem;
+}
+
+.sidebar__link {
+    display: inline-block;
+    padding: .5rem 1.25rem .5rem .25rem;
+    width: 100%;
+    opacity: .5;
+    font-weight: 700;
+}
+
+.sidebar__link--active {
+    opacity: 1;
+}
+
+.game-grid {
+    /* Grow to full width */
+    flex-grow: 1;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+    gap: 1rem;
+}
+
+.game-card__img {
+    width: 100%;
+}
+
 .footer {
     padding: 1.25rem 0;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    background-color: #222;
-    color: #fff;
+    background-color: #CBD5E0;
 }
 
 .footer__title {
     font-size: .9rem;
-    opacity: .65;
+    color: hsl(211, 25%, 37%);
 }

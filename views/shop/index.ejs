@@ -1,4 +1,14 @@
-<h1>Home Page</h1>
+<%- include("../partials/hero") %>
+
 <% if (locals.error) { %>
     <p class="error"><%= locals.error %></p>
-<% } %> 
+<% } %>
+
+<main class="main--game">
+    <%- include("../partials/sidebar", { genre }) %>
+    <section class="game-grid">
+        <% products.forEach(product => { %>
+            <%- include("../partials/game-grid-item", { product }) %> 
+        <% }); %>
+    </section>
+</main>
