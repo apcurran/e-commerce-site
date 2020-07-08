@@ -6,9 +6,12 @@
 
 <main class="main--game">
     <%- include("../partials/sidebar", { genre }) %>
-    <section class="game-grid">
-        <% products.forEach(product => { %>
-            <%- include("../partials/game-grid-item", { product }) %> 
-        <% }); %>
+    <section class="game-section">
+        <h2 class="game-section__title"><%= genre %></h2>
+        <div class="game-grid">
+            <% products.forEach(product => { %>
+                <%- include("../partials/game-grid-item", { product }) %> 
+            <% }); %>
+        </div>
     </section>
 </main>

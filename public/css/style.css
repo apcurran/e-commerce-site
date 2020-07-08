@@ -9,6 +9,7 @@
     --wrapper-width: 92.5%;
 
     --light-grey: #caccce;
+    --dark-indigo: #4c51bf;
 }
 
 /* Global Styles */
@@ -125,10 +126,19 @@ body {
     opacity: 1;
 }
 
-.game-grid {
+.game-section {
     /* Grow to full width */
     flex-grow: 1;
+}
 
+.game-section__title {
+    margin-bottom: 1.15rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--dark-indigo);
+}
+
+.game-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
     gap: 1.5rem;
