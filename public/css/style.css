@@ -9,7 +9,9 @@
     --wrapper-width: 92.5%;
 
     --light-grey: #caccce;
+    --light-blue: #a3bffa;
     --dark-indigo: #4c51bf;
+    --dark-teal: #2c7a7b;
 }
 
 /* Global Styles */
@@ -149,7 +151,7 @@ body {
 }
 
 .game-card__fig {
-    border-bottom: 4px solid #A3BFFA;
+    border-bottom: 4px solid var(--light-blue);
     border-radius: 4px 4px 0 0;
 }
 
@@ -176,7 +178,7 @@ body {
     padding: .4rem 1.35rem .5rem 1.35rem;
     margin-bottom: 1rem;
     border-radius: 500px;
-    background-color: #A3BFFA;
+    background-color: var(--light-blue);
     color: #5f5f5f;
 }
 
@@ -186,6 +188,106 @@ body {
 
 .game-card__price {
     font-weight: 700;
+}
+
+/* Game Details Page */
+
+.game-details {
+    margin-top: .35rem;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 6.5rem;
+}
+
+.game-details__left__title {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: var(--dark-indigo);
+}
+
+.game-details__left__img {
+    display: inline-block;
+    margin-bottom: 1.25rem;
+}
+
+.game-details__left__desc {
+    line-height: 1.6;
+}
+
+.game-details__right__list__item {
+    margin-bottom: .25rem;
+}
+
+/* First item with Border */
+.list--top {
+    font-weight: 700;
+    display: inline-block;
+    padding-bottom: 1rem;
+
+    border-bottom: 1px solid var(--light-grey);
+}
+
+.list--bottom {
+    padding-top: 1rem;
+    margin-bottom: .5rem;
+}
+
+.game-details__right__list__item span {
+    font-weight: 700;
+}
+
+.game-details__right__form {
+    margin-bottom: 1.2rem;
+}
+
+.game-details__right__form__label {
+    font-weight: 700;
+    color: var(--dark-indigo);
+}
+
+.game-details__add-btn {
+    display: inline-block;
+    position: relative;
+    padding: .6rem 1.25rem;
+    
+    letter-spacing: .08em;
+    background-color: var(--dark-teal);
+    color: #fff;
+    font-size: 1rem;
+    text-transform: uppercase;
+    overflow: hidden;
+}
+
+/* Shiny Layer */
+.game-details__add-btn:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background: white;
+    opacity: 0.3;
+    height: 100%;
+    width: 100%;
+    transform: skewX(-45deg);
+    background: linear-gradient(to right, white, white 20px, transparent 20px);
+    transform-origin: left bottom;
+    /* animation: shine 10s ease-in infinite; */
+}
+
+/* Button Animation */
+@keyframes shine {
+    0% {
+        transform: skewX(-45deg) translateX(-100%);
+    }
+
+    10% {
+        transform: skewX(-45deg) translateX(100%);
+    }
+
+    100% {
+        transform: skewX(-45deg) translateX(100%);
+    }
 }
 
 .footer {

@@ -1,0 +1,38 @@
+<%- include("../partials/hero") %>
+
+<% if (locals.error) { %>
+    <p class="error"><%= locals.error %></p>
+<% } %>
+
+<main class="main--game">
+    <%- include("../partials/sidebar", { genre }) %>
+    <section class="game-details">
+        <section class="game-details__left">
+            <h1 class="game-details__left__title"><%= product.title %></h1>
+            <img src="<%= product.img_path %>" alt="<%= product.title %> cover art" class="game-details__left__img">
+            <p class="game-details__left__desc"><%= product.description %></p>
+        </section>
+        <section class="game-details__right">
+            <ul class="game-details__right__list list--top">
+                <li class="game-details__right__list__item">Details</li>
+            </ul>
+            <ul class="game-details__right__list list--bottom">
+                <li class="game-details__right__list__item">Genre: <span><%= product.genre %></span></li>
+                <li class="game-details__right__list__item">New <span>$<%= product.price %></span></li>
+                <li class="game-details__right__list__item">Rating here...</li>
+            </ul>
+            <form action="" class="game-details__right__form">
+                <label class="game-details__right__form__label">Rate this game</label>
+                <select name="rating" id="game-rating" class="game-details__right__form__select">
+                    <option value="5" class="game-details__right__form__option">5 Stars</option>
+                    <option value="4" class="game-details__right__form__option">4 Stars</option>
+                    <option value="3" class="game-details__right__form__option">3 Stars</option>
+                    <option value="2" class="game-details__right__form__option">2 Stars</option>
+                    <option value="1" class="game-details__right__form__option">1 Star</option>
+                </select>
+                <button class="game-details__right__form__submit">Submit</button>
+            </form>
+            <a href="" class="game-details__add-btn">Add to Cart</a>
+        </section>
+    </section>
+</main>

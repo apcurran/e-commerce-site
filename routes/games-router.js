@@ -67,4 +67,18 @@ router.get("/games/sports", async (req, res) => {
     }
 });
 
+router.get("/games/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const product = await Product.findById(id);
+
+        res.render("shop/product-page", { title: `${product.title} Details`, product, genre: product.genre });
+
+    } catch (err) {
+        console.error(err);
+
+        res.render("shop/product-page", { title: req.params.id, error: err.message });
+    }
+});
+
 module.exports = router;
