@@ -1,10 +1,13 @@
+"use strict";
+
 const express = require("express");
 const router = express.Router();
 const Product = require("../models/Product");
 
+// GET Page Views
 router.get("/", async (req, res) => {
     try {
-        const products = await Product.find();
+        const products = await Product.find().lean();
 
         res.render("shop/index", { title: "Home", products, genre: "all" });
         
@@ -17,7 +20,7 @@ router.get("/", async (req, res) => {
 
 router.get("/games/action", async (req, res) => {
     try {
-        const products = await Product.find({ genre: "action" });
+        const products = await Product.find({ genre: "action" }).lean();
 
         res.render("shop/index", { title: "Home", products, genre: "action" });
         
@@ -30,7 +33,7 @@ router.get("/games/action", async (req, res) => {
 
 router.get("/games/adventure", async (req, res) => {
     try {
-        const products = await Product.find({ genre: "adventure" });
+        const products = await Product.find({ genre: "adventure" }).lean();
 
         res.render("shop/index", { title: "Home", products, genre: "adventure" });
         
@@ -43,7 +46,7 @@ router.get("/games/adventure", async (req, res) => {
 
 router.get("/games/rpg", async (req, res) => {
     try {
-        const products = await Product.find({ genre: "rpg" });
+        const products = await Product.find({ genre: "rpg" }).lean();
 
         res.render("shop/index", { title: "Home", products, genre: "rpg" });
         
@@ -56,7 +59,7 @@ router.get("/games/rpg", async (req, res) => {
 
 router.get("/games/sports", async (req, res) => {
     try {
-        const products = await Product.find({ genre: "sports" });
+        const products = await Product.find({ genre: "sports" }).lean();
 
         res.render("shop/index", { title: "Home", products, genre: "sports" });
         
@@ -67,6 +70,7 @@ router.get("/games/sports", async (req, res) => {
     }
 });
 
+// GET Single Product
 router.get("/games/:id", async (req, res) => {
     try {
         const { id } = req.params;
