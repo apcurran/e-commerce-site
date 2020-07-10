@@ -322,7 +322,6 @@ body {
 .user-card__form {
     display: flex;
     flex-direction: column;
-
 }
 
 .user-card__form__input {
