@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 5000;
 const morgan = require("morgan");
 const expressLayouts = require("express-ejs-layouts");
 const mongoose = require("mongoose");
+const session = require("express-session");
 // Routers
 const gamesRouter = require("./routes/games-router");
 const userRouter = require("./routes/user-router");
@@ -27,6 +28,7 @@ app.set("layout", "layouts/layout");
 app.use(expressLayouts);
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
+app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
 
 // Routes
 app.use("/", gamesRouter);
