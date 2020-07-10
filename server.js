@@ -8,6 +8,7 @@ const expressLayouts = require("express-ejs-layouts");
 const mongoose = require("mongoose");
 // Routers
 const gamesRouter = require("./routes/games-router");
+const userRouter = require("./routes/user-router");
 
 const app = express();
 
@@ -29,6 +30,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use("/", gamesRouter);
+app.use("/user", userRouter);
+
 // Final 404 route handler
 app.use((req, res, next) => {
     res.status(404).render("404", { title: "404 Not Found" });
