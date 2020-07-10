@@ -14,6 +14,7 @@
     --light-blue: #a3bffa;
     --dark-indigo: #4c51bf;
     --submit-btn-bg-clr: #046586;
+    --dark-red: #9b2c2c;
 }
 
 /* Global Styles */
@@ -31,6 +32,11 @@ body,
 input,
 button {
     font-family: 'Muli', sans-serif;
+}
+
+.error {
+    color: var(--dark-red);
+    margin-bottom: .5rem;
 }
 
 body {

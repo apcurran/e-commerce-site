@@ -14,7 +14,13 @@ router.get("/signup", (req, res) => {
 });
 
 router.post("/signup", (req, res) => {
-    res.redirect("/");
+    try {
+        
+    } catch (err) {
+        console.error(err);
+
+        res.render("user/signup", { title: "Sign Up", error: err });
+    }
 });
 
 // GET Log In
