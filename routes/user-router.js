@@ -5,6 +5,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const { checkNotAuthenticated } = require("../config/check-auth");
+const { signupValidation, loginValidation } = require("../validation/validate-user");
 const passport = require("passport");
 const csrf = require("csurf");
 
@@ -18,6 +19,14 @@ router.get("/signup", checkNotAuthenticated, (req, res) => {
 });
 
 router.post("/signup", checkNotAuthenticated, async (req, res) => {
+    try {
+        // Validate incoming data
+        await signupValidation(req.body);
+
+    } catch (err) {
+        return res.render("user/signup", { title: "Sign Up", csrfToken: req.csrfToken(), error: err.details[0].message });
+    }
+
     try {
         const { first_name, last_name, email, password } = req.body;
 
