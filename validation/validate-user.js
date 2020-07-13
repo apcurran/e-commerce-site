@@ -38,7 +38,9 @@ function loginValidation(data) {
         password: Joi
                 .string()
                 .min(6)
-                .required()
+                .required(),
+        _csrf: Joi
+                .string()
     });
 
     return schema.validateAsync(data);

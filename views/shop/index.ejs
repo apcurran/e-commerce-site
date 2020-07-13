@@ -1,10 +1,5 @@
 <%- include("../partials/hero") %>
 
-<% if (locals.user) { %>
-    <h2>Welcome back, <%= locals.user.first_name %>!</h2>
-    <a href="/user/logout">LOG OUT</a>
-<% } %> 
-
 <% if (locals.error) { %>
     <p class="error"><%= locals.error %></p>
 <% } %>

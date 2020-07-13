@@ -4,7 +4,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
-const { checkNotAuthenticated } = require("../config/check-auth");
+const { checkNotAuthenticated, checkAuthenticated } = require("../config/check-auth");
 const { signupValidation, loginValidation } = require("../validation/validate-user");
 const passport = require("passport");
 const csrf = require("csurf");
@@ -61,15 +61,20 @@ router.post("/signup", checkNotAuthenticated, async (req, res) => {
 });
 
 // GET Log In
-router.get("/login",  checkNotAuthenticated, (req, res) => {
+router.get("/login", checkNotAuthenticated, (req, res) => {
     res.render("user/login", { title: "Log In", csrfToken: req.csrfToken() });
 });
 
 router.post("/login", checkNotAuthenticated, passport.authenticate("local", {
-    successRedirect: "/",
+    successRedirect: "/user/profile",
     failureRedirect: "/user/login",
     failureFlash: true
 }));
+
+// GET User Profile
+router.get("/profile", checkAuthenticated, (req, res) => {
+    res.render("user/profile", { title: "Profile", user: req.user });
+});
 
 // GET Log Out
 router.get("/logout", (req, res) => {

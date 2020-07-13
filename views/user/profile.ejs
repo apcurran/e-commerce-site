@@ -1,0 +1,6 @@
+<h1>Profile Page</h1>
+
+<% if (locals.user) { %>
+    <h2>Welcome back, <%= locals.user.first_name %>!</h2>
+    <a href="/user/logout">LOG OUT</a>
+<% } %>
