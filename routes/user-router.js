@@ -2,6 +2,8 @@
 
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcrypt");
+const User = require("../models/User");
 const csrf = require("csurf");
 
 const csrfProtection = csrf();
@@ -13,8 +15,32 @@ router.get("/signup", (req, res) => {
     res.render("user/signup", { title: "Sign Up", csrfToken: req.csrfToken() });
 });
 
-router.post("/signup", (req, res) => {
+router.post("/signup", async (req, res) => {
     try {
+        const { first_name, last_name, email, password } = req.body;
+
+        // Check if user is already in db
+        const emailExists = await User.findOne({ email });
+
+        if (emailExists) {
+            return res.render("user/signup", { title: "Sign Up", error: "Email already exists" });
+        }
+
+        // Hash password
+        const saltRounds = 12;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+        // Create a new user
+        const user = new User({
+            first_name,
+            last_name,
+            email,
+            password
+        });
+
+        await user.save();
+
+        res.redirect("/user/login");
         
     } catch (err) {
         console.error(err);
