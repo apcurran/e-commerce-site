@@ -9,6 +9,9 @@ const mongoose = require("mongoose");
 const flash = require("express-flash");
 const session = require("express-session");
 const passport = require("passport");
+// Initialize Passport
+require("./config/passport-config");
+
 // Routers
 const gamesRouter = require("./routes/games-router");
 const userRouter = require("./routes/user-router");
