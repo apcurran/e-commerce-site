@@ -3,9 +3,17 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("../models/User");
+const { loginValidation } = require("../validation/validate-user");
 const bcrypt = require("bcrypt");
 
-async function authenticateUser(email, password, done) {
+async function authenticateUser(req, email, password, done) {
+    try {
+        await loginValidation(req.body);
+
+    } catch (err) {
+        return done(null, false, { message: err.details[0].message });
+    }
+
     try {
         const user = await User.findOne({ email });
 
@@ -28,7 +36,7 @@ async function authenticateUser(email, password, done) {
     }
 }
 
-passport.use(new LocalStrategy({ usernameField: "email", passwordField: "password" }, authenticateUser));
+passport.use(new LocalStrategy({ usernameField: "email", passwordField: "password", passReqToCallback: true }, authenticateUser));
 
 passport.serializeUser((user, done) => {
     done(null, user.id);

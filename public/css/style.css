@@ -36,7 +36,7 @@ button {
 
 .error {
     color: var(--dark-red);
-    margin-bottom: .5rem;
+    margin-bottom: 1rem;
 }
 
 body {
