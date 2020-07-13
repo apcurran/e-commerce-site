@@ -1,9 +1,13 @@
 <main class="user-card signup-card">
     <section class="user-card__left">
         <h1 class="user-card__title">Log In</h1>
-        <form action="" method="POST" class="user-card__form">
+        <% if (messages.error) { %>
+            <p class="error"><%= messages.error %></p>
+        <% } %>
+        <form action="/user/login" method="POST" class="user-card__form">
             <input type="email" name="email" class="user-card__form__input" aria-label="Enter email address" placeholder="Email address">
             <input type="password" name="password" class="user-card__form__input" aria-label="Enter password" placeholder="Password">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <button class="user-card__form-submit" type="submit">
                 <span class="user-card__form-submit__span">Submit</span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">

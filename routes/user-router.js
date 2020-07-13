@@ -53,12 +53,12 @@ router.post("/signup", checkNotAuthenticated, async (req, res) => {
 
 // GET Log In
 router.get("/login",  checkNotAuthenticated, (req, res) => {
-    res.render("user/login", { title: "Log In" });
+    res.render("user/login", { title: "Log In", csrfToken: req.csrfToken() });
 });
 
 router.post("/login", checkNotAuthenticated, passport.authenticate("local", {
     successRedirect: "/",
-    failureRedirect: "/login",
+    failureRedirect: "/user/login",
     failureFlash: true
 }));
 
