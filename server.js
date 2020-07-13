@@ -40,6 +40,13 @@ app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUniniti
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Global views variable
+app.use((req, res, next) => {
+    res.locals.isLoggedIn = req.isAuthenticated();
+
+    next();
+});
+
 // Routes
 app.use("/", gamesRouter);
 app.use("/user", userRouter);

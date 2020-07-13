@@ -7,15 +7,24 @@
             <li class="nav__list__item">
                 <a href="/" class="nav__list__link">Games</a>
             </li>
-            <li class="nav__list__item">
-                <a href="/user/login" class="nav__list__link">Log In</a>
-            </li>
-            <li class="nav__list__item">
-                <a href="/user/signup" class="nav__list__link">Sign Up</a>
-            </li>
-            <li class="nav__list__item">
-                <a href="/checkout" class="nav__list__link">Checkout</a>
-            </li>
+            <% if (isLoggedIn) { %>
+                <li class="nav__list__item">
+                    <a href="/user/profile" class="nav__list__link">Profile</a>
+                </li>
+                <li class="nav__list__item">
+                    <a href="/checkout" class="nav__list__link">Checkout</a>
+                </li>
+                <li class="nav__list__item">
+                    <a href="/user/logout" class="nav__list__link">Log Out</a>
+                </li>
+            <% } else { %>
+                <li class="nav__list__item">
+                    <a href="/user/login" class="nav__list__link">Log In</a>
+                </li>
+                <li class="nav__list__item">
+                    <a href="/user/signup" class="nav__list__link">Sign Up</a>
+                </li>
+            <% } %> 
         </ul>
     </nav>
 </header>
