@@ -4,6 +4,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
+const { checkNotAuthenticated } = require("../config/check-auth");
 const csrf = require("csurf");
 
 const csrfProtection = csrf();
@@ -11,11 +12,11 @@ const csrfProtection = csrf();
 router.use(csrfProtection);
 
 // GET Sign Up
-router.get("/signup", (req, res) => {
+router.get("/signup", checkNotAuthenticated, (req, res) => {
     res.render("user/signup", { title: "Sign Up", csrfToken: req.csrfToken() });
 });
 
-router.post("/signup", async (req, res) => {
+router.post("/signup", checkNotAuthenticated, async (req, res) => {
     try {
         const { first_name, last_name, email, password } = req.body;
 
@@ -50,7 +51,7 @@ router.post("/signup", async (req, res) => {
 });
 
 // GET Log In
-router.get("/login", (req, res) => {
+router.get("/login",  checkNotAuthenticated, (req, res) => {
     res.render("user/login", { title: "Log In" });
 });
 
