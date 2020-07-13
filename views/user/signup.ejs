@@ -3,7 +3,7 @@
         <h1 class="user-card__title">Sign Up</h1>
         <% if (locals.error) { %>
             <p class="error"><%= error %></p>
-        <% } %> 
+        <% } %>
         <form action="/user/signup" method="POST" class="user-card__form">
             <input type="text" name="first_name" class="user-card__form__input" aria-label="Enter first name" placeholder="First name">
             <input type="text" name="last_name" class="user-card__form__input" aria-label="Enter last name" placeholder="Last name">
