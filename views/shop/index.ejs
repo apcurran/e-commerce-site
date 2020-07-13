@@ -2,6 +2,7 @@
 
 <% if (user) { %>
     <h2>Welcome back, <%= user.first_name %>!</h2>
+    <a href="/user/logout">LOG OUT</a>
 <% } %> 
 
 <% if (locals.error) { %>
