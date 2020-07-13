@@ -9,6 +9,7 @@ const mongoose = require("mongoose");
 const flash = require("express-flash");
 const session = require("express-session");
 const passport = require("passport");
+const MongoStore = require("connect-mongo")(session);
 // Initialize Passport
 require("./config/passport-config");
 
@@ -35,7 +36,13 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
 app.use(flash());
-app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    cookie: { maxAge: 120 * 60 * 1000 }
+}));
 // Passport Setup
 app.use(passport.initialize());
 app.use(passport.session());
@@ -43,6 +50,7 @@ app.use(passport.session());
 // Global views variable
 app.use((req, res, next) => {
     res.locals.isLoggedIn = req.isAuthenticated();
+    res.locals.session = req.session;
 
     next();
 });
