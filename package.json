@@ -11,6 +11,7 @@
   "author": "Alex Curran",
   "license": "ISC",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "bcrypt": "^5.0.0",
     "csurf": "^1.11.0",
     "dotenv": "^8.2.0",
