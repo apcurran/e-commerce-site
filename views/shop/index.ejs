@@ -1,5 +1,9 @@
 <%- include("../partials/hero") %>
 
+<% if (user) { %>
+    <h2>Welcome back, <%= user.username %></h2>
+<% } %> 
+
 <% if (locals.error) { %>
     <p class="error"><%= locals.error %></p>
 <% } %>

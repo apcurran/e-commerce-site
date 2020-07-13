@@ -5,6 +5,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const { checkNotAuthenticated } = require("../config/check-auth");
+const passport = require("passport");
 const csrf = require("csurf");
 
 const csrfProtection = csrf();
@@ -24,7 +25,7 @@ router.post("/signup", checkNotAuthenticated, async (req, res) => {
         const emailExists = await User.findOne({ email });
 
         if (emailExists) {
-            return res.render("user/signup", { title: "Sign Up", error: "Email already exists" });
+            return res.render("user/signup", { title: "Sign Up", csrfToken: req.csrfToken(), error: "Email already exists" });
         }
 
         // Hash password
@@ -36,7 +37,7 @@ router.post("/signup", checkNotAuthenticated, async (req, res) => {
             first_name,
             last_name,
             email,
-            password
+            password: hashedPassword
         });
 
         await user.save();
@@ -46,7 +47,7 @@ router.post("/signup", checkNotAuthenticated, async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        res.render("user/signup", { title: "Sign Up", error: err });
+        res.render("user/signup", { title: "Sign Up", csrfToken: req.csrfToken(), error: err });
     }
 });
 
@@ -54,5 +55,11 @@ router.post("/signup", checkNotAuthenticated, async (req, res) => {
 router.get("/login",  checkNotAuthenticated, (req, res) => {
     res.render("user/login", { title: "Log In" });
 });
+
+router.post("/login", checkNotAuthenticated, passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/login",
+    failureFlash: true
+}));
 
 module.exports = router;

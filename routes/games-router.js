@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
     try {
         const products = await Product.find().lean();
 
-        res.render("shop/index", { title: "Home", products, genre: "all" });
+        res.render("shop/index", { title: "Home", products, genre: "all", user: req.user });
         
     } catch (err) {
         console.error(err);
