@@ -97,6 +97,15 @@ body {
     margin: 2rem auto 4rem auto;
 }
 
+.cart-icon-link {
+    display: inline-flex;
+}
+
+.cart-icon {
+    margin-right: .25rem;
+    opacity: .65;
+}
+
 /* Game Views */
 
 .hero-container {

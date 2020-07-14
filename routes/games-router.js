@@ -89,9 +89,8 @@ router.get("/games/:id", async (req, res) => {
 // GET Add game to cart
 router.get("/add-to-cart/:id", async (req, res) => {
     try {
-        debugger;
         const productId = req.params.id;
-        // If a cart is already in the session, retrieve the old cart, otherwise pass a new obj
+        // If a cart is already in the session retrieve the old cart, otherwise pass a new obj
         const cart = new Cart(req.session.cart ? req.session.cart : {});
 
         const product = await Product.findById(productId);
