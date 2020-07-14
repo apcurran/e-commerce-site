@@ -3,6 +3,7 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../models/Product");
+const Cart = require("../models/Cart");
 
 // GET Page Views
 router.get("/", async (req, res) => {
@@ -82,6 +83,28 @@ router.get("/games/:id", async (req, res) => {
         console.error(err);
 
         res.render("shop/product-page", { title: req.params.id, error: err.message });
+    }
+});
+
+// GET Add game to cart
+router.get("/add-to-cart/:id", async (req, res) => {
+    try {
+        debugger;
+        const productId = req.params.id;
+        // If a cart is already in the session, retrieve the old cart, otherwise pass a new obj
+        const cart = new Cart(req.session.cart ? req.session.cart : {});
+
+        const product = await Product.findById(productId);
+
+        cart.add(product, product.id);
+        req.session.cart = cart;
+
+        console.log(req.session.cart);
+
+        res.redirect("/");
+        
+    } catch (err) {
+        console.error(err);
     }
 });
 
