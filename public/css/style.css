@@ -103,7 +103,7 @@ body {
 
 .cart-icon {
     margin-right: .25rem;
-    opacity: .65;
+    opacity: .6;
     transition: opacity 120ms ease-in-out;
 }
 
@@ -450,7 +450,7 @@ th {
 }
 
 .order-summary__table__title {
-    padding: .75rem 0;
+    padding: 1rem 0;
     font-size: 1.2rem;
     background-color: #d7dfea;
     column-span: all;
@@ -483,7 +483,7 @@ th {
 
 .order-summary__btn__link {
     display: block;
-    padding: .6rem 1.25rem;
+    padding: .75rem 1.25rem;
 
     letter-spacing: .08em;
     background-color: var(--submit-btn-bg-clr);
