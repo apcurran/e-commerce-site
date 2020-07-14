@@ -18,7 +18,21 @@
     </section>
     <aside class="order-summary">
         <table class="order-summary__table">
-
+            <thead class="table-head">
+                <tr class="table-head__row">
+                    <th class="order-summary__table__title" colspan="2" scope="row">Order Summary</th>
+                </tr>
+            </thead>
+            <tbody class="order-summary__table__body">
+                <tr>
+                    <th class="order-summary__table__row-header" scope="row">Shipping</th>
+                    <td class="order-summary__table__row-value">Free</td>
+                </tr>
+                <tr class="order-summary__table__total">
+                    <th class="order-summary__table__row-header total-header" scope="row">Subtotal</th>
+                    <td class="order-summary__table__row-value total-price">$<%= totalPrice %></td>
+                </tr>
+            </tbody>
         </table>
         <button class="order-summary__btn">
             <a href="/checkout" class="order-summary__btn__link">Checkout</a>
