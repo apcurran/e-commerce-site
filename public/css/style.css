@@ -104,6 +104,11 @@ body {
 .cart-icon {
     margin-right: .25rem;
     opacity: .65;
+    transition: opacity 120ms ease-in-out;
+}
+
+.cart:hover .cart-icon {
+    opacity: 1;
 }
 
 /* Game Views */
@@ -407,4 +412,9 @@ body {
 .footer__title {
     font-size: .9rem;
     color: hsl(211, 25%, 37%);
+}
+
+/* Checkout */
+.checkout-link {
+    color: var(--dark-indigo);
 }

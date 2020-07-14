@@ -1,0 +1,18 @@
+<h1>Checkout Preview</h1>
+<% if (locals.products) { %>
+    <% products.forEach(product => { %>
+        <section>
+            <h3><%= product.item.title %></h3>
+        </section>
+    <% }); %>
+
+    <p>Total $<%= totalPrice %></p>
+<% } else { %>
+    <a href="/" class="checkout-link">
+        <svg fill="none" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        <span>Back to Games</span>
+    </a>
+    <p>You have no items in your cart yet.</p>
+<% } %>

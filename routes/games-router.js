@@ -107,4 +107,19 @@ router.get("/add-to-cart/:id", async (req, res) => {
     }
 });
 
+router.get("/checkout-preview", async (req, res) => {
+    try {
+        if (!req.session.cart) {
+            return res.render("shop/checkout-preview", { title: "Checkout Preview" });
+        }
+
+        const cart = new Cart(req.session.cart);
+
+        res.render("shop/checkout-preview", { title: "Checkout Preview", products: cart.generateArray(), totalPrice: cart.totalPrice });
+
+    } catch (err) {
+        console.error(err);
+    }
+});
+
 module.exports = router;
