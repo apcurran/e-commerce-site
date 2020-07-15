@@ -264,7 +264,15 @@ body {
 
 .game-details__right__form__label {
     font-weight: 700;
+}
+
+.game-details__right__form__submit {
+    border: none;
+    background: none;
+    font-weight: 700;
+    font-size: 1rem;
     color: var(--dark-indigo);
+    cursor: pointer;
 }
 
 .game-details__add-btn {
