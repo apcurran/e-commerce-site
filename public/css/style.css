@@ -576,3 +576,29 @@ th {
     border-right-color: var(--light-indigo);
     border-bottom-color: var(--light-indigo);
 }
+
+.checkout-form__submit {
+    padding: .75rem 1.25rem;
+    background-color: var(--submit-btn-bg-clr);
+    color: #fff;
+    letter-spacing: .08em;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.checkout-form__submit:disabled {
+    cursor: default;
+    background-color: #cbd5e0;
+    color: #555;
+}
+
+.result-message {
+    margin-bottom: .5rem;
+    color: var(--dark-indigo);
+}
+
+.underline {
+    text-decoration: underline;
+}

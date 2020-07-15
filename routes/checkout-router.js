@@ -30,7 +30,7 @@ router.post("/api/create-payment-intent", async (req, res) => {
     try {
         const cart = new Cart(req.session.cart);
         const paymentIntent = await stripe.paymentIntents.create({
-          amount: cart.totalPrice,
+          amount: cart.totalPrice * 100,
           currency: "usd"
         });
     
