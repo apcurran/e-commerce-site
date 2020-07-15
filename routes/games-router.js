@@ -114,6 +114,7 @@ router.get("/checkout-preview", async (req, res) => {
         }
 
         const cart = new Cart(req.session.cart);
+        console.log(cart.generateArray());
 
         res.render("shop/checkout-preview", { title: "Checkout Preview", products: cart.generateArray(), totalPrice: cart.totalPrice });
 

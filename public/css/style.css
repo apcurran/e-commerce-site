@@ -448,9 +448,30 @@ body {
 }
 
 .checkout-section__item__right__title {
-    font-weight: 400;
-    margin-bottom: .5rem;
-    color: var(--dark-indigo);
+    font-weight: 700;
+    font-size: 1.125rem;
+    margin-bottom: .25rem;
+}
+
+.checkout-section__item__right__qty-controls {
+    margin-bottom: 1rem;
+}
+
+.checkout-section__item__right__qty-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #6c727d;
+}
+
+.qty-btn-sub {
+    padding-right: .5rem;
+}
+
+.qty-btn-add {
+    padding-left: .5rem;
 }
 
 .order-summary {

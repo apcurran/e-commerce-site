@@ -15,6 +15,11 @@
                         </figure>
                         <div class="checkout-section__item__right">
                             <h3 class="checkout-section__item__right__title"><%= product.item.title %></h3>
+                            <div class="checkout-section__item__right__qty-controls">
+                                <button class="checkout-section__item__right__qty-btn qty-btn-sub">-</button>
+                                <span class="checkout-section__item__right__qty"><%= product.qty %></span>
+                                <button class="checkout-section__item__right__qty-btn qty-btn-add">+</button>
+                            </div>
                             <p class="checkout-section__item__right__price">$<%= product.item.price %></p>
                         </div>
                     </article>
