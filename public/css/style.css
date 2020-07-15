@@ -12,6 +12,7 @@
     --med-grey: hsl(218, 17%, 38%);
     --dark-grey: #1a202c;
     --light-blue: #a3bffa;
+    --light-indigo: #7f9cf5;
     --dark-indigo: #4c51bf;
     --submit-btn-bg-clr: #046586;
     --dark-red: #9b2c2c;
@@ -540,4 +541,38 @@ th {
     color: #fff;
     font-size: 1rem;
     text-transform: uppercase;
+}
+
+/* Checkout Form */
+.checkout-form-title {
+    color: var(--dark-indigo);
+    margin-bottom: 1rem;
+}
+
+.checkout-form {
+    max-width: 25rem;
+    width: 92.5%;
+}
+
+.checkout-form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.25rem;
+}
+
+.checkout-form__label {
+    margin-bottom: .5rem;
+}
+
+.checkout-form__input {
+    padding: .75rem 1rem;
+    font-size: 1rem;
+    border: 2px solid hsl(210, 4%, 85%);
+    border-radius: 4px;
+    outline: none;
+}
+
+.checkout-form__input:focus {
+    border-right-color: var(--light-indigo);
+    border-bottom-color: var(--light-indigo);
 }

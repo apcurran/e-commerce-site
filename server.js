@@ -16,6 +16,7 @@ require("./config/passport-config");
 // Routers
 const gamesRouter = require("./routes/games-router");
 const userRouter = require("./routes/user-router");
+const checkoutRouter = require("./routes/checkout-router");
 
 const app = express();
 
@@ -58,6 +59,7 @@ app.use((req, res, next) => {
 // Routes
 app.use("/", gamesRouter);
 app.use("/user", userRouter);
+app.use("/", checkoutRouter);
 
 // Final 404 route handler
 app.use((req, res, next) => {
