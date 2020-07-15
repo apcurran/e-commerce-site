@@ -142,7 +142,7 @@ body {
     display: inline-block;
     padding: .5rem 1.25rem .5rem .25rem;
     width: 100%;
-    opacity: .5;
+    opacity: .55;
     font-weight: 700;
 }
 
@@ -201,7 +201,7 @@ body {
     margin-bottom: 1rem;
     border-radius: 500px;
     background-color: var(--light-blue);
-    color: #5f5f5f;
+    color: #4d4e4e;
 }
 
 .game-card__genre-chip-text {
