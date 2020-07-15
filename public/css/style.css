@@ -414,22 +414,43 @@ body {
     color: hsl(211, 25%, 37%);
 }
 
-/* Checkout */
+/* Checkout Preview */
 .main--checkout {
-    margin-top: 4rem;
+    margin-top: 3.5rem;
+}
+
+.checkout-grid {
     display: grid;
     grid-template-columns: 1.75fr 1fr;
     gap: 1.75rem;
 }
 
-.checkout-section__link {
+.checkout__link {
     display: inline-flex;
     align-items: center;
+    margin-bottom: 2rem;
+
+    font-weight: 700;
     color: var(--dark-indigo);
 }
 
-.checkout-section__link__icon {
+.checkout__link__icon {
     margin-right: .25rem;
+}
+
+.checkout-section__item {
+    display: flex;
+    margin-bottom: 4rem;
+}
+
+.checkout-section__item__right {
+    margin-left: 2rem;
+}
+
+.checkout-section__item__right__title {
+    font-weight: 400;
+    margin-bottom: .5rem;
+    color: var(--dark-indigo);
 }
 
 .order-summary {

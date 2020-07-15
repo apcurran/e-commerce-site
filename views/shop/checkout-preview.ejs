@@ -1,41 +1,49 @@
 <main class="main--checkout">
-    <section class="checkout-section">
-        <a href="/" class="checkout-section__link">
-            <svg class="checkout-section__link__icon" fill="none" viewBox="0 0 24 24" width="15" height="15" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-            </svg>
-            <span>Back to Games</span>
-        </a>
-        <% if (locals.products) { %>
-            <% products.forEach(product => { %>
-                <article class="checkout-section__item">
-                    <h3><%= product.item.title %></h3>
-                </article>
-            <% }); %>
-        <% } else { %>
-            <p>You have no items in your cart yet.</p>
-        <% } %>
-    </section>
-    <aside class="order-summary">
-        <table class="order-summary__table">
-            <thead class="table-head">
-                <tr class="table-head__row">
-                    <th class="order-summary__table__title" colspan="2" scope="row">Order Summary</th>
-                </tr>
-            </thead>
-            <tbody class="order-summary__table__body">
-                <tr>
-                    <th class="order-summary__table__row-header" scope="row">Shipping</th>
-                    <td class="order-summary__table__row-value">Free</td>
-                </tr>
-                <tr class="order-summary__table__total">
-                    <th class="order-summary__table__row-header total-header" scope="row">Subtotal</th>
-                    <td class="order-summary__table__row-value total-price">$<%= totalPrice %></td>
-                </tr>
-            </tbody>
-        </table>
-        <button class="order-summary__btn">
-            <a href="/checkout" class="order-summary__btn__link">Checkout</a>
-        </button>
-    </aside>
+    <a href="/" class="checkout__link">
+        <svg class="checkout__link__icon" fill="none" viewBox="0 0 24 24" width="15" height="15" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        <span>Back to Games</span>
+    </a>
+    <div class="checkout-grid">
+        <section class="checkout-section">
+            <% if (locals.products) { %>
+                <% products.forEach(product => { %>
+                    <article class="checkout-section__item">
+                        <figure class="checkout-section__item__fig">
+                            <img class="checkout-section__item__img" src="<%= product.item.img_path %>" alt="<%= product.item.title %> cover">
+                        </figure>
+                        <div class="checkout-section__item__right">
+                            <h3 class="checkout-section__item__right__title"><%= product.item.title %></h3>
+                            <p class="checkout-section__item__right__price">$<%= product.item.price %></p>
+                        </div>
+                    </article>
+                <% }); %>
+            <% } else { %>
+                <p>You have no items in your cart yet.</p>
+            <% } %>
+        </section>
+        <aside class="order-summary">
+            <table class="order-summary__table">
+                <thead class="table-head">
+                    <tr class="table-head__row">
+                        <th class="order-summary__table__title" colspan="2" scope="row">Order Summary</th>
+                    </tr>
+                </thead>
+                <tbody class="order-summary__table__body">
+                    <tr>
+                        <th class="order-summary__table__row-header" scope="row">Shipping</th>
+                        <td class="order-summary__table__row-value">Free</td>
+                    </tr>
+                    <tr class="order-summary__table__total">
+                        <th class="order-summary__table__row-header total-header" scope="row">Subtotal</th>
+                        <td class="order-summary__table__row-value total-price">$<%= totalPrice %></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="order-summary__btn">
+                <a href="/checkout" class="order-summary__btn__link">Checkout</a>
+            </button>
+        </aside>
+    </div>
 </main>
