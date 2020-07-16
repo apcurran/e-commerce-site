@@ -19,6 +19,30 @@ router.get("/checkout-preview", (req, res) => {
     res.render("shop/checkout-preview", { title: "Checkout Preview", products: cart.generateArray(), totalPrice: cart.totalPrice });
 });
 
+// Checkout-preview remove one instance of an item from cart
+router.get("/reduce/:id", (req, res) => {
+    const productId = req.params.id;
+    const cart = new Cart(req.session.cart ? req.session.cart : {});
+
+    cart.reduceByOne(productId);
+
+    req.session.cart = cart;
+
+    res.redirect("/checkout-preview");
+});
+
+// Checkout-preview remove one item and all of its quantity from cart
+router.get("/remove/:id", (req, res) => {
+    const productId = req.params.id;
+    const cart = new Cart(req.session.cart ? req.session.cart : {});
+
+    cart.removeItem(productId);
+
+    req.session.cart = cart;
+
+    res.redirect("/checkout-preview");
+});
+
 router.get("/checkout", checkAuthenticated, (req, res) => {
     if (!req.session.cart) {
         return res.redirect("/checkout-preview");
