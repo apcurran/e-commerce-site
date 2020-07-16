@@ -42,7 +42,7 @@
                     </tr>
                     <tr class="order-summary__table__total">
                         <th class="order-summary__table__row-header total-header" scope="row">Subtotal</th>
-                        <td class="order-summary__table__row-value total-price">$<%= totalPrice %></td>
+                        <td class="order-summary__table__row-value total-price">$<%= locals.totalPrice ? totalPrice : "0" %></td>
                     </tr>
                 </tbody>
             </table>

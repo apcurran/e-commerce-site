@@ -68,9 +68,11 @@ async function payWithCard(stripe, card, clientSecret) {
     if (result.error) {
         resultMsgPara.textContent = result.error.message;
     } else {
+        sendSuccessfulOrderInfo(result.paymentIntent.id);
+
         document.getElementById("submit").disabled = true;
 
-        resultMsgPara.textContent = "Payment success!";
+        resultMsgPara.textContent = "Payment success! An email with your download code for your games will be sent shortly.";
 
         const homeLink = document.createElement("a");
         homeLink.classList.add("checkout__link", "underline");
@@ -78,6 +80,32 @@ async function payWithCard(stripe, card, clientSecret) {
         homeLink.textContent = "Back to games";
 
         form.append(homeLink);
+    }
+}
+
+async function sendSuccessfulOrderInfo(paymentId) {
+    try {
+        const firstName = document.getElementById("first-name").value;
+        const lastName = document.getElementById("last-name").value;
+        const email = document.getElementById("email").value;
+
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                first_name: firstName,
+                last_name: lastName,
+                email: email,
+                payment_id: paymentId
+            })
+        };
+
+        const result = await fetch("http://localhost:5000/api/successful-order", options);
+
+    } catch (err) {
+        console.error(err);
     }
 }
 
