@@ -4,6 +4,9 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
+const Order = require("../models/Order");
+const Cart = require("../models/Cart");
+
 const { checkNotAuthenticated, checkAuthenticated } = require("../config/check-auth");
 const { signupValidation, loginValidation } = require("../validation/validate-user");
 const passport = require("passport");
@@ -81,8 +84,19 @@ router.post("/login", checkNotAuthenticated, passport.authenticate("local", {
 });
 
 // GET User Profile
-router.get("/profile", checkAuthenticated, (req, res) => {
-    res.render("user/profile", { title: "Profile", user: req.user });
+router.get("/profile", checkAuthenticated, async (req, res) => {
+    try {
+        const order = await Order.find({ user_id: req.user._id });
+        // TODO display orders in view
+        
+        res.render("user/profile", { title: "Profile", user: req.user });
+
+    } catch (err) {
+        console.error(err);
+
+        res.render("user/profile", { title: "Profile", user: req.user, error: err.message });
+    }
+
 });
 
 // GET Log Out
