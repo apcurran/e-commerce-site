@@ -22,6 +22,15 @@ module.exports = class Cart {
         this.totalPrice += storedItem.item.price;
     }
 
+    incrementByOne(id) {
+        // Adjust game count and total game price
+        this.items[id].qty++;
+        this.items[id].price += this.items[id].item.price;
+        // Adjust total cart qty and total cart price
+        this.totalQty++;
+        this.totalPrice += this.items[id].item.price;
+    }
+
     reduceByOne(id) {
         // Adjust game count and total game price
         this.items[id].qty--;

@@ -19,6 +19,18 @@ router.get("/checkout-preview", (req, res) => {
     res.render("shop/checkout-preview", { title: "Checkout Preview", products: cart.generateArray(), totalPrice: cart.totalPrice });
 });
 
+// Checkout-preview add one instance of an item to cart
+router.get("/increase/:id", (req, res) => {
+    const productId = req.params.id;
+    const cart = new Cart(req.session.cart ? req.session.cart : {});
+
+    cart.incrementByOne(productId);
+
+    req.session.cart = cart;
+
+    res.redirect("/checkout-preview");
+});
+
 // Checkout-preview remove one instance of an item from cart
 router.get("/reduce/:id", (req, res) => {
     const productId = req.params.id;

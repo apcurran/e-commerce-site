@@ -20,7 +20,9 @@
                                     <a href="/reduce/<%= product.item._id %>">-</a>
                                 </button>
                                 <span class="checkout-section__item__right__qty"><%= product.qty %></span>
-                                <button class="checkout-section__item__right__qty-btn qty-btn-add">+</button>
+                                <button class="checkout-section__item__right__qty-btn qty-btn-add">
+                                    <a href="/increase/<%= product.item._id %>">+</a>
+                                </button>
                             </div>
                             <button class="checkout-section__item__right__item-remove">
                                 <a href="/remove/<%= product.item._id %>">Remove Game</a>
