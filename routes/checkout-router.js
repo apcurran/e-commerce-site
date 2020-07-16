@@ -5,6 +5,7 @@ const router = express.Router();
 const Product = require("../models/Product");
 const Cart = require("../models/Cart");
 const Order = require("../models/Order");
+const { checkAuthenticated, checkNotAuthenticated } = require("../config/check-auth");
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
@@ -18,7 +19,7 @@ router.get("/checkout-preview", (req, res) => {
     res.render("shop/checkout-preview", { title: "Checkout Preview", products: cart.generateArray(), totalPrice: cart.totalPrice });
 });
 
-router.get("/checkout", (req, res) => {
+router.get("/checkout", checkAuthenticated, (req, res) => {
     if (!req.session.cart) {
         return res.redirect("/checkout-preview");
     }
@@ -28,7 +29,7 @@ router.get("/checkout", (req, res) => {
     res.render("shop/checkout", { title: "Checkout", total: cart.totalPrice });
 });
 
-router.post("/api/create-payment-intent", async (req, res) => {
+router.post("/api/create-payment-intent", checkAuthenticated, async (req, res) => {
     try {
         if (!req.session.cart) {
             return res.redirect("/checkout-preview");
@@ -47,7 +48,7 @@ router.post("/api/create-payment-intent", async (req, res) => {
     }
 });
 
-router.post("/api/successful-order", async (req, res) => {
+router.post("/api/successful-order", checkAuthenticated, async (req, res) => {
     try {
         const cart = new Cart(req.session.cart);
         const order = new Order({

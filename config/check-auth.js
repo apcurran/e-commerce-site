@@ -8,6 +8,8 @@ function checkAuthenticated(req, res, next) {
         return next();
     }
 
+    req.session.oldUrl = req.url;
+
     return res.redirect("/user/login");
 }
 
