@@ -66,10 +66,19 @@ router.get("/login", checkNotAuthenticated, (req, res) => {
 });
 
 router.post("/login", checkNotAuthenticated, passport.authenticate("local", {
-    successRedirect: "/user/profile",
+    // successRedirect: "/user/profile",
     failureRedirect: "/user/login",
     failureFlash: true
-}));
+}), (req, res, next) => {
+    if (req.session.oldUrl) {
+        const oldUrl = req.session.oldUrl;
+
+        req.session.oldUrl = null;
+        res.redirect(oldUrl);
+    } else {
+        res.redirect("/user/profile");
+    }
+});
 
 // GET User Profile
 router.get("/profile", checkAuthenticated, (req, res) => {
