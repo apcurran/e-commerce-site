@@ -99,7 +99,6 @@ router.get("/profile", checkAuthenticated, async (req, res) => {
 
         res.render("user/profile", { title: "Profile", user: req.user, error: err.message });
     }
-
 });
 
 // GET Log Out

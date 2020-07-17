@@ -21,4 +21,14 @@ function checkNotAuthenticated(req, res, next) {
     return next();
 }
 
-module.exports = { checkAuthenticated, checkNotAuthenticated };
+function checkAdminAuthenticated(req, res, next) {
+    if (req.isAuthenticated() && req.user.admin) {
+        return next();
+    }
+
+    req.session.oldUrl = req.url;
+
+    return res.redirect("/admin/login");
+}
+
+module.exports = { checkAuthenticated, checkNotAuthenticated, checkAdminAuthenticated };

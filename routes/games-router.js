@@ -4,6 +4,7 @@ const express = require("express");
 const router = express.Router();
 const Product = require("../models/Product");
 const Cart = require("../models/Cart");
+const { checkAdminAuthenticated } = require("../config/check-auth");
 
 // GET Page Views
 router.get("/", async (req, res) => {
@@ -105,6 +106,14 @@ router.get("/add-to-cart/:id", async (req, res) => {
     } catch (err) {
         console.error(err);
     }
+});
+
+// ADMIN PROTECTED ROUTES //
+
+router.get("/game/add", checkAdminAuthenticated, async (req, res) => {
+    console.log("Hello admin!");
+
+    res.end();
 });
 
 module.exports = router;
