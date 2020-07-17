@@ -38,6 +38,7 @@ async function authenticateUser(req, email, password, done) {
 
 async function authenticateAdmin(req, email, password, done) {
     try {
+        console.log(req.body);
         await loginValidation(req.body);
 
     } catch (err) {

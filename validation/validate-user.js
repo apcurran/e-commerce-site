@@ -22,6 +22,8 @@ function signupValidation(data) {
                 .min(6)
                 .required(),
         admin_secret: Joi
+                .string(),
+        _csrf: Joi
                 .string()
     });
 
