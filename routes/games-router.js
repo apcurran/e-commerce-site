@@ -111,9 +111,7 @@ router.get("/add-to-cart/:id", async (req, res) => {
 // ADMIN PROTECTED ROUTES //
 
 router.get("/game/add", checkAdminAuthenticated, async (req, res) => {
-    console.log("Hello admin!");
-
-    res.end();
+    res.render("admin/add-game", { title: "New Game" });
 });
 
 module.exports = router;
