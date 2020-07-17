@@ -50,9 +50,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Global views variable
+// Global views variables
 app.use((req, res, next) => {
     res.locals.isLoggedIn = req.isAuthenticated();
+    res.locals.currentUser = req.user;
     res.locals.session = req.session;
 
     next();

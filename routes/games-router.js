@@ -110,8 +110,31 @@ router.get("/add-to-cart/:id", async (req, res) => {
 
 // ADMIN PROTECTED ROUTES //
 
-router.get("/game/add", checkAdminAuthenticated, async (req, res) => {
+router.get("/game/add", checkAdminAuthenticated, (req, res) => {
     res.render("admin/add-game", { title: "New Game" });
+});
+
+router.post("/game/add", checkAdminAuthenticated, async (req, res) => {
+    try {
+        const { title, genre, price, description, img_path } = req.body;
+
+        const product = new Product({
+            title,
+            genre,
+            price,
+            description,
+            img_path
+        });
+
+        await product.save();
+
+        res.redirect("/");
+
+    } catch (err) {
+        console.error(err);
+
+        res.render("admin/add-game", { title: "New Game", error: err });
+    }
 });
 
 module.exports = router;

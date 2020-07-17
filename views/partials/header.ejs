@@ -8,9 +8,15 @@
                 <a href="/" class="nav__list__link">Games</a>
             </li>
             <% if (isLoggedIn) { %>
-                <li class="nav__list__item">
-                    <a href="/user/profile" class="nav__list__link">Profile</a>
-                </li>
+                <% if (currentUser.admin) { %>
+                    <li class="nav__list__item">
+                        <a href="/game/add" class="nav__list__link">Add Game</a>
+                    </li> 
+                <% } else { %>
+                    <li class="nav__list__item">
+                        <a href="/user/profile" class="nav__list__link">Profile</a>
+                    </li>
+                <% } %>
                 <li class="nav__list__item">
                     <a href="/user/logout" class="nav__list__link">Log Out</a>
                 </li>
