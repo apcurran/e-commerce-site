@@ -681,6 +681,17 @@ th {
 }
 
 /* Smaller Device Screens */
+@media screen and (max-width: 72em) {
+    .checkout-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .checkout-section__item {
+        flex-direction: column;
+    }
+
+}
+
 @media screen and (max-width: 48.5em) {
     .user-card {
         grid-template-columns: 1fr;
@@ -730,5 +741,10 @@ th {
 
     .user-card__left {
         padding: 1.75rem 2.5rem;
+    }
+
+    /* Checkout Preview */
+    .checkout-section__item__img {
+        width: 100%;
     }
 }
