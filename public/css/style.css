@@ -690,6 +690,10 @@ th {
         flex-direction: column;
     }
 
+    .game-details {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
 }
 
 @media screen and (max-width: 48.5em) {
@@ -714,6 +718,11 @@ th {
 
     .nav__list__link {
         font-size: .925rem;
+    }
+
+    /* Game Details */
+    .game-details__left__img {
+        width: 100%;
     }
 }
 
