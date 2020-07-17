@@ -562,7 +562,7 @@ th {
 }
 
 /* Checkout Form */
-.checkout-form-title {
+.checkout-form__title {
     color: var(--dark-indigo);
     margin-bottom: 1rem;
 }
@@ -570,6 +570,7 @@ th {
 .checkout-form {
     max-width: 25rem;
     width: 92.5%;
+    margin: 0 auto;
 }
 
 .checkout-form-group {
@@ -623,16 +624,15 @@ th {
 
 /* Add Game */
 
-.add-game-title {
+.add-game-form__title {
     margin-bottom: 2rem;
-    text-align: center;
     color: var(--dark-indigo);
 }
 
 .add-game-form {
     max-width: 30rem;
     width: 92.5%;
-    margin: 2rem auto;
+    margin: 0 auto;
 }
 
 .form-group {

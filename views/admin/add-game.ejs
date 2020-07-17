@@ -1,8 +1,8 @@
-<h1 class="add-game-title">Add New Game</h1>
 <% if (locals.error) { %>
     <p class="error"><%= error %></p>
 <% } %> 
 <form action="/game/add" method="POST" class="add-game-form">
+    <h1 class="add-game-form__title">Add New Game</h1>
     <div class="form-group">
         <label for="title" class="form-group__label">Title</label>
         <input type="text" class="form-group__input" id="title" name="title" required>
