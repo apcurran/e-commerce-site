@@ -326,7 +326,7 @@ body {
 
 .user-card {
     margin: 2rem auto;
-    width: 62rem;
+    max-width: 62rem;
     display: grid;
     grid-template-columns: 1.2fr 1fr;
  
@@ -421,7 +421,7 @@ body {
 
 .footer__title {
     font-size: .9rem;
-    color: hsl(211, 25%, 37%);
+    color: hsl(211, 25%, 36%);
 }
 
 /* Checkout Preview */
@@ -678,4 +678,57 @@ th {
     color: #fff;
     cursor: pointer;
     box-shadow: 0 10px 16px -7px rgba(4, 101, 134, .55);
+}
+
+/* Smaller Device Screens */
+@media screen and (max-width: 48.5em) {
+    .user-card {
+        grid-template-columns: 1fr;
+    }
+
+    .user-card__left {
+        border-radius: 10px 10px 0 0;
+    }
+
+    .user-card__right,
+    .user-card__right__img {
+        border-radius: 0 0 10px 10px;
+    }
+}
+
+@media screen and (max-width: 42.5em) {
+    .nav__logo-img {
+        width: 12rem;
+    }
+
+    .nav__list__link {
+        font-size: .925rem;
+    }
+}
+
+@media screen and (max-width: 32.5em) {
+    .nav {
+        flex-direction: column;
+    }
+
+    .nav__logo-link {
+        margin-bottom: .75rem;
+    }
+
+    .main--game {
+        flex-direction: column;
+    }
+
+    .hero-container {
+        margin-bottom: 1rem;
+    }
+
+    .sidebar {
+        margin-right: 0;
+        margin-bottom: 2rem;
+    }
+
+    .user-card__left {
+        padding: 1.75rem 2.5rem;
+    }
 }
