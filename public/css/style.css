@@ -452,6 +452,23 @@ body {
     margin-bottom: 4rem;
 }
 
+.checkout-section__item__right__item-remove {
+    background: none;
+    border: none;
+}
+
+.checkout-section__item__right__item-remove-link {
+    display: inline-block;
+    padding: .5rem 0;
+    font-weight: 700;
+    color: hsl(216, 15%, 46%);
+    font-size: 1rem;
+}
+
+.checkout-section__item__right__item-remove:hover .checkout-section__item__right__item-remove-link {
+    text-decoration: underline;
+}
+
 .checkout-section__item__right {
     margin-left: 2rem;
 }
