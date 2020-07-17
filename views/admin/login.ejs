@@ -1,0 +1,22 @@
+<main class="user-card signup-card">
+    <section class="user-card__left">
+        <h1 class="user-card__title">Admin Log In</h1>
+        <% if (messages.error) { %>
+            <p class="error"><%= messages.error %></p>
+        <% } %>
+        <form action="/user/login" method="POST" class="user-card__form">
+            <input type="email" name="email" class="user-card__form__input" aria-label="Enter email address" placeholder="Email address">
+            <input type="password" name="password" class="user-card__form__input" aria-label="Enter password" placeholder="Password">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button class="user-card__form-submit" type="submit">
+                <span class="user-card__form-submit__span">Submit</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <path class="icon-arrow" d="M18.59 13H3a1 1 0 0 1 0-2h15.59l-5.3-5.3a1 1 0 1 1 1.42-1.4l7 7a1 1 0 0 1 0 1.4l-7 7a1 1 0 0 1-1.42-1.4l5.3-5.3z"/>
+                </svg>
+            </button>
+        </form>
+    </section>
+    <section class="user-card__right">
+        <img loading="eager" src="/images/space-invaders-bg.jpg" alt="Space invaders" class="user-card__right__img">
+    </section>
+</main>
