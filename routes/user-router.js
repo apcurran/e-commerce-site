@@ -86,10 +86,14 @@ router.post("/login", checkNotAuthenticated, passport.authenticate("local", {
 // GET User Profile
 router.get("/profile", checkAuthenticated, async (req, res) => {
     try {
-        const order = await Order.find({ user_id: req.user._id });
-        // TODO display orders in view
+        const orders = await Order.find({ user_id: req.user._id });
+
+        for (let order of orders) {
+            const cart = new Cart(order.cart);
+            order.items = cart.generateArray();
+        }
         
-        res.render("user/profile", { title: "Profile", user: req.user });
+        res.render("user/profile", { title: "Profile", user: req.user, orders: orders });
 
     } catch (err) {
         console.error(err);

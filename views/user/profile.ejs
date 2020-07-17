@@ -6,5 +6,19 @@
 
 <% if (locals.user) { %>
     <h2>Welcome back, <%= locals.user.first_name %>!</h2>
-    <a href="/user/logout">LOG OUT</a>
 <% } %>
+
+<% orders.forEach(order => { %>
+    <h2>Order Details</h2>
+    <p>Created on <%= order.dateFormatted %></p>
+    <ul>
+        <% order.items.forEach(item => { %>
+            <li>
+                <span>$<%= item.price %></span>
+                <span><%= item.item.title %></span>
+                <span>Qty <%= item.qty %></span>
+            </li>
+        <% }); %> 
+    </ul>
+    <p>Total Order Price $<%= order.cart.totalPrice %></p>
+<% }); %>
