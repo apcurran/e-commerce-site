@@ -108,6 +108,29 @@ router.get("/add-to-cart/:id", async (req, res) => {
     }
 });
 
+// POST game rating
+router.post("/games/:id/add-rating", async (req, res) => {
+    try {
+        const productId = req.params.id;
+        const product = await Product.findById(productId);
+        const newRating = {
+            user_id: req.user._id,
+            user_rating: req.body.rating
+        };
+
+        product.ratings.push(newRating);
+
+        await product.save();
+
+        res.render("shop/product-page", { title: `${product.title} Details`, product, genre: product.genre });
+
+    } catch (err) {
+        console.error(err);
+
+        res.render("shop/product-page", { title: req.params.id, error: err.message });
+    }
+});
+
 // ADMIN PROTECTED ROUTES //
 
 router.get("/game/add", checkAdminAuthenticated, (req, res) => {

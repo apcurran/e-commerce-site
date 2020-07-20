@@ -24,7 +24,7 @@
                 <li class="game-details__right__list__item">Rating here...</li>
             </ul>
             <% if (isLoggedIn) { %>
-                <form action="" class="game-details__right__form">
+                <form method="POST" action="/games/<%= product._id %>/add-rating" class="game-details__right__form">
                     <label class="game-details__right__form__label">Rate this game</label>
                     <select name="rating" id="game-rating" class="game-details__right__form__select">
                         <option value="5" class="game-details__right__form__option">5 Stars</option>
