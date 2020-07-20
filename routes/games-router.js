@@ -5,6 +5,7 @@ const router = express.Router();
 const Product = require("../models/Product");
 const Cart = require("../models/Cart");
 const { checkAdminAuthenticated } = require("../config/check-auth");
+const { checkAuthenticated } = require("../config/check-auth");
 
 // GET Page Views
 router.get("/", async (req, res) => {
@@ -118,7 +119,7 @@ router.get("/add-to-cart/:id", async (req, res) => {
 });
 
 // POST game rating
-router.post("/games/:id/add-rating", async (req, res) => {
+router.post("/games/:id/add-rating", checkAuthenticated, async (req, res) => {
     try {
         const productId = req.params.id;
         const product = await Product.findById(productId);

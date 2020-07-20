@@ -256,8 +256,21 @@ body {
     margin-bottom: .5rem;
 }
 
-.game-details__right__list__item span {
+/* .game-details__right__list__item span {
     font-weight: 700;
+} */
+
+.game-rating-item {
+    display: flex;
+    align-items: center;
+}
+
+.game-avg-rating {
+    font-weight: 700;
+}
+
+.game-avg-rating-desc {
+    color: hsl(216, 15%, 45%);
 }
 
 .game-details__right__form {
@@ -266,6 +279,12 @@ body {
 
 .game-details__right__form__label {
     font-weight: 700;
+}
+
+.game-details__right__form__select {
+    padding: .25rem;
+    border-radius: 4px;
+    margin-right: .25rem;
 }
 
 .game-details__right__form__submit {

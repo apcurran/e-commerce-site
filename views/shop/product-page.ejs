@@ -22,9 +22,15 @@
                 <li class="game-details__right__list__item">Genre: <span><%= product.genre %></span></li>
                 <li class="game-details__right__list__item">New <span>$<%= product.price %></span></li>
                 <% if (locals.noAverageRating) { %>
-                    <li class="game-details__right__list__item"><%= noAverageRating %></li>
+                    <li class="game-details__right__list__item game-avg-rating-desc"><%= noAverageRating %></li>
                 <% } else { %>
-                    <li class="game-details__right__list__item"><%= averageRating.toFixed(1) %> stars</li>
+                    <li class="game-details__right__list__item game-rating-item">
+                        <svg fill="none" viewBox="0 0 24 24" width="24" height="24" stroke="#ECC94B" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+                        </svg>
+                        <span class="game-avg-rating"><%= averageRating.toFixed(1) %></span>
+                        <span class="game-avg-rating-desc">/5</span>
+                    </li>
                 <% } %>
             </ul>
             <% if (isLoggedIn) { %>
@@ -37,7 +43,7 @@
                         <option value="2" class="game-details__right__form__option">2 Stars</option>
                         <option value="1" class="game-details__right__form__option">1 Star</option>
                     </select>
-                    <button class="game-details__right__form__submit">Submit</button>
+                    <button class="game-details__right__form__submit">Submit Rating</button>
                 </form>
             <% } %>
             <a href="/add-to-cart/<%= product._id %>" class="game-details__add-btn">Add to Cart</a>
