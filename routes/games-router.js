@@ -77,8 +77,14 @@ router.get("/games/:id", async (req, res) => {
     try {
         const { id } = req.params;
         const product = await Product.findById(id);
+        const avgProductRatings = await Product.aggregate([
+            { $unwind: "$ratings" },
+            { $group: { _id: `$_id`, avgRating: { $avg: { "$ifNull": ["$ratings.user_rating", 0] } } } },
+            { $project: { title: 1, avgRating: 1, list: 1 } }
+        ]);
+        console.log(avgProductRatings);
 
-        res.render("shop/product-page", { title: `${product.title} Details`, product, genre: product.genre });
+        res.render("shop/product-page", { title: `${product.title} Details`, product, genre: product.genre  });
 
     } catch (err) {
         console.error(err);
