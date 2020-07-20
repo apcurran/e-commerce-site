@@ -281,6 +281,7 @@ body {
     display: inline-block;
     position: relative;
     padding: .6rem 1.25rem;
+    margin-bottom: .5rem;
     
     letter-spacing: .08em;
     background-color: var(--submit-btn-bg-clr);
@@ -320,6 +321,21 @@ body {
     100% {
         transform: skewX(-45deg) translateX(100%);
     }
+}
+
+/* Admin Only */
+
+.game-details__delete-btn {
+    padding: .6rem 1.25rem;
+    border: 1px solid var(--light-grey);
+    background: none;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    cursor: pointer;
+}
+
+.game-details__delete-btn:hover {
+    background-color: hsl(0, 95%, 77%);
 }
 
 /* User Sign Up Page */
@@ -425,6 +441,7 @@ body {
 }
 
 /* Checkout Preview */
+
 .main--checkout {
     margin-top: 3.5rem;
 }
@@ -562,6 +579,7 @@ th {
 }
 
 /* Checkout Form */
+
 .checkout-form__title {
     color: var(--dark-indigo);
     margin-bottom: 1rem;

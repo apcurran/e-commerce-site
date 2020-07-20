@@ -35,6 +35,13 @@
                 <button class="game-details__right__form__submit">Submit</button>
             </form>
             <a href="/add-to-cart/<%= product._id %>" class="game-details__add-btn">Add to Cart</a>
+            <% if (isLoggedIn) { %>
+                <% if (currentUser.admin) { %>
+                    <form method="POST" action="/games/<%= product._id %>?_method=DELETE" class="game-details__delete">
+                        <button type="submit" class="game-details__delete-btn">Delete Game</button>
+                    </form>
+                <% } %> 
+            <% } %>
         </section>
     </section>
 </main>

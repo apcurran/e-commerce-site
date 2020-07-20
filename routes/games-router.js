@@ -137,4 +137,19 @@ router.post("/game/add", checkAdminAuthenticated, async (req, res) => {
     }
 });
 
+// DELETE Single Product
+router.delete("/games/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        await Product.findByIdAndDelete(id);
+
+        res.redirect("/");
+
+    } catch (err) {
+        console.error(err);
+
+        res.render("shop/product-page", { title: req.params.id, error: err.message });
+    }
+});
+
 module.exports = router;

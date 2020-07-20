@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 5000;
 const morgan = require("morgan");
 const expressLayouts = require("express-ejs-layouts");
 const mongoose = require("mongoose");
+const methodOverride = require("method-override");
 const flash = require("express-flash");
 const session = require("express-session");
 const passport = require("passport");
@@ -37,6 +38,7 @@ app.use(expressLayouts);
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(methodOverride("_method"));
 
 app.use(flash());
 app.use(session({
