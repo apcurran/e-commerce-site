@@ -682,14 +682,9 @@ th {
 
 /* Profile Orders */
 
-.profile-title {
-    margin-bottom: .25rem;
-    color: var(--dark-indigo);
-}
-
 .profile-greeting {
     margin-bottom: 1.5rem;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
 }
 
 .profile-orders-container {
@@ -699,17 +694,23 @@ th {
 }
 
 .profile-order {
-    padding: 2rem;
+    padding: 2rem 3rem;
 }
 
 .profile-order:not(:first-of-type) {
     border-top: 1px solid #e2e8f0;
 }
 
+.profile-order__title {
+    font-size: 1.4rem;
+    margin-bottom: 1.25rem;
+}
+
 .profile-order__date {
-    margin-bottom: 1rem;
-    font-weight: 700;
-    color: #6f757d;
+    display: inline-block;
+    margin-left: .5rem;
+    font-size: 1rem;
+    color: hsl(214, 6%, 45%);
 }
 
 .profile-order__item {
@@ -723,6 +724,16 @@ th {
 
 .profile-order__item:last-of-type {
     margin-bottom: 2.5rem;
+}
+
+.profile-order__item--left__title {
+    margin-bottom: .25rem;
+    font-weight: 700;
+    color: var(--dark-indigo);
+}
+
+.profile-order__item--left__qty {
+    font-size: .9rem;
 }
 
 .profile-order__total {
