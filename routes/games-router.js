@@ -138,7 +138,7 @@ router.post("/game/add", checkAdminAuthenticated, async (req, res) => {
 });
 
 // DELETE Single Product
-router.delete("/games/:id", async (req, res) => {
+router.delete("/games/:id", checkAdminAuthenticated, async (req, res) => {
     try {
         const { id } = req.params;
         await Product.findByIdAndDelete(id);
