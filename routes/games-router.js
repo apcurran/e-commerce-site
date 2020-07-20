@@ -83,6 +83,12 @@ router.get("/games/:id", async (req, res) => {
             { $group: { _id: `$_id`, avgRating: { $avg: { "$ifNull": ["$ratings.user_rating", 0] } } } },
         ]);
 
+        // No rating? Output regular game data
+        if (avgProductRatings.length === 0) {
+            return res.render("shop/product-page", { title: `${product.title} Details`, product, genre: product.genre, noAverageRating: "No ratings yet."});
+        }
+
+        // Output game data and rating
         res.render("shop/product-page", { title: `${product.title} Details`, product, genre: product.genre, averageRating: avgProductRatings[0].avgRating });
 
     } catch (err) {
@@ -103,8 +109,6 @@ router.get("/add-to-cart/:id", async (req, res) => {
 
         cart.add(product, product.id);
         req.session.cart = cart;
-
-        console.log(req.session.cart);
 
         res.redirect("/");
         
@@ -127,7 +131,7 @@ router.post("/games/:id/add-rating", async (req, res) => {
 
         await product.save();
 
-        res.render("shop/product-page", { title: `${product.title} Details`, product, genre: product.genre });
+        res.redirect(`/games/${productId}`);
 
     } catch (err) {
         console.error(err);

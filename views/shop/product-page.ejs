@@ -21,7 +21,11 @@
             <ul class="game-details__right__list list--bottom">
                 <li class="game-details__right__list__item">Genre: <span><%= product.genre %></span></li>
                 <li class="game-details__right__list__item">New <span>$<%= product.price %></span></li>
-                <li class="game-details__right__list__item">Rating here...</li>
+                <% if (locals.noAverageRating) { %>
+                    <li class="game-details__right__list__item"><%= noAverageRating %></li>
+                <% } else { %>
+                    <li class="game-details__right__list__item"><%= averageRating.toFixed(1) %> stars</li>
+                <% } %>
             </ul>
             <% if (isLoggedIn) { %>
                 <form method="POST" action="/games/<%= product._id %>/add-rating" class="game-details__right__form">
