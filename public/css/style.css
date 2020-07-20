@@ -256,10 +256,6 @@ body {
     margin-bottom: .5rem;
 }
 
-/* .game-details__right__list__item span {
-    font-weight: 700;
-} */
-
 .game-rating-item {
     display: flex;
     align-items: center;
@@ -270,7 +266,7 @@ body {
 }
 
 .game-avg-rating-desc {
-    color: hsl(216, 15%, 45%);
+    color: hsl(216, 15%, 43%);
 }
 
 .game-details__right__form {

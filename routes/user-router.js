@@ -8,7 +8,7 @@ const Order = require("../models/Order");
 const Cart = require("../models/Cart");
 
 const { checkNotAuthenticated, checkAuthenticated } = require("../config/check-auth");
-const { signupValidation, loginValidation } = require("../validation/validate-user");
+const { signupValidation } = require("../validation/validate-user");
 const passport = require("passport");
 const csrf = require("csurf");
 
