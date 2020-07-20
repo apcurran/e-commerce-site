@@ -23,17 +23,19 @@
                 <li class="game-details__right__list__item">New <span>$<%= product.price %></span></li>
                 <li class="game-details__right__list__item">Rating here...</li>
             </ul>
-            <form action="" class="game-details__right__form">
-                <label class="game-details__right__form__label">Rate this game</label>
-                <select name="rating" id="game-rating" class="game-details__right__form__select">
-                    <option value="5" class="game-details__right__form__option">5 Stars</option>
-                    <option value="4" class="game-details__right__form__option">4 Stars</option>
-                    <option value="3" class="game-details__right__form__option">3 Stars</option>
-                    <option value="2" class="game-details__right__form__option">2 Stars</option>
-                    <option value="1" class="game-details__right__form__option">1 Star</option>
-                </select>
-                <button class="game-details__right__form__submit">Submit</button>
-            </form>
+            <% if (isLoggedIn) { %>
+                <form action="" class="game-details__right__form">
+                    <label class="game-details__right__form__label">Rate this game</label>
+                    <select name="rating" id="game-rating" class="game-details__right__form__select">
+                        <option value="5" class="game-details__right__form__option">5 Stars</option>
+                        <option value="4" class="game-details__right__form__option">4 Stars</option>
+                        <option value="3" class="game-details__right__form__option">3 Stars</option>
+                        <option value="2" class="game-details__right__form__option">2 Stars</option>
+                        <option value="1" class="game-details__right__form__option">1 Star</option>
+                    </select>
+                    <button class="game-details__right__form__submit">Submit</button>
+                </form>
+            <% } %>
             <a href="/add-to-cart/<%= product._id %>" class="game-details__add-btn">Add to Cart</a>
             <% if (isLoggedIn) { %>
                 <% if (currentUser.admin) { %>
