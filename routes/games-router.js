@@ -81,7 +81,7 @@ router.get("/games/:id", async (req, res) => {
         const avgProductRatings = await Product.aggregate([
             { $match: { _id: product._id } },
             { $unwind: "$ratings" },
-            { $group: { _id: `$_id`, avgRating: { $avg: { "$ifNull": ["$ratings.user_rating", 0] } } } },
+            { $group: { _id: `$_id`, avgRating: { $avg: { "$ifNull": ["$ratings.user_rating", 0] } }, totalRatings: { $sum: 1 } } }
         ]);
 
         // No rating? Output regular game data
@@ -89,8 +89,8 @@ router.get("/games/:id", async (req, res) => {
             return res.render("shop/product-page", { title: `${product.title} Details`, product, genre: product.genre, noAverageRating: "No ratings yet."});
         }
 
-        // Output game data and rating
-        res.render("shop/product-page", { title: `${product.title} Details`, product, genre: product.genre, averageRating: avgProductRatings[0].avgRating });
+        // Output game data, rating, and num of ratings
+        res.render("shop/product-page", { title: `${product.title} Details`, product, genre: product.genre, averageRating: avgProductRatings[0].avgRating, totalRatings: avgProductRatings[0].totalRatings });
 
     } catch (err) {
         console.error(err);

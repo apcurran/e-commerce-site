@@ -85,7 +85,7 @@ router.post("/login", checkNotAuthenticated, passport.authenticate("local.login"
 // GET User Profile
 router.get("/profile", checkAuthenticated, async (req, res) => {
     try {
-        const orders = await Order.find({ user_id: req.user._id });
+        const orders = await Order.find({ user_id: req.user._id }).sort({ created_at: -1 });
 
         for (let order of orders) {
             const cart = new Cart(order.cart);
