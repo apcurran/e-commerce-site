@@ -818,3 +818,13 @@ th {
         width: 100%;
     }
 }
+
+@media screen and (max-width: 25.75em) {
+    .profile-order {
+        padding: 1.5rem 2rem;
+    }
+
+    .profile-order__date {
+        margin-left: 0;
+    }
+}
