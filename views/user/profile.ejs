@@ -1,24 +1,34 @@
-<h1>Profile Page</h1>
+<h1 class="profile-title">Profile Page</h1>
 
 <% if (locals.error) { %>
     <p class="error"><%= error %></p>
 <% } %> 
 
 <% if (locals.user) { %>
-    <h2>Welcome back, <%= locals.user.first_name %>!</h2>
+    <h2 class="profile-greeting">Welcome back, <%= locals.user.first_name %>!</h2>
 <% } %>
 
-<% orders.forEach(order => { %>
-    <h2>Order Details</h2>
-    <p>Created on <%= order.dateFormatted %></p>
-    <ul>
-        <% order.items.forEach(item => { %>
-            <li>
-                <span>$<%= item.price %></span>
-                <span><%= item.item.title %></span>
-                <span>Qty <%= item.qty %></span>
-            </li>
-        <% }); %> 
-    </ul>
-    <p>Total Order Price $<%= order.cart.totalPrice %></p>
-<% }); %>
+<main class="profile-orders-container">
+    <% orders.forEach(order => { %>
+        <article class="profile-order">
+            <h2 class="profile-order__title">Order Details</h2>
+            <p class="profile-order__date">Created on <%= order.dateFormatted %></p>
+            <ul class="profile-order__list">
+                <% order.items.forEach(item => { %>
+                    <li class="profile-order__item">
+                        <div class="profile-order__item--left">
+                            <span><%= item.item.title %></span>
+                            <span>Qty <%= item.qty %></span>
+                        </div>
+                        <div class="profile-order__item--right">
+                            <span>$<%= item.price %></span>
+                        </div>
+                    </li>
+                <% }); %> 
+            </ul>
+            <p class="profile-order__total">
+                <strong>Total Order Price $<%= order.cart.totalPrice %></strong>
+            </p>
+        </article>
+    <% }); %>
+</main>

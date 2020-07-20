@@ -72,7 +72,7 @@ async function payWithCard(stripe, card, clientSecret) {
 
         document.getElementById("submit").disabled = true;
 
-        resultMsgPara.textContent = "Payment success! An email with your download code for your games will be sent shortly.";
+        resultMsgPara.textContent = "Payment success! An email with the download code for your games will be sent shortly.";
 
         const homeLink = document.createElement("a");
         homeLink.classList.add("checkout__link", "underline");
