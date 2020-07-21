@@ -4,3 +4,4 @@
 
 ## Features:
 
+![Heroes for Sale Main Page](./readme-imgs/heroes-for-sale-main.png)
