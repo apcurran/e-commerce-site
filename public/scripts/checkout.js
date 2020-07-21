@@ -6,7 +6,7 @@ const form = document.querySelector(".checkout-form");
 
 async function fetchPaymentIntent() {
     try {
-        const result = await fetch("http://localhost:5000/api/create-payment-intent", { method: "POST" });
+        const result = await fetch("https://apcurran-heroes-for-sale.herokuapp.com/api/create-payment-intent", { method: "POST" });
         var data = await result.json();
     } catch (err) {
         console.error(err);
@@ -102,7 +102,7 @@ async function sendSuccessfulOrderInfo(paymentId) {
             })
         };
 
-        const result = await fetch("http://localhost:5000/api/successful-order", options);
+        const result = await fetch("https://apcurran-heroes-for-sale.herokuapp.com/api/successful-order", options);
 
     } catch (err) {
         console.error(err);
