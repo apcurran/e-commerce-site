@@ -49,13 +49,15 @@
                         <option value="2" class="game-details__right__form__option">2 Stars</option>
                         <option value="1" class="game-details__right__form__option">1 Star</option>
                     </select>
-                    <button class="game-details__right__form__submit">Submit Rating</button>
+                    <button class="game-details__right__form__submit underline--indigo">Submit Rating</button>
                 </form>
             <% } %>
             <a href="/add-to-cart/<%= product._id %>" class="game-details__add-btn">Add to Cart</a>
             <% if (isLoggedIn) { %>
                 <% if (currentUser.admin) { %>
-                    <a href="/games/<%= product._id %>/update" class="game-details__update-link">Update Game</a>
+                    <div class="game-details__update-container">
+                        <a href="/games/<%= product._id %>/update" class="game-details__update-link">Update Game</a>
+                    </div>
                     <form method="POST" action="/games/<%= product._id %>?_method=DELETE" class="game-details__delete">
                         <button type="submit" class="game-details__delete-btn">Delete Game</button>
                     </form>

@@ -195,7 +195,8 @@ router.patch("/games/:id/update", checkAdminAuthenticated, async (req, res) => {
             description,
             img_path
         };
-        const updatedProduct = await Product.findByIdAndUpdate(id, updatedProductInfo);
+        
+        await Product.findByIdAndUpdate(id, updatedProductInfo);
     
         res.redirect(`/games/${id}`);
         

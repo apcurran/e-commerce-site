@@ -41,6 +41,10 @@ button {
     margin-bottom: 1rem;
 }
 
+.underline--indigo {
+    background-image: linear-gradient(180deg, transparent 70%, rgba(101,125,225,.4) 0);
+}
+
 body {
     display: grid;
     min-height: 100vh;
@@ -285,10 +289,9 @@ body {
 
 .game-details__right__form__submit {
     border: none;
-    background: none;
+    background-color: transparent;
     font-weight: 700;
     font-size: 1rem;
-    color: var(--dark-indigo);
     cursor: pointer;
 }
 
@@ -296,7 +299,7 @@ body {
     display: inline-block;
     position: relative;
     padding: .6rem 1.25rem;
-    margin-bottom: .5rem;
+    margin-bottom: 1.25rem;
     
     letter-spacing: .08em;
     background-color: var(--submit-btn-bg-clr);
@@ -320,7 +323,7 @@ body {
     transform: skewX(-45deg);
     background: linear-gradient(to right, white, white 20px, transparent 20px);
     transform-origin: left bottom;
-    /* animation: shine 10s ease-in infinite; */
+    animation: shine 11s ease-in infinite;
 }
 
 /* Button Animation */
@@ -340,6 +343,7 @@ body {
 
 /* Admin Only */
 
+.game-details__update-link,
 .game-details__delete-btn {
     padding: .6rem 1.25rem;
     border: 1px solid var(--light-grey);
@@ -347,6 +351,12 @@ body {
     text-transform: uppercase;
     letter-spacing: .08em;
     cursor: pointer;
+}
+
+.game-details__update-link {
+    display: inline-block;
+    margin-bottom: 1rem;
+    background-color: hsl(139, 73%, 84%);
 }
 
 .game-details__delete-btn:hover {
