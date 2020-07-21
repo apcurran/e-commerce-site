@@ -11,6 +11,8 @@ const flash = require("express-flash");
 const session = require("express-session");
 const passport = require("passport");
 const MongoStore = require("connect-mongo")(session);
+const compression = require("compression");
+const helmet = require("helmet");
 // Initialize Passport
 require("./config/passport-config");
 
@@ -32,6 +34,8 @@ const db = mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
 
 // Middleware
+app.use(helmet());
+app.use(compression());
 app.set("view engine", "ejs");
 app.set("layout", "layouts/layout");
 app.use(expressLayouts);
