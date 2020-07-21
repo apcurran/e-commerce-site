@@ -2,10 +2,9 @@
 
 const express = require("express");
 const router = express.Router();
-const Product = require("../models/Product");
 const Cart = require("../models/Cart");
 const Order = require("../models/Order");
-const { checkAuthenticated, checkNotAuthenticated } = require("../config/check-auth");
+const { checkAuthenticated } = require("../config/check-auth");
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
