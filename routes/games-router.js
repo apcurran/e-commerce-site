@@ -170,6 +170,20 @@ router.post("/game/add", checkAdminAuthenticated, async (req, res) => {
     }
 });
 
+router.get("/games/:id/update", checkAdminAuthenticated, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const product = await Product.findById(id);
+    
+        res.render("admin/update-game", { title: "Update Game", product: product });
+        
+    } catch (err) {
+        console.error(err);
+
+        res.render("admin/update-game", { title: "Update Game", product: product, error: err });
+    }
+});
+
 // DELETE Single Product
 router.delete("/games/:id", checkAdminAuthenticated, async (req, res) => {
     try {

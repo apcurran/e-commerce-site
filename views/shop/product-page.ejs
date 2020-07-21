@@ -55,6 +55,7 @@
             <a href="/add-to-cart/<%= product._id %>" class="game-details__add-btn">Add to Cart</a>
             <% if (isLoggedIn) { %>
                 <% if (currentUser.admin) { %>
+                    <a href="/games/<%= product._id %>/update" class="game-details__update-link">Update Game</a>
                     <form method="POST" action="/games/<%= product._id %>?_method=DELETE" class="game-details__delete">
                         <button type="submit" class="game-details__delete-btn">Delete Game</button>
                     </form>
