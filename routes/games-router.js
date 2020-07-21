@@ -6,6 +6,7 @@ const Product = require("../models/Product");
 const Cart = require("../models/Cart");
 const { checkAdminAuthenticated } = require("../config/check-auth");
 const { checkAuthenticated } = require("../config/check-auth");
+const { gameValidation } = require("../validation/validate-game");
 
 // GET Page Views
 router.get("/", async (req, res) => {
@@ -149,6 +150,14 @@ router.get("/game/add", checkAdminAuthenticated, (req, res) => {
 
 router.post("/game/add", checkAdminAuthenticated, async (req, res) => {
     try {
+        // Validate incoming data
+        await gameValidation(req.body);
+
+    } catch (err) {
+        return res.render("admin/add-game", { title: "New Game", error: err.details[0].message });
+    }
+
+    try {
         const { title, genre, price, description, img_path } = req.body;
 
         const product = new Product({
@@ -186,6 +195,14 @@ router.get("/games/:id/update", checkAdminAuthenticated, async (req, res) => {
 
 router.patch("/games/:id/update", checkAdminAuthenticated, async (req, res) => {
     try {
+        // Validate incoming data
+        await gameValidation(req.body);
+
+    } catch (err) {
+        return res.render("admin/update-game", { title: "Update Game", error: err.details[0].message });
+    }
+
+    try {
         const { id } = req.params;
         const { title, genre, price, description, img_path } = req.body;
         const updatedProductInfo = {
@@ -195,7 +212,7 @@ router.patch("/games/:id/update", checkAdminAuthenticated, async (req, res) => {
             description,
             img_path
         };
-        
+
         await Product.findByIdAndUpdate(id, updatedProductInfo);
     
         res.redirect(`/games/${id}`);

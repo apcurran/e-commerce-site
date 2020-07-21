@@ -5,7 +5,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
-const { checkNotAuthenticated, checkAuthenticated } = require("../config/check-auth");
+const { checkNotAuthenticated } = require("../config/check-auth");
 const { signupValidation, loginValidation } = require("../validation/validate-user");
 const passport = require("passport");
 const csrf = require("csurf");
