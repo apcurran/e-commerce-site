@@ -1,7 +1,7 @@
 <% if (locals.error) { %>
     <p class="error"><%= error %></p>
 <% } %> 
-<form action="/games/<%= product._id %>/update" method="POST" class="add-game-form">
+<form action="/games/<%= product._id %>/update?_method=PATCH" method="POST" class="add-game-form">
     <h1 class="add-game-form__title">Update Game</h1>
     <div class="form-group">
         <label for="title" class="form-group__label">Title</label>

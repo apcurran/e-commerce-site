@@ -141,7 +141,7 @@ router.post("/games/:id/add-rating", checkAuthenticated, async (req, res) => {
     }
 });
 
-// ADMIN PROTECTED ROUTES //
+//// ADMIN PROTECTED ROUTES ////
 
 router.get("/game/add", checkAdminAuthenticated, (req, res) => {
     res.render("admin/add-game", { title: "New Game" });
@@ -176,6 +176,28 @@ router.get("/games/:id/update", checkAdminAuthenticated, async (req, res) => {
         const product = await Product.findById(id);
     
         res.render("admin/update-game", { title: "Update Game", product: product });
+        
+    } catch (err) {
+        console.error(err);
+
+        res.render("admin/update-game", { title: "Update Game", product: product, error: err });
+    }
+});
+
+router.patch("/games/:id/update", checkAdminAuthenticated, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { title, genre, price, description, img_path } = req.body;
+        const updatedProductInfo = {
+            title,
+            genre,
+            price,
+            description,
+            img_path
+        };
+        const updatedProduct = await Product.findByIdAndUpdate(id, updatedProductInfo);
+    
+        res.redirect(`/games/${id}`);
         
     } catch (err) {
         console.error(err);
