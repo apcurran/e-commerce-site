@@ -354,9 +354,21 @@ body {
 }
 
 .game-details__update-link {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     margin-bottom: 1rem;
     background-color: hsl(139, 73%, 84%);
+}
+
+.game-details__update-link svg,
+.game-details__delete-btn svg {
+    margin-right: .5rem;
+    opacity: .65;
+}
+
+.game-details__delete-btn {
+    display: inline-flex;
+    align-items: center;
 }
 
 .game-details__delete-btn:hover {
