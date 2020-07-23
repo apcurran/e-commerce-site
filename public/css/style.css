@@ -125,6 +125,7 @@ body {
 
 .hero-img {
     width: 100%;
+    height: auto;
 }
 
 .main--game {
@@ -186,6 +187,10 @@ body {
 .game-card__fig__img {
     display: block;
     width: 100%;
+    /* Avoid aspect-ratio distortion
+    when width and height are set on
+    img element */
+    height: auto;
     border-radius: 4px 4px 0 0;
 }
 
@@ -235,6 +240,7 @@ body {
 
 .game-details__left__img {
     display: inline-block;
+    height: auto;
     margin-bottom: 1.25rem;
 }
 
@@ -505,6 +511,10 @@ body {
 .checkout-section__item {
     display: flex;
     margin-bottom: 4rem;
+}
+
+.checkout-section__item__img {
+    height: auto;
 }
 
 .checkout-section__item__right__item-remove {
