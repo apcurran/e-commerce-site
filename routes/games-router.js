@@ -11,7 +11,8 @@ const { gameValidation } = require("../validation/validate-game");
 // GET Page Views
 router.get("/", async (req, res) => {
     try {
-        const products = await Product.find().lean();
+        // Exclude description and ratings fields on Product model for GET route
+        const products = await Product.find().select("-description -ratings").lean();
 
         res.render("shop/index", { title: "Home", products, genre: "all", user: req.user });
         
@@ -24,7 +25,7 @@ router.get("/", async (req, res) => {
 
 router.get("/games/action", async (req, res) => {
     try {
-        const products = await Product.find({ genre: "action" }).lean();
+        const products = await Product.find({ genre: "action" }).select("-description -ratings").lean();
 
         res.render("shop/index", { title: "Home", products, genre: "action" });
         
@@ -37,7 +38,7 @@ router.get("/games/action", async (req, res) => {
 
 router.get("/games/adventure", async (req, res) => {
     try {
-        const products = await Product.find({ genre: "adventure" }).lean();
+        const products = await Product.find({ genre: "adventure" }).select("-description -ratings").lean();
 
         res.render("shop/index", { title: "Home", products, genre: "adventure" });
         
@@ -50,7 +51,7 @@ router.get("/games/adventure", async (req, res) => {
 
 router.get("/games/rpg", async (req, res) => {
     try {
-        const products = await Product.find({ genre: "rpg" }).lean();
+        const products = await Product.find({ genre: "rpg" }).select("-description -ratings").lean();
 
         res.render("shop/index", { title: "Home", products, genre: "rpg" });
         
@@ -63,7 +64,7 @@ router.get("/games/rpg", async (req, res) => {
 
 router.get("/games/sports", async (req, res) => {
     try {
-        const products = await Product.find({ genre: "sports" }).lean();
+        const products = await Product.find({ genre: "sports" }).select("-description -ratings").lean();
 
         res.render("shop/index", { title: "Home", products, genre: "sports" });
         
