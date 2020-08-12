@@ -34,7 +34,7 @@ router.post("/signup", checkNotAuthenticated, async (req, res) => {
         const { first_name, last_name, email, password } = req.body;
 
         // Check if user is already in db
-        const emailExists = await User.findOne({ email });
+        const emailExists = await User.findOne({ email }).lean();
 
         if (emailExists) {
             return res.render("user/signup", { title: "Sign Up", csrfToken: req.csrfToken(), error: "Email already exists" });

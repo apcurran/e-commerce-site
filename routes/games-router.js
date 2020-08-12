@@ -78,7 +78,7 @@ router.get("/games/sports", async (req, res) => {
 router.get("/games/:id", async (req, res) => {
     try {
         const { id } = req.params;
-        const product = await Product.findById(id);
+        const product = await Product.findById(id).lean();
         const avgProductRatings = await Product.aggregate([
             { $match: { _id: product._id } },
             { $unwind: "$ratings" },
@@ -182,7 +182,7 @@ router.post("/game/add", checkAdminAuthenticated, async (req, res) => {
 router.get("/games/:id/update", checkAdminAuthenticated, async (req, res) => {
     try {
         const { id } = req.params;
-        const product = await Product.findById(id);
+        const product = await Product.findById(id).lean();
     
         res.render("admin/update-game", { title: "Update Game", product: product });
         
