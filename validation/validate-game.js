@@ -22,7 +22,9 @@ function gameValidation(data) {
         img_path: Joi
                 .string()
                 .min(1)
-                .required()
+                .required(),
+        _csrf: Joi
+                .string()
     });
 
     return schema.validateAsync(data);

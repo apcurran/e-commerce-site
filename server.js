@@ -34,7 +34,7 @@ mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
 
-// CSRF
+// csrf
 const csrfProtection = csrf();
 
 // Middleware
