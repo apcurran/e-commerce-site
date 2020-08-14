@@ -49,6 +49,7 @@
                         <option value="2" class="game-details__right__form__option">2 Stars</option>
                         <option value="1" class="game-details__right__form__option">1 Star</option>
                     </select>
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <button class="game-details__right__form__submit underline--indigo">Submit Rating</button>
                 </form>
             <% } %>
@@ -64,6 +65,7 @@
                         </a>
                     </div>
                     <form method="POST" action="/games/<%= product._id %>?_method=DELETE" class="game-details__delete">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                         <button type="submit" class="game-details__delete-btn">
                             <svg fill="none" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>

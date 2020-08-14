@@ -8,15 +8,10 @@ const User = require("../models/User");
 const { checkNotAuthenticated } = require("../config/check-auth");
 const { signupValidation, loginValidation } = require("../validation/validate-user");
 const passport = require("passport");
-const csrf = require("csurf");
-
-const csrfProtection = csrf();
-// Use csrf middleware in all user-router routes
-router.use(csrfProtection);
 
 // GET Admin Log In
 router.get("/login", checkNotAuthenticated, (req, res) => {
-    res.render("admin/login", { title: "Admin Log In", csrfToken: req.csrfToken() });
+    res.render("admin/login", { title: "Admin Log In" });
 });
 
 // POST Admin Log In
@@ -36,7 +31,7 @@ router.post("/login", checkNotAuthenticated, passport.authenticate("local.adminL
 
 // GET Admin Sign Up
 router.get("/signup", checkNotAuthenticated, (req, res) => {
-    res.render("admin/signup", { title: "Sign Up", csrfToken: req.csrfToken() });
+    res.render("admin/signup", { title: "Sign Up" });
 });
 
 // POST Admin Sign Up
@@ -46,7 +41,7 @@ router.post("/signup", checkNotAuthenticated, async (req, res) => {
         await signupValidation(req.body);
 
     } catch (err) {
-        return res.render("admin/signup", { title: "Sign Up", csrfToken: req.csrfToken(), error: err.details[0].message });
+        return res.render("admin/signup", { title: "Sign Up", error: err.details[0].message });
     }
 
     try {
@@ -56,7 +51,7 @@ router.post("/signup", checkNotAuthenticated, async (req, res) => {
         const emailExists = await User.findOne({ email });
 
         if (emailExists) {
-            return res.render("admin/signup", { title: "Sign Up", csrfToken: req.csrfToken(), error: "Email already exists" });
+            return res.render("admin/signup", { title: "Sign Up", error: "Email already exists" });
         }
 
         // Hash password
@@ -65,7 +60,7 @@ router.post("/signup", checkNotAuthenticated, async (req, res) => {
 
         // Admin
         if (admin_secret !== process.env.ADMIN_SECRET) {
-            return res.render("admin/signup", { title: "Sign Up", csrfToken: req.csrfToken(), error: "Incorrect admin secret" });
+            return res.render("admin/signup", { title: "Sign Up", error: "Incorrect admin secret" });
         }
 
         // Create a new admin user
@@ -84,7 +79,7 @@ router.post("/signup", checkNotAuthenticated, async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        res.render("admin/signup", { title: "Sign Up", csrfToken: req.csrfToken(), error: err });
+        res.render("admin/signup", { title: "Sign Up", error: err });
     }
 });
 

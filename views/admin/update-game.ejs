@@ -28,6 +28,7 @@
         <label for="img_path" class="form-group__label">Image URL</label>
         <input type="text" class="form-group__input" id="img_path" name="img_path" value="<%= product.img_path %>" required>
     </div>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
     <button class="form__submit" type="submit">
         <span class="user-card__form-submit__span">Submit</span>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">

@@ -13,6 +13,7 @@ const passport = require("passport");
 const MongoStore = require("connect-mongo")(session);
 const compression = require("compression");
 const helmet = require("helmet");
+const csrf = require("csurf");
 // Initialize Passport
 require("./config/passport-config");
 
@@ -33,6 +34,9 @@ mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
 
+// CSRF
+const csrfProtection = csrf();
+
 // Middleware
 app.use(helmet());
 app.use(compression());
@@ -52,6 +56,9 @@ app.use(session({
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
     cookie: { maxAge: 120 * 60 * 1000 }
 }));
+// Enable csrfProtection
+app.use(csrfProtection);
+
 // Passport Setup
 app.use(passport.initialize());
 app.use(passport.session());
@@ -61,6 +68,7 @@ app.use((req, res, next) => {
     res.locals.isLoggedIn = req.isAuthenticated();
     res.locals.currentUser = req.user;
     res.locals.session = req.session;
+    res.locals.csrfToken = req.csrfToken();
 
     next();
 });

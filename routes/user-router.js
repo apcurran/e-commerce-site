@@ -10,15 +10,10 @@ const Cart = require("../models/Cart");
 const { checkNotAuthenticated, checkAuthenticated } = require("../config/check-auth");
 const { signupValidation } = require("../validation/validate-user");
 const passport = require("passport");
-const csrf = require("csurf");
-
-const csrfProtection = csrf();
-// Use csrf middleware in all user-router routes
-router.use(csrfProtection);
 
 // GET Sign Up
 router.get("/signup", checkNotAuthenticated, (req, res) => {
-    res.render("user/signup", { title: "Sign Up", csrfToken: req.csrfToken() });
+    res.render("user/signup", { title: "Sign Up" });
 });
 
 router.post("/signup", checkNotAuthenticated, async (req, res) => {
@@ -27,7 +22,7 @@ router.post("/signup", checkNotAuthenticated, async (req, res) => {
         await signupValidation(req.body);
 
     } catch (err) {
-        return res.render("user/signup", { title: "Sign Up", csrfToken: req.csrfToken(), error: err.details[0].message });
+        return res.render("user/signup", { title: "Sign Up", error: err.details[0].message });
     }
 
     try {
@@ -37,7 +32,7 @@ router.post("/signup", checkNotAuthenticated, async (req, res) => {
         const emailExists = await User.findOne({ email }).lean();
 
         if (emailExists) {
-            return res.render("user/signup", { title: "Sign Up", csrfToken: req.csrfToken(), error: "Email already exists" });
+            return res.render("user/signup", { title: "Sign Up", error: "Email already exists" });
         }
 
         // Hash password
@@ -59,13 +54,13 @@ router.post("/signup", checkNotAuthenticated, async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        res.render("user/signup", { title: "Sign Up", csrfToken: req.csrfToken(), error: err });
+        res.render("user/signup", { title: "Sign Up", error: err });
     }
 });
 
 // GET Log In
 router.get("/login", checkNotAuthenticated, (req, res) => {
-    res.render("user/login", { title: "Log In", csrfToken: req.csrfToken() });
+    res.render("user/login", { title: "Log In" });
 });
 
 router.post("/login", checkNotAuthenticated, passport.authenticate("local.login", {
