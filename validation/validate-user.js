@@ -27,7 +27,7 @@ function signupValidation(data) {
                 .string()
     });
 
-    return schema.validateAsync(data);
+    return schema.validateAsync(data, { escapeHtml: true });
 }
 
 function loginValidation(data) {
@@ -45,7 +45,7 @@ function loginValidation(data) {
                 .string()
     });
 
-    return schema.validateAsync(data);
+    return schema.validateAsync(data, { escapeHtml: true });
 }
 
 module.exports = { signupValidation, loginValidation };
