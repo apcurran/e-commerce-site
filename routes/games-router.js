@@ -11,10 +11,37 @@ const { gameValidation } = require("../validation/validate-game");
 // GET Page Views
 router.get("/", async (req, res) => {
     try {
-        // Exclude description and ratings fields on Product model for GET route
-        const products = await Product.find().select("-description -ratings").lean();
+        const page = Number(req.query.page) || 1;
+        const itemsPerPage = 4;
 
-        res.render("shop/index", { title: "Home", products, genre: "all", user: req.user });
+        const totalItems = await Product
+            .find()
+            .countDocuments()
+            .lean();
+
+        // Exclude description and ratings fields on Product model for GET route
+        const products = await Product
+            .find()
+            .skip((page - 1) * itemsPerPage)
+            .limit(itemsPerPage)
+            .select("-description -ratings")
+            .lean();
+
+        const hasNextPage = itemsPerPage * page < totalItems;
+        const hasPrevPage = page > 1;
+        const nextPage = page + 1;
+        const prevPage = page - 1;
+
+        res.render("shop/index", {
+            title: "Home",
+            products,
+            hasNextPage,
+            hasPrevPage,
+            nextPage,
+            prevPage,
+            genre: "all",
+            user: req.user
+        });
         
     } catch (err) {
         console.error(err);
