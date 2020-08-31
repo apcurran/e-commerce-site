@@ -12,29 +12,31 @@ const { gameValidation } = require("../validation/validate-game");
 router.get("/", async (req, res) => {
     try {
         const page = Number(req.query.page) || 1;
-        const itemsPerPage = 4;
+        const itemsPerPage = 9;
 
-        const totalItems = await Product
+        const totalItems = Product
             .find()
             .countDocuments()
             .lean();
 
         // Exclude description and ratings fields on Product model for GET route
-        const products = await Product
+        const products = Product
             .find()
             .skip((page - 1) * itemsPerPage)
             .limit(itemsPerPage)
             .select("-description -ratings")
             .lean();
 
-        const hasNextPage = itemsPerPage * page < totalItems;
+        const [myTotalItems, myProducts] = await Promise.all([totalItems, products]);
+
+        const hasNextPage = itemsPerPage * page < myTotalItems;
         const hasPrevPage = page > 1;
         const nextPage = page + 1;
         const prevPage = page - 1;
 
         res.render("shop/index", {
             title: "Home",
-            products,
+            products: myProducts,
             hasNextPage,
             hasPrevPage,
             nextPage,

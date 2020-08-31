@@ -14,10 +14,10 @@
             <% }); %>
         </div>
         <section class="pagination">
-            <% if (hasPrevPage) { %>
+            <% if (locals.hasPrevPage) { %>
                 <a href="?page=<%= prevPage %>" class="pagination__link underline--indigo">Prev</a>
             <% } %>
-            <% if (hasNextPage) { %>
+            <% if (locals.hasNextPage) { %>
                 <a href="?page=<%= nextPage %>" class="pagination__link underline--indigo">Next</a>
             <% } %> 
         </section>
