@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 
 const { checkNotAuthenticated } = require("../config/check-auth");
-const { signupValidation, loginValidation } = require("../validation/validate-user");
+const { signupValidation } = require("../validation/validate-user");
 const passport = require("passport");
 
 // GET Admin Log In
