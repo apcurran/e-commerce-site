@@ -88,7 +88,7 @@ const postApiSuccessfulOrder = async (req, res) => {
         });
         
         await order.save();
-        
+
         req.session.cart = null;
         res.status(201).end();
 

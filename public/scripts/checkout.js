@@ -3,19 +3,23 @@
 const stripe = Stripe("pk_test_51GyOBXEFSgPrRFzWmUBqUfL9lNgsZR7qWlzKEQe7hTRs48845plWirspdaEqDps99uKE3MumJXsyjJPlSXoCGgOR0089tYnp4V");
 const elements = stripe.elements();
 const form = document.querySelector(".checkout-form");
-// const API_URL = "https://apcurran-heroes-for-sale.herokuapp.com/api/create-payment-intent";
-const API_URL = "http://localhost:5000/api/create-payment-intent";
 const csrfToken = document.getElementById("csrf-token").value;
+
+const PAYMENT_INTENT_API_URL = "https://apcurran-heroes-for-sale.herokuapp.com/api/create-payment-intent";
+const SUCCESS_API_URL = "https://apcurran-heroes-for-sale.herokuapp.com/api/successful-order";
 
 async function fetchPaymentIntent() {
     try {
-        const result = await fetch(API_URL, {
+        const options = {
             headers: {
                 'X-CSRF-TOKEN': csrfToken
             },
             method: "POST"
-        });
+        };
+
+        const result = await fetch(PAYMENT_INTENT_API_URL, options);
         var data = await result.json();
+        
     } catch (err) {
         console.error(err);
     }
@@ -111,7 +115,7 @@ async function sendSuccessfulOrderInfo(paymentId) {
             })
         };
 
-        const result = await fetch("https://apcurran-heroes-for-sale.herokuapp.com/api/successful-order", options);
+        await fetch(SUCCESS_API_URL, options);
 
     } catch (err) {
         console.error(err);
