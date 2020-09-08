@@ -12,7 +12,7 @@ async function fetchPaymentIntent() {
     try {
         const options = {
             headers: {
-                'X-CSRF-TOKEN': csrfToken
+                "CSRF-Token": csrfToken
             },
             method: "POST"
         };
@@ -105,7 +105,7 @@ async function sendSuccessfulOrderInfo(paymentId) {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                'X-CSRF-TOKEN': csrfToken
+                "CSRF-Token": csrfToken
             },
             body: JSON.stringify({
                 first_name: firstName,
