@@ -1,30 +1,23 @@
 "use strict";
 
-const passport = require("passport");
 const { signupValidation } = require("../validation/validate-user");
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
-
 
 const getLogin = (req, res) => {
     res.render("admin/login", { title: "Admin Log In" });
 };
 
-const postLogin = () => {
-    passport.authenticate("local.adminLogin", {
-        failureRedirect: "/admin/login",
-        failureFlash: true
-    }), (req, res, next) => {
-        if (req.session.oldUrl) {
-            const oldUrl = req.session.oldUrl;
-    
-            req.session.oldUrl = null;
-            res.redirect(oldUrl);
-        } else {
-            res.redirect("/");
-        }
+const postLogin = (req, res) => {
+    if (req.session.oldUrl) {
+        const oldUrl = req.session.oldUrl;
+
+        req.session.oldUrl = null;
+        res.redirect(oldUrl);
+    } else {
+        res.redirect("/");
     }
-};
+}
 
 const getSignup = (req, res) => {
     res.render("admin/signup", { title: "Sign Up" });

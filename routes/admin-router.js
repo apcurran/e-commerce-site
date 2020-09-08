@@ -2,6 +2,7 @@
 
 const express = require("express");
 const router = express.Router();
+const passport = require("passport");
 const adminController = require("../controllers/admin-controller");
 const { checkNotAuthenticated } = require("../config/check-auth");
 
@@ -9,7 +10,10 @@ const { checkNotAuthenticated } = require("../config/check-auth");
 router.get("/login", checkNotAuthenticated, adminController.getLogin);
 
 // POST Admin Log In
-router.post("/login", checkNotAuthenticated, adminController.postLogin);
+router.post("/login", checkNotAuthenticated, passport.authenticate("local.adminLogin", {
+    failureRedirect: "/admin/login",
+    failureFlash: true
+}), adminController.postLogin);
 
 // GET Admin Sign Up
 router.get("/signup", checkNotAuthenticated, adminController.getSignup);
