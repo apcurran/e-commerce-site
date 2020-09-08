@@ -56,12 +56,11 @@ app.use(session({
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
     cookie: { maxAge: 120 * 60 * 1000 }
 }));
-// Enable csrfProtection
-app.use(csrfProtection);
-
 // Passport Setup
 app.use(passport.initialize());
 app.use(passport.session());
+// Enable csrfProtection
+app.use(csrfProtection);
 
 // Global views variables
 app.use((req, res, next) => {
