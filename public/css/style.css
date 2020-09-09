@@ -840,6 +840,7 @@ th {
 
 .main__title-404 {
     font-size: calc(1.25rem + 1.5vw);
+    color: hsl(202, 81%, 87%);
 }
 
 .main__desc-404 {
@@ -849,7 +850,7 @@ th {
 .main__img-404 {
     width: 100%;
     height: auto;
-    filter: brightness(.65);
+    filter: brightness(.625);
 }
 
 /* Smaller Device Screens */
