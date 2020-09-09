@@ -1,6 +1,7 @@
 "use strict";
 
 require('dotenv').config()
+
 const express = require("express");
 const PORT = process.env.PORT || 5000;
 const morgan = require("morgan");
@@ -14,6 +15,7 @@ const MongoStore = require("connect-mongo")(session);
 const compression = require("compression");
 const helmet = require("helmet");
 const csrf = require("csurf");
+
 // Initialize Passport
 require("./config/passport-config");
 
