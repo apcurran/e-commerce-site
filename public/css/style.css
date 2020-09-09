@@ -821,6 +821,37 @@ th {
     color: var(--submit-btn-bg-clr);
 }
 
+/* 404 Page */
+.main-404 {
+    position: relative;
+}
+
+.main__info-404 {
+    position: absolute;
+    top: 30%;
+    left: 12%;
+    z-index: 5;
+}
+
+.main__title-404,
+.main__desc-404 {
+    color: #fff;
+}
+
+.main__title-404 {
+    font-size: calc(1.25rem + 1.5vw);
+}
+
+.main__desc-404 {
+    font-size: calc(1.05rem + .15vw);
+}
+
+.main__img-404 {
+    width: 100%;
+    height: auto;
+    filter: brightness(.65);
+}
+
 /* Smaller Device Screens */
 @media screen and (max-width: 72em) {
     .checkout-grid {
@@ -849,6 +880,11 @@ th {
     .user-card__right,
     .user-card__right__img {
         border-radius: 0 0 10px 10px;
+    }
+
+    .main__img-404 {
+        height: 33rem;
+        object-fit: cover;
     }
 }
 
