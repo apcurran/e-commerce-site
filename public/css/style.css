@@ -11,7 +11,7 @@
     --light-grey: #caccce;
     --med-grey: hsl(218, 17%, 38%);
     --dark-grey: #1a202c;
-    --light-blue: #a3bffa;
+    --light-blue: #c3dafe;
     --light-indigo: #7f9cf5;
     --dark-indigo: #4c51bf;
     --submit-btn-bg-clr: #046586;
@@ -219,6 +219,7 @@ body {
 
 .game-card__genre-chip-text {
     line-height: 1;
+    color: #182d4d;
 }
 
 .game-card__price {
