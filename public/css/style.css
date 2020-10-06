@@ -210,7 +210,7 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: .4rem 1.35rem .5rem 1.35rem;
+    padding: .4rem 1rem .5rem 1rem;
     margin-bottom: 1rem;
     border-radius: 500px;
     background-color: var(--light-blue);
