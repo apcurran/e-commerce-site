@@ -260,6 +260,7 @@ body {
 
 .game-details__left__desc {
     line-height: 1.6;
+    white-space: pre-wrap;
 }
 
 .game-details__right__list__item {
