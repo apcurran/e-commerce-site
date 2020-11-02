@@ -1,5 +1,7 @@
 "use strict";
 
+const mongoose = require("mongoose");
+
 const Product = require("../models/Product");
 const Cart = require("../models/Cart");
 const { gameValidation } = require("../validation/validate-game");
@@ -102,20 +104,41 @@ const getGamesSports = async (req, res) => {
 const getGame = async (req, res) => {
     try {
         const { id } = req.params;
-        const product = await Product.findById(id).lean();
-        const avgProductRatings = await Product.aggregate([
-            { $match: { _id: product._id } },
-            { $unwind: "$ratings" },
-            { $group: { _id: `$_id`, avgRating: { $avg: { "$ifNull": ["$ratings.user_rating", 0] } }, totalRatings: { $sum: 1 } } }
+        const prodId = mongoose.Types.ObjectId(id);
+        const prod = await Product.aggregate([
+            { $match: { _id: prodId } },
+            { $unwind: {
+                "path": "$ratings",
+                "preserveNullAndEmptyArrays": true // still returns a document if ratings is empty
+            } },
+            {
+                $group: {
+                    _id: "$_id",
+                    title: { $first: "$title" },
+                    genre: { $first: "$genre" },
+                    price: { $first: "$price" },
+                    description: { $first: "$description" },
+                    img_path: { $first: "$img_path" },
+                    avgRating: { $avg: "$ratings.user_rating" },
+                    totalRatings: { $sum: 1 }
+                }
+            }
         ]);
+        const product = prod[0];
 
         // No rating? Output regular game data
-        if (avgProductRatings.length === 0) {
+        if (product.avgRating === null) {
             return res.render("shop/product-page", { title: `${product.title} Details`, product, genre: product.genre, noAverageRating: "No ratings yet."});
         }
 
-        // Output game data, rating, and num of ratings
-        res.render("shop/product-page", { title: `${product.title} Details`, product, genre: product.genre, averageRating: avgProductRatings[0].avgRating, totalRatings: avgProductRatings[0].totalRatings });
+        // Otherwise, output game data, rating, and num of ratings
+        res.render("shop/product-page", {
+            title: `${product.title} Details`,
+            product,
+            genre: product.genre,
+            averageRating: product.avgRating,
+            totalRatings: product.totalRatings
+        });
 
     } catch (err) {
         console.error(err);
