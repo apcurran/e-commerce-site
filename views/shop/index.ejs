@@ -9,8 +9,8 @@
     <section class="game-section">
         <h2 class="game-section__title"><%= genre %></h2>
         <div class="game-grid">
-            <% products.forEach(product => { %>
-                <%- include("../partials/game-grid-item", { product }) %> 
+            <% products.forEach((product, gridItemIndex) => { %>
+                <%- include("../partials/game-grid-item", { product, gridItemIndex }) %> 
             <% }); %>
         </div>
         <section class="pagination">

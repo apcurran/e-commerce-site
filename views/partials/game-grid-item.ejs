@@ -1,7 +1,7 @@
 <a href="/games/<%= product._id %>" class="game-card-wrapper">
     <article class="game-card">
         <figure class="game-card__fig">
-            <img src="<%= product.img_path %>" alt="Game cover art" class="game-card__fig__img" width="460" height="215" loading="lazy">
+            <img src="<%= product.img_path %>" alt="Game cover art" class="game-card__fig__img" width="460" height="215" loading="<%= gridItemIndex > 5 ? "lazy" : "eager" %>">
         </figure>
         <div class="game-card__info">
             <h3 class="game-card__title"><%= product.title %></h3>
