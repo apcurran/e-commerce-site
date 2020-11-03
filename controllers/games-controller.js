@@ -10,23 +10,48 @@ const getGamesIndex = async (req, res) => {
     try {
         const page = Number(req.query.page) || 1;
         const itemsPerPage = 9;
+        const skipAmt = ((page - 1) * itemsPerPage);
 
-        const totalItems = Product
-            .find()
-            .countDocuments()
-            .lean();
+        // Aggregate Option
+        const productsAgg = await Product.aggregate([
+            {
+                $facet: {
+                    "products_data": [
+                        { $skip: skipAmt},
+                        { $limit: itemsPerPage },
+                        { $project: { description: 0, ratings: 0 } }
+                    ],
+                    "total_products": [
+                        {
+                            $count: "total_products"
+                        }
+                    ]
+                }
+            }
+        ]);
 
-        // Exclude description and ratings fields
-        const products = Product
-            .find()
-            .skip((page - 1) * itemsPerPage)
-            .limit(itemsPerPage)
-            .select("-description -ratings")
-            .lean();
+        const myProducts = productsAgg[0].products_data;
+        const totalProducts = productsAgg[0].total_products[0].total_products;
 
-        const [myTotalItems, myProducts] = await Promise.all([totalItems, products]);
+        // const totalItems = await Product
+        //     .find()
+        //     .countDocuments()
+        //     .lean();
+        // console.log("Total Items", totalItems);
 
-        const hasNextPage = itemsPerPage * page < myTotalItems;
+        // // Exclude description and ratings fields
+        // const products = await Product
+        //     .find()
+        //     .skip((page - 1) * itemsPerPage)
+        //     .limit(itemsPerPage)
+        //     .select("-description -ratings")
+        //     .lean();
+        
+        // console.log(products);
+
+        // const [myTotalItems, myProducts] = await Promise.all([totalItems, products]);
+
+        const hasNextPage = itemsPerPage * page < totalProducts;
         const hasPrevPage = page > 1;
         const nextPage = page + 1;
         const prevPage = page - 1;
