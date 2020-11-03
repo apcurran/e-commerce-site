@@ -8,6 +8,7 @@ const { gameValidation } = require("../validation/validate-game");
 
 const getGamesIndex = async (req, res) => {
     try {
+        // Pagination
         const page = Number(req.query.page) || 1;
         const itemsPerPage = 9;
         const skipAmt = ((page - 1) * itemsPerPage);
