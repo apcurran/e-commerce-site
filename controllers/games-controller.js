@@ -16,7 +16,7 @@ const getGamesIndex = async (req, res) => {
             .countDocuments()
             .lean();
 
-        // Exclude description and ratings fields on Product model for GET route
+        // Exclude description and ratings fields
         const products = Product
             .find()
             .skip((page - 1) * itemsPerPage)
@@ -109,7 +109,7 @@ const getGame = async (req, res) => {
             { $match: { _id: prodId } },
             { $unwind: {
                 "path": "$ratings",
-                "preserveNullAndEmptyArrays": true // still returns a document if ratings is empty
+                "preserveNullAndEmptyArrays": true // still returns a document if ratings field is empty
             } },
             {
                 $group: {
@@ -193,7 +193,6 @@ const getAddGame = (req, res) => {
 
 const postAddGame = async (req, res) => {
     try {
-        // Validate incoming data
         await gameValidation(req.body);
 
     } catch (err) {
@@ -238,7 +237,6 @@ const getUpdateGame = async (req, res) => {
 
 const patchUpdateGame = async (req, res) => {
     try {
-        // Validate incoming data
         await gameValidation(req.body);
 
     } catch (err) {
