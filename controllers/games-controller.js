@@ -106,11 +106,15 @@ const getGame = async (req, res) => {
         const { id } = req.params;
         const prodId = mongoose.Types.ObjectId(id);
         const prod = await Product.aggregate([
-            { $match: { _id: prodId } },
-            { $unwind: {
-                "path": "$ratings",
-                "preserveNullAndEmptyArrays": true // still returns a document if ratings field is empty
-            } },
+            {
+                $match: { _id: prodId }
+            },
+            {
+                $unwind: {
+                    "path": "$ratings",
+                    "preserveNullAndEmptyArrays": true // still returns a document if ratings field is empty
+                }
+            },
             {
                 $group: {
                     _id: "$_id",
