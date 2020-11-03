@@ -19,7 +19,7 @@ const getGamesIndex = async (req, res) => {
                     "products_data": [
                         { $skip: skipAmt},
                         { $limit: itemsPerPage },
-                        { $project: { description: 0, ratings: 0 } }
+                        { $project: { description: 0, ratings: 0 } } // exclude description and ratings fields
                     ],
                     "total_products": [
                         {
