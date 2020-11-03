@@ -168,7 +168,7 @@ const getAddToCart = async (req, res) => {
 const postAddRating = async (req, res) => {
     try {
         const productId = req.params.id;
-        const product = await Product.findById(productId);
+        const product = await Product.findById(productId).select("ratings");
         const newRating = {
             user_id: req.user._id,
             user_rating: req.body.rating
