@@ -23,7 +23,7 @@ const getGamesIndex = async (req, res) => {
                     ],
                     "total_products": [
                         {
-                            $count: "total_products"
+                            $count: "products_count"
                         }
                     ]
                 }
@@ -31,25 +31,7 @@ const getGamesIndex = async (req, res) => {
         ]);
 
         const myProducts = productsAgg[0].products_data;
-        const totalProducts = productsAgg[0].total_products[0].total_products;
-
-        // const totalItems = await Product
-        //     .find()
-        //     .countDocuments()
-        //     .lean();
-        // console.log("Total Items", totalItems);
-
-        // // Exclude description and ratings fields
-        // const products = await Product
-        //     .find()
-        //     .skip((page - 1) * itemsPerPage)
-        //     .limit(itemsPerPage)
-        //     .select("-description -ratings")
-        //     .lean();
-        
-        // console.log(products);
-
-        // const [myTotalItems, myProducts] = await Promise.all([totalItems, products]);
+        const totalProducts = productsAgg[0].total_products[0].products_count;
 
         const hasNextPage = itemsPerPage * page < totalProducts;
         const hasPrevPage = page > 1;
