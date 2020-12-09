@@ -242,9 +242,9 @@ body {
 /* Mobile FAB */
 .floating-action-btn {
     position: fixed;
+    display: none;
     bottom: 2rem;
     right: 2rem;
-    display: none;
     padding: .875rem;
     border: none;
     border-radius: 50%;
