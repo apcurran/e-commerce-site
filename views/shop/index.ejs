@@ -5,6 +5,7 @@
 <% } %>
 
 <main class="main--game">
+    <a id="top" href="#"></a>
     <%- include("../partials/sidebar", { genre }) %>
     <section class="game-section">
         <h2 class="game-section__title"><%= genre %></h2>
@@ -21,5 +22,6 @@
                 <a href="?page=<%= nextPage %>" class="pagination__link underline--indigo">Next</a>
             <% } %> 
         </section>
+        <%- include("../partials/floating-action-btn.ejs") %> 
     </section>
 </main>

@@ -239,6 +239,31 @@ body {
     font-size: 1.125rem;
 }
 
+/* Mobile FAB */
+.floating-action-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    display: none;
+    padding: .875rem;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--dark-indigo);
+    cursor: pointer;
+}
+
+.floating-action-btn__icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    stroke: #fff;
+}
+
+@media screen and (max-width: 32.5em) {
+    .floating-action-btn {
+        display: inline-flex;
+    }
+}
+
 /* Game Details Page */
 
 .game-details {
