@@ -18,6 +18,10 @@
     --dark-red: #9b2c2c;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 /* Global Styles */
 
 a {
