@@ -139,6 +139,8 @@ body {
 
 .sidebar {
     align-self: flex-start;
+    position: sticky;
+    top: 1rem;
     margin-right: 3.25rem;
 }
 
