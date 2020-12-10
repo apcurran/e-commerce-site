@@ -261,7 +261,7 @@ body {
     border: none;
     border-radius: 50%;
     background-color: var(--dark-indigo);
-    box-shadow: 0 7px 11px hsla(237, 52%, 28%, .28);
+    box-shadow: 0 7px 11px hsla(237, 52%, 28%, .21);
     cursor: pointer;
 }
 
