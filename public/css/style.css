@@ -140,9 +140,14 @@ body {
 
 .sidebar {
     align-self: flex-start;
-    position: sticky;
-    top: 1rem;
     margin-right: 3.25rem;
+}
+
+@media screen and (min-width: 32.5em) {
+    .sidebar {
+        position: sticky;
+        top: 1rem;
+    }
 }
 
 .sidebar__list--top {
@@ -256,6 +261,7 @@ body {
     border: none;
     border-radius: 50%;
     background-color: var(--dark-indigo);
+    box-shadow: 0 7px 11px hsla(237, 52%, 28%, .28);
     cursor: pointer;
 }
 
