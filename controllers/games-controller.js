@@ -141,11 +141,10 @@ const getGame = async (req, res) => {
         const product = prod[0];
         // TODO
         // Check for existing rating
-        const currUserId = req.user._id.toString();
+        const currUserId = req.user ? req.user._id.toString() : null;
         const productRatingsArr = product.ratings;
         
         const currUserRatingExists = checkRatingExistence(currUserId, productRatingsArr);
-        console.log(currUserRatingExists);
 
         // No game ratings yet? Output regular game data
         if (product.avgRating === null) {
