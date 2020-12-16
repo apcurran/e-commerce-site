@@ -307,6 +307,11 @@ body {
     margin-bottom: .25rem;
 }
 
+.game-details__right__rating-exists-notification {
+    margin-bottom: 1rem;
+    color: var(--dark-indigo);
+}
+
 /* First item with Border */
 .list--top {
     font-weight: 700;

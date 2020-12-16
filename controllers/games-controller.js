@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const Product = require("../models/Product");
 const Cart = require("../models/Cart");
 const { gameValidation } = require("../validation/validate-game");
+const { checkRatingExistence } = require("../utils/check-rating-existence");
 
 const getGamesIndex = async (req, res) => {
     try {
@@ -132,13 +133,21 @@ const getGame = async (req, res) => {
                     description: { $first: "$description" },
                     img_path: { $first: "$img_path" },
                     avgRating: { $avg: "$ratings.user_rating" },
+                    ratings: { $push: "$ratings" },
                     totalRatings: { $sum: 1 }
                 }
             }
         ]);
         const product = prod[0];
+        // TODO
+        // Check for existing rating
+        const currUserId = req.user._id.toString();
+        const productRatingsArr = product.ratings;
+        
+        const currUserRatingExists = checkRatingExistence(currUserId, productRatingsArr);
+        console.log(currUserRatingExists);
 
-        // No rating? Output regular game data
+        // No game ratings yet? Output regular game data
         if (product.avgRating === null) {
             return res.render("shop/product-page", { title: `${product.title} Details`, product, genre: product.genre, noAverageRating: "No ratings yet."});
         }
@@ -149,7 +158,8 @@ const getGame = async (req, res) => {
             product,
             genre: product.genre,
             averageRating: product.avgRating,
-            totalRatings: product.totalRatings
+            totalRatings: product.totalRatings,
+            currUserRatingExists
         });
 
     } catch (err) {
