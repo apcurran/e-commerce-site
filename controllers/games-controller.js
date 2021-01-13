@@ -114,7 +114,7 @@ const getGame = async (req, res) => {
     try {
         const { id } = req.params;
         const prodId = mongoose.Types.ObjectId(id);
-        const prod = await Product.aggregate([
+        const product = (await Product.aggregate([
             {
                 $match: { _id: prodId }
             },
@@ -137,9 +137,8 @@ const getGame = async (req, res) => {
                     totalRatings: { $sum: 1 }
                 }
             }
-        ]);
+        ]))[0];
         
-        const product = prod[0];
         const currUserId = req.user ? req.user._id.toString() : null;
         const productRatingsArr = product.ratings;
         const currUserRatingExists = checkRatingExistence(currUserId, productRatingsArr);
