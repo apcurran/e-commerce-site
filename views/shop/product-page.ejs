@@ -41,10 +41,10 @@
             </ul>
             <% if (isLoggedIn) { %>
                 <% if (locals.currUserRatingExists) { %>
-                    <!-- Show submitted rating notification to logged in user -->
+                    <%# Show submitted rating notification to logged in user #%>
                     <p class="game-details__right__rating-exists-notification">Your rating has already been submitted.</p>
                 <% } else { %>
-                    <!-- Show rating form -->
+                    <%# Show rating form #%>
                     <form method="POST" action="/games/<%= product._id %>/add-rating" class="game-details__right__form">
                         <label class="game-details__right__form__label">Rate this game</label>
                         <select name="rating" id="game-rating" class="game-details__right__form__select">
