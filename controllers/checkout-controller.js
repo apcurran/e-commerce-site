@@ -1,8 +1,9 @@
 "use strict";
 
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+
 const Cart = require("../models/Cart");
 const Order = require("../models/Order");
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const getCheckoutPreview = (req, res) => {
     if (!req.session.cart) {

@@ -1,6 +1,7 @@
 "use strict";
 
 const bcrypt = require("bcrypt");
+
 const User = require("../models/User");
 const Order = require("../models/Order");
 const Cart = require("../models/Cart");

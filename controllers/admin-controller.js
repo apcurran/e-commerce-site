@@ -1,8 +1,9 @@
 "use strict";
 
+const bcrypt = require("bcrypt");
+
 const { signupValidation } = require("../validation/validate-user");
 const User = require("../models/User");
-const bcrypt = require("bcrypt");
 
 const getLogin = (req, res) => {
     res.render("admin/login", { title: "Admin Log In" });
