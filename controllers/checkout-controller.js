@@ -73,7 +73,7 @@ const postApiCreatePaymentIntent = async (req, res) => {
         res.send({ clientSecret: paymentIntent.client_secret });
         
     } catch (err) {
-        console.error(err);
+        next(err);
     }
 };
 
@@ -94,7 +94,7 @@ const postApiSuccessfulOrder = async (req, res) => {
         res.status(201).end();
 
     } catch (err) {
-        console.error(err);
+        next(err);
     }
 };
 

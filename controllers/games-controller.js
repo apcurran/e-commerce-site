@@ -179,7 +179,7 @@ const getAddToCart = async (req, res) => {
         res.redirect("/");
         
     } catch (err) {
-        console.error(err);
+        next(err);
     }
 };
 
