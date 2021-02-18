@@ -22,7 +22,7 @@
 
 - User passwords hashed through bcrypt
 
-- Uses Moment JS for date formatting
+- Uses native Intl methods for date formatting
 
 - Full Stripe integration for secure payment of game items
 
