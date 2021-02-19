@@ -45,7 +45,7 @@ app.use(compression());
 app.set("view engine", "ejs");
 app.set("layout", "layouts/layout");
 app.use(expressLayouts);
-app.use(express.static("public"));
+app.use(express.static("public", { maxAge: "2d" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride("_method"));
