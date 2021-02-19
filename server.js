@@ -45,7 +45,15 @@ app.use(compression());
 app.set("view engine", "ejs");
 app.set("layout", "layouts/layout");
 app.use(expressLayouts);
-app.use(express.static("public", { maxAge: "2d" }));
+
+if (process.env.NODE_ENV !== "production") {
+    // Disable caching
+    app.use(express.static("public"));
+} else {
+    // Enable 2 day caching of static assets
+    app.use(express.static("public", { maxAge: "2d" }));
+}
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride("_method"));
