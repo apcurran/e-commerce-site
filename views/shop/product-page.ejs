@@ -21,7 +21,7 @@
             <ul class="game-details__right__list list--bottom">
                 <li class="game-details__right__list__item">
                     <strong>Genre: </strong>
-                    <span><%= product.genre %></span>
+                    <span class="<%= product.genre === "rpg" ? "uppercase" : "titlecase" %>"><%= product.genre %></span>
                 </li>
                 <li class="game-details__right__list__item">
                     <strong>New </strong>
