@@ -6,7 +6,7 @@
         <div class="game-card__info">
             <h3 class="game-card__title"><%= product.title %></h3>
             <div class="game-card__genre-chip">
-                <span class="game-card__genre-chip-text"><%= product.genre %></span>
+                <span class="game-card__genre-chip-text <%= product.genre === "rpg" ? "uppercase" : "titlecase" %>"><%= product.genre %></span>
             </div>
             <p class="game-card__price">$<%= product.price %></p>
         </div>

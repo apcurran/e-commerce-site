@@ -50,6 +50,14 @@ button {
     background-image: linear-gradient(180deg, transparent 70%, rgba(101,125,225,.4) 0);
 }
 
+.uppercase {
+    text-transform: uppercase;
+}
+
+.titlecase {
+    text-transform: capitalize;
+}
+
 body {
     display: grid;
     min-height: 100vh;
@@ -223,7 +231,7 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: .4rem 1rem .5rem 1rem;
+    padding: .5rem 1rem .5rem 1rem;
     margin-bottom: 1rem;
     border-radius: 500px;
     background-color: var(--light-blue);
@@ -233,6 +241,7 @@ body {
 .game-card__genre-chip-text {
     line-height: 1;
     color: #182d4d;
+    font-size: .875rem;
 }
 
 .game-card__price {
