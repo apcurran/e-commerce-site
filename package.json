@@ -20,19 +20,19 @@
     "compression": "^1.7.4",
     "connect-mongo": "^3.2.0",
     "csurf": "^1.11.0",
-    "dotenv": "^8.2.0",
+    "dotenv": "^8.6.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
-    "express-ejs-layouts": "^2.5.0",
+    "express-ejs-layouts": "^2.5.1",
     "express-flash": "0.0.2",
-    "express-session": "^1.17.1",
+    "express-session": "^1.17.2",
     "helmet": "^3.23.3",
     "method-override": "^3.0.0",
-    "mongoose": "^5.12.3",
+    "mongoose": "^5.13.10",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "stripe": "^8.143.0"
+    "stripe": "^8.181.0"
   },
   "devDependencies": {
     "eslint": "^8.0.0"
