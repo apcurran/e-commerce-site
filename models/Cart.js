@@ -60,4 +60,4 @@ module.exports = class Cart {
 
         return arr;
     }
-}
+};

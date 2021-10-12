@@ -165,7 +165,7 @@ const getGame = async (req, res) => {
     }
 };
 
-const getAddToCart = async (req, res) => {
+const getAddToCart = async (req, res, next) => {
     try {
         const productId = req.params.id;
         // If a cart is already in the session retrieve the old cart, otherwise pass a new obj
@@ -242,7 +242,7 @@ const postAddGame = async (req, res) => {
 const getUpdateGame = async (req, res) => {
     try {
         const { id } = req.params;
-        const product = await Product.findById(id).lean();
+        var product = await Product.findById(id).lean();
     
         res.render("admin/update-game", { title: "Update Game", product: product });
         
@@ -264,7 +264,7 @@ const patchUpdateGame = async (req, res) => {
     try {
         const { id } = req.params;
         const { title, genre, price, description, img_path } = req.body;
-        const updatedProductInfo = {
+        var updatedProductInfo = {
             title,
             genre,
             price,
@@ -279,7 +279,7 @@ const patchUpdateGame = async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        res.render("admin/update-game", { title: "Update Game", product: product, error: err });
+        res.render("admin/update-game", { title: "Update Game", product: updatedProductInfo, error: err });
     }
 };
 

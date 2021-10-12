@@ -58,7 +58,7 @@ const getCheckout = (req, res) => {
     res.render("shop/checkout", { title: "Checkout", total: cart.totalPrice });
 };
 
-const postApiCreatePaymentIntent = async (req, res) => {
+const postApiCreatePaymentIntent = async (req, res, next) => {
     try {
         if (!req.session.cart) {
             return res.redirect("/checkout-preview");
@@ -77,7 +77,7 @@ const postApiCreatePaymentIntent = async (req, res) => {
     }
 };
 
-const postApiSuccessfulOrder = async (req, res) => {
+const postApiSuccessfulOrder = async (req, res, next) => {
     try {
         const cart = new Cart(req.session.cart);
         const order = new Order({

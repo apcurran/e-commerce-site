@@ -1,7 +1,6 @@
 "use strict";
 
 const stripe = Stripe("pk_test_51GyOBXEFSgPrRFzWmUBqUfL9lNgsZR7qWlzKEQe7hTRs48845plWirspdaEqDps99uKE3MumJXsyjJPlSXoCGgOR0089tYnp4V");
-const elements = stripe.elements();
 const form = document.querySelector(".checkout-form");
 const csrfToken = document.getElementById("csrf-token").value;
 
@@ -30,7 +29,7 @@ async function fetchPaymentIntent() {
     const style = {
         base: {
           color: "#32325d",
-          fontFamily: 'Muli, Arial, sans-serif',
+          fontFamily: "Muli, Arial, sans-serif",
           fontSmoothing: "antialiased",
           fontSize: "16px",
           "::placeholder": {
@@ -38,7 +37,7 @@ async function fetchPaymentIntent() {
           }
         },
         invalid: {
-          fontFamily: 'Muli, Arial, sans-serif',
+          fontFamily: "Muli, Arial, sans-serif",
           color: "#fa755a",
           iconColor: "#fa755a"
         }
@@ -49,13 +48,13 @@ async function fetchPaymentIntent() {
     // Stripe injects an iframe into the DOM
     card.mount("#card-element");
 
-    card.on("change", event => {
+    card.on("change", (event) => {
         const cardErrorPara = document.getElementById("card-errors");
 
         cardErrorPara.textContent = event.error ? event.error.message : "";
     });
 
-    form.addEventListener("submit", event => {
+    form.addEventListener("submit", (event) => {
         event.preventDefault();
 
         payWithCard(stripe, card, data.clientSecret);

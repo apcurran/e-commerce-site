@@ -18,7 +18,7 @@ const postLogin = (req, res) => {
     } else {
         res.redirect("/");
     }
-}
+};
 
 const getSignup = (req, res) => {
     res.render("admin/signup", { title: "Sign Up" });

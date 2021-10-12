@@ -66,7 +66,7 @@ const postLogin = (req, res, next) => {
     } else {
         res.redirect("/user/profile");
     }
-}
+};
 
 const getProfile = async (req, res) => {
     try {
