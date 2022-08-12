@@ -32,9 +32,9 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 // DB Setup
-mongoose.connect(process.env.DB_URI);
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "mongo connection error"));
+mongoose
+    .connect(process.env.DB_URI, { autoIndex: false })
+    .catch((err) => console.error(`Mongo error:, ${err}`));
 
 // csrf
 const csrfProtection = csrf();
