@@ -12,7 +12,8 @@ router.get("/login", checkNotAuthenticated, adminController.getLogin);
 // POST Admin Log In
 router.post("/login", checkNotAuthenticated, passport.authenticate("local.adminLogin", {
     failureRedirect: "/admin/login",
-    failureFlash: true
+    failureFlash: true,
+    keepSessionInfo: true // preserve session state
 }), adminController.postLogin);
 
 // GET Admin Sign Up

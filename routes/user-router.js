@@ -16,7 +16,8 @@ router.get("/login", checkNotAuthenticated, userController.getLogin);
 
 router.post("/login", checkNotAuthenticated, passport.authenticate("local.login", {
     failureRedirect: "/user/login",
-    failureFlash: true
+    failureFlash: true,
+    keepSessionInfo: true // preserve session state
 }), userController.postLogin);
 
 // GET User Profile
