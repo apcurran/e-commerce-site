@@ -86,12 +86,9 @@ const getProfile = async (req, res) => {
     }
 };
 
-const getLogout = (req, res, next) => {
-    req.logOut((err) => {
-        if (err) return next(err);
-
-        res.redirect("/");
-    });
+const getLogout = (req, res) => {
+    req.logOut();
+    res.redirect("/");
 };
 
 module.exports = {
