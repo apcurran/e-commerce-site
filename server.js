@@ -82,7 +82,6 @@ app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     res.locals.session = req.session;
     res.locals.csrfToken = req.csrfToken();
-    console.log(res.locals.csrfToken);
 
     next();
 });
