@@ -65,7 +65,10 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
-    cookie: { maxAge: 120 * 60 * 1000 }
+    cookie: {
+        secure: process.env.SESSION_SECURE,
+        maxAge: 120 * 60 * 1000
+    }
 }));
 // Passport Setup
 app.use(passport.initialize());
