@@ -61,12 +61,12 @@ app.use(methodOverride("_method"));
 app.use(flash());
 app.use(session({
     secret: process.env.SESSION_SECRET,
-    name: process.env.SESSION_NAME,
+    // name: process.env.SESSION_NAME,
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
     cookie: {
-        secure: process.env.SESSION_SECURE,
+        // secure: process.env.SESSION_SECURE,
         maxAge: 120 * 60 * 1000
     }
 }));
