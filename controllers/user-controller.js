@@ -24,7 +24,10 @@ const postSignup = async (req, res) => {
         const { first_name, last_name, email, password } = req.body;
 
         // Check if user is already in db
-        const emailExists = await User.findOne({ email }).lean();
+        const emailExists = await User
+                                    .findOne({ email })
+                                    .lean()
+                                    .setOptions({ sanitizeFilter: true });
 
         if (emailExists) {
             return res.render("user/signup", { title: "Sign Up", error: "Email already exists" });
@@ -70,7 +73,10 @@ const postLogin = (req, res, next) => {
 
 const getProfile = async (req, res) => {
     try {
-        const orders = await Order.find({ user_id: req.user._id }).sort({ created_at: -1 });
+        const orders = await Order
+                                .find({ user_id: req.user._id })
+                                .sort({ created_at: -1 })
+                                .setOptions({ sanitizeFilter: true });
 
         for (let order of orders) {
             const cart = new Cart(order.cart);

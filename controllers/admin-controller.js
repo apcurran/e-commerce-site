@@ -37,7 +37,10 @@ const postSignup = async (req, res) => {
         const { first_name, last_name, email, password, admin_secret } = req.body;
 
         // Check if user is already in db
-        const emailExists = await User.findOne({ email }).lean();
+        const emailExists = await User
+                                    .findOne({ email })
+                                    .lean()
+                                    .setOptions({ sanitizeFilter: true });
 
         if (emailExists) {
             return res.render("admin/signup", { title: "Sign Up", error: "Email already exists" });
