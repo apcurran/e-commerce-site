@@ -78,6 +78,7 @@ app.use(csrfProtection);
 
 // Global views variables
 app.use((req, res, next) => {
+    console.log(req.isAuthenticated()); // BUG
     res.locals.isLoggedIn = req.isAuthenticated();
     res.locals.currentUser = req.user;
     res.locals.session = req.session;
