@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 
 const { signupValidation } = require("../validation/validate-user");
 const User = require("../models/User");
+const { GENERIC_ERR_MSG } = require("../utils/generic-err-msg");
 
 const getLogin = (req, res) => {
     res.render("admin/login", { title: "Admin Log In" });
@@ -71,7 +72,7 @@ const postSignup = async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        res.render("admin/signup", { title: "Sign Up", error: err });
+        res.render("admin/signup", { title: "Sign Up", error: GENERIC_ERR_MSG });
     }
 };
 

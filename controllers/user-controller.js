@@ -6,6 +6,7 @@ const User = require("../models/User");
 const Order = require("../models/Order");
 const Cart = require("../models/Cart");
 const { signupValidation } = require("../validation/validate-user");
+const { GENERIC_ERR_MSG } = require("../utils/generic-err-msg");
 
 const getSignup = (req, res) => {
     res.render("user/signup", { title: "Sign Up" });
@@ -52,7 +53,7 @@ const postSignup = async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        res.render("user/signup", { title: "Sign Up", error: err });
+        res.render("user/signup", { title: "Sign Up", error: GENERIC_ERR_MSG });
     }
 };
 
@@ -88,7 +89,7 @@ const getProfile = async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        res.render("user/profile", { title: "Profile", user: req.user, error: err.message });
+        res.render("user/profile", { title: "Profile", user: req.user, error: GENERIC_ERR_MSG });
     }
 };
 

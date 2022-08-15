@@ -6,6 +6,7 @@ const Product = require("../models/Product");
 const Cart = require("../models/Cart");
 const { gameValidation } = require("../validation/validate-game");
 const { checkRatingExistence } = require("../utils/check-rating-existence");
+const { GENERIC_ERR_MSG } = require("../utils/generic-err-msg");
 
 const getGamesIndex = async (req, res) => {
     try {
@@ -54,7 +55,7 @@ const getGamesIndex = async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        res.render("shop/index", { title: "Home", error: err.message });
+        res.render("shop/index", { title: "Home", error: GENERIC_ERR_MSG });
     }
 };
 
@@ -67,7 +68,7 @@ const getGamesAction = async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        res.render("shop/index", { title: "Home", error: err.message });
+        res.render("shop/index", { title: "Home", error: GENERIC_ERR_MSG });
     }
 };
 
@@ -80,7 +81,7 @@ const getGamesAdventure = async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        res.render("shop/index", { title: "Home", error: err.message });
+        res.render("shop/index", { title: "Home", error: GENERIC_ERR_MSG });
     }
 };
 
@@ -93,7 +94,7 @@ const getGamesRpg = async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        res.render("shop/index", { title: "Home", error: err.message });
+        res.render("shop/index", { title: "Home", error: GENERIC_ERR_MSG });
     }
 };
 
@@ -106,7 +107,7 @@ const getGamesSports = async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        res.render("shop/index", { title: "Home", error: err.message });
+        res.render("shop/index", { title: "Home", error: GENERIC_ERR_MSG });
     }
 };
 
@@ -161,7 +162,7 @@ const getGame = async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        res.render("shop/product-page", { title: req.params.id, error: err.message });
+        res.render("shop/product-page", { title: req.params.id, error: GENERIC_ERR_MSG });
     }
 };
 
@@ -201,7 +202,7 @@ const postAddRating = async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        res.render("shop/product-page", { title: req.params.id, error: err.message });
+        res.render("shop/product-page", { title: req.params.id, error: GENERIC_ERR_MSG });
     }
 };
 
@@ -235,7 +236,7 @@ const postAddGame = async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        res.render("admin/add-game", { title: "New Game", error: err });
+        res.render("admin/add-game", { title: "New Game", error: GENERIC_ERR_MSG });
     }
 };
 
@@ -249,7 +250,7 @@ const getUpdateGame = async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        res.render("admin/update-game", { title: "Update Game", product: product, error: err });
+        res.render("admin/update-game", { title: "Update Game", product: product, error: GENERIC_ERR_MSG });
     }
 };
 
@@ -281,7 +282,7 @@ const patchUpdateGame = async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        res.render("admin/update-game", { title: "Update Game", product: updatedProductInfo, error: err });
+        res.render("admin/update-game", { title: "Update Game", product: updatedProductInfo, error: GENERIC_ERR_MSG });
     }
 };
 
@@ -295,7 +296,7 @@ const deleteGame = async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        res.render("shop/product-page", { title: req.params.id, error: err.message });
+        res.render("shop/product-page", { title: req.params.id, error: GENERIC_ERR_MSG });
     }
 };
 

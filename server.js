@@ -16,6 +16,8 @@ const shrinkRay = require("shrink-ray-current");
 const helmet = require("helmet");
 const csrf = require("csurf");
 
+const { GENERIC_ERR_MSG } = require("./utils/generic-err-msg");
+
 // Initialize Passport
 require("./config/passport-config");
 
@@ -99,7 +101,7 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
     console.error(err);
 
-    res.status(500).render("error", { title: "Server Error", error: err.message });
+    res.status(500).render("error", { title: "Server Error", error: GENERIC_ERR_MSG });
 });
 
 app.listen(PORT, () => console.log(`Server running on port, ${PORT}.`));
