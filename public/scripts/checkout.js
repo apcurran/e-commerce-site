@@ -4,6 +4,7 @@ const stripe = Stripe("pk_test_51GyOBXEFSgPrRFzWmUBqUfL9lNgsZR7qWlzKEQe7hTRs4884
 const form = document.querySelector(".checkout-form");
 const csrfToken = document.getElementById("csrf-token").value;
 
+// get variable base URL that changes on localhost (dev) to domain (prod)
 const baseUrl = window.location.origin;
 const PAYMENT_INTENT_API_URL = `${baseUrl}/api/create-payment-intent`;
 const SUCCESS_API_URL = `${baseUrl}/api/successful-order`;
