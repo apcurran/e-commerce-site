@@ -40,6 +40,8 @@ mongoose
 
 // csrf
 const csrfProtection = csrf();
+// reduce fingerprinting
+app.disable("x-powered-by");
 
 // Middleware
 app.use(helmet());
