@@ -71,8 +71,8 @@ const devCookieOptions = {
 };
 const prodCookieOptions = {
     maxAge: 120 * 60 * 1000,
-    secure: true,
-    httpOnly: true,
+    // secure: true,
+    // httpOnly: true,
     domain: process.env.COOKIE_DOMAIN,
     path: "/"
 };
