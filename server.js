@@ -70,6 +70,7 @@ app.use(session({
     saveUninitialized: false,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
     cookie: {
+        // expires option should not be set directly; only use the maxAge option
         maxAge: 120 * 60 * 1000
     }
 }));
