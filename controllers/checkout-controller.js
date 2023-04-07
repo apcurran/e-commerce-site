@@ -49,6 +49,7 @@ const getRemove = (req, res) => {
 };
 
 const getCheckout = (req, res) => {
+    // reload the page if the cart is empty
     if (!req.session.cart) {
         return res.redirect("/checkout-preview");
     }
@@ -64,7 +65,7 @@ const postApiCreatePaymentIntent = async (req, res, next) => {
             return res.redirect("/checkout-preview");
         }
 
-        const cart = new Cart(req.session.cart);
+        const cart = req.session.cart;
         const paymentIntent = await stripe.paymentIntents.create({
           amount: cart.totalPrice * 100,
           currency: "usd"
@@ -79,7 +80,7 @@ const postApiCreatePaymentIntent = async (req, res, next) => {
 
 const postApiSuccessfulOrder = async (req, res, next) => {
     try {
-        const cart = new Cart(req.session.cart);
+        const cart = req.session.cart;
         const order = new Order({
             user_id: req.user._id,
             cart: cart,
