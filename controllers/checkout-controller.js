@@ -10,9 +10,9 @@ const getCheckoutPreview = (req, res) => {
         return res.render("shop/checkout-preview", { title: "Checkout Preview" });
     }
 
-    const cart = new Cart(req.session.cart);
+    const customerCart = req.session.cart;
 
-    res.render("shop/checkout-preview", { title: "Checkout Preview", products: cart.generateArray(), totalPrice: cart.totalPrice });
+    res.render("shop/checkout-preview", { title: "Checkout Preview", products: Cart.generateArray(customerCart), totalPrice: customerCart.totalPrice });
 };
 
 const getIncrease = (req, res) => {

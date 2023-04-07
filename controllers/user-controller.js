@@ -80,8 +80,7 @@ const getProfile = async (req, res) => {
                                 .setOptions({ sanitizeFilter: true });
 
         for (let order of orders) {
-            const cart = new Cart(order.cart);
-            order.items = cart.generateArray();
+            order.items = Cart.generateArray(order.cart);
         }
         
         res.render("user/profile", { title: "Profile", user: req.user, orders: orders });

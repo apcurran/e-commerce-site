@@ -51,11 +51,11 @@ module.exports = class Cart {
         delete this.items[id];
     }
 
-    generateArray() {
+    static generateArray(cartObj) {
         let arr = [];
 
-        for (let id in this.items) {
-            arr.push(this.items[id]);
+        for (let id in cartObj.items) {
+            arr.push(cartObj.items[id]);
         }
 
         return arr;
