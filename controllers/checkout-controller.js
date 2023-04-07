@@ -53,7 +53,7 @@ const getCheckout = (req, res) => {
         return res.redirect("/checkout-preview");
     }
 
-    const cart = new Cart(req.session.cart);
+    const cart = req.session.cart;
 
     res.render("shop/checkout", { title: "Checkout", total: cart.totalPrice });
 };
