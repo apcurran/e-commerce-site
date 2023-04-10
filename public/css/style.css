@@ -17,6 +17,10 @@
     --dark-indigo: #4c51bf;
     --submit-btn-bg-clr: #046586;
     --dark-red: #9b2c2c;
+
+    --fz-small: .875rem;
+    --fz-med: 1.125rem;
+    --fz-large: 1.75rem;
 }
 
 html {
@@ -24,6 +28,9 @@ html {
 }
 
 /* Global Styles */
+h1 {
+    font-size: var(--fz-large);
+}
 
 a {
     text-decoration: none;
@@ -39,6 +46,7 @@ input,
 textarea,
 button {
     font-family: 'Muli', sans-serif;
+    font-size: var(--fz-med);
 }
 
 .error {
@@ -225,13 +233,14 @@ body {
 
 .game-card__title {
     margin-bottom: .5rem;
+    font-size: var(--fz-med);
 }
 
 .game-card__genre-chip {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: .5rem 1rem .5rem 1rem;
+    padding: .5rem .875rem;
     margin-bottom: 1rem;
     border-radius: 500px;
     background-color: var(--light-blue);
@@ -241,7 +250,7 @@ body {
 .game-card__genre-chip-text {
     line-height: 1;
     color: #182d4d;
-    font-size: .875rem;
+    font-size: var(--fz-small);
 }
 
 .game-card__price {
@@ -487,7 +496,6 @@ body {
     padding: .5rem .75rem;
     margin-bottom: 1rem;
     
-    font-size: 1rem;
     border: 1px solid var(--light-grey);
     border-radius: 4px;
 }
