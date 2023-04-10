@@ -838,14 +838,14 @@ th {
 }
 
 .profile-order__title {
-    font-size: 1.4rem;
+    font-size: var(--fz-med);
     margin-bottom: 1.25rem;
 }
 
 .profile-order__date {
     display: inline-block;
     margin-left: .5rem;
-    font-size: 1rem;
+    font-size: var(--fz-small);
     color: hsl(214, 6%, 45%);
 }
 
@@ -869,11 +869,10 @@ th {
 }
 
 .profile-order__item--left__qty {
-    font-size: .9rem;
+    font-size: var(--fz-small);
 }
 
 .profile-order__total {
-    font-size: 1.1rem;
     color: var(--submit-btn-bg-clr);
 }
 
@@ -951,7 +950,7 @@ th {
     }
 
     .nav__list__link {
-        font-size: .925rem;
+        font-size: var(--fz-small);
     }
 
     /* Game Details */
