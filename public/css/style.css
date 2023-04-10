@@ -44,6 +44,7 @@ ul {
 
 body,
 input,
+select,
 textarea,
 button {
     font-family: 'Muli', sans-serif;
@@ -271,7 +272,6 @@ body {
 .pagination__link {
     margin: 0 .5rem;
     padding: 0 .25rem;
-    font-size: 1.125rem;
 }
 
 /* Mobile FAB */
@@ -310,7 +310,6 @@ body {
 
 .game-details__left__title {
     margin-bottom: 1rem;
-    font-size: 1.5rem;
     color: var(--dark-indigo);
 }
 
@@ -379,7 +378,6 @@ body {
     border: none;
     background-color: transparent;
     font-weight: 700;
-    font-size: 1rem;
     cursor: pointer;
 }
 
@@ -392,7 +390,6 @@ body {
     letter-spacing: .08em;
     background-color: var(--submit-btn-bg-clr);
     color: #fff;
-    font-size: 1rem;
     text-transform: uppercase;
     overflow: hidden;
 }
@@ -520,7 +517,6 @@ body {
     justify-content: space-between;
     align-items: center;
 
-    font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: .08em;
     border: none;
@@ -560,7 +556,7 @@ body {
 }
 
 .footer__title {
-    font-size: .9rem;
+    font-size: var(--fz-small);
     color: hsl(211, 25%, 36%);
 }
 
@@ -608,7 +604,6 @@ body {
     padding: .5rem 0;
     font-weight: 700;
     color: hsl(216, 15%, 46%);
-    font-size: 1rem;
 }
 
 .checkout-section__item__right__item-remove:hover .checkout-section__item__right__item-remove-link {
@@ -621,7 +616,7 @@ body {
 
 .checkout-section__item__right__title {
     font-weight: 700;
-    font-size: 1.125rem;
+    font-size: var(--fz-med);
     margin-bottom: .25rem;
 }
 
@@ -634,7 +629,6 @@ body {
     border: none;
     cursor: pointer;
     font-weight: 700;
-    font-size: 1.25rem;
     color: #6c727d;
 }
 
@@ -666,7 +660,7 @@ th {
 
 .order-summary__table__title {
     padding: 1rem 0;
-    font-size: 1.25rem;
+    font-weight: 700;
     background-color: #d7dfea;
     column-span: all;
 }
@@ -703,7 +697,6 @@ th {
     letter-spacing: .08em;
     background-color: var(--submit-btn-bg-clr);
     color: #fff;
-    font-size: 1rem;
     text-transform: uppercase;
 }
 
@@ -732,7 +725,6 @@ th {
 
 .checkout-form__input {
     padding: .75rem 1rem;
-    font-size: 1rem;
     border: 2px solid #e2e8f0;
     border-radius: 4px;
     outline: none;
@@ -748,7 +740,6 @@ th {
     background-color: var(--submit-btn-bg-clr);
     color: #fff;
     letter-spacing: .08em;
-    font-size: 1rem;
     border: none;
     cursor: pointer;
     margin-bottom: 1rem;
@@ -769,7 +760,7 @@ th {
     text-decoration: underline;
 }
 
-/* Add Game */
+/* Admin Add Game */
 
 .add-game-form__title {
     margin-bottom: 2rem;
@@ -796,7 +787,6 @@ th {
 .form-group__select,
 .form-group__textarea {
     padding: .75rem 1rem;
-    font-size: 1rem;
     border: 2px solid #e2e8f0;
     border-radius: 4px;
     outline: none;
@@ -817,7 +807,6 @@ th {
     justify-content: space-between;
     align-items: center;
 
-    font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: .08em;
     border: none;
@@ -831,7 +820,7 @@ th {
 
 .profile-greeting {
     margin-bottom: 1.5rem;
-    font-size: 1.5rem;
+    font-size: var(--fz-large);
 }
 
 .profile-orders-container {
