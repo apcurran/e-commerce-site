@@ -55,7 +55,7 @@ if (process.env.NODE_ENV !== "production") {
     app.use(express.static("public"));
 } else {
     // Enable 2 day caching of static assets
-    app.use(express.static("public", { maxAge: "2d" }));
+    app.use(express.static("public", { maxAge: "1d" }));
     // trust first proxy for cookie secure option to work properly
     app.set("trust proxy", 1);
 }
