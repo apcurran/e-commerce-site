@@ -30,6 +30,7 @@ html {
 /* Global Styles */
 h1 {
     font-size: var(--fz-large);
+    line-height: 1;
 }
 
 a {
