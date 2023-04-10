@@ -303,7 +303,6 @@ body {
 /* Game Details Page */
 
 .game-details {
-    margin-top: .35rem;
     display: grid;
     grid-template-columns: 1fr 1.5fr;
     gap: 6.5rem;
