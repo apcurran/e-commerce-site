@@ -7,7 +7,7 @@
 <main class="main--game">
     <%- include("../partials/sidebar", { genre }) %>
     <section class="game-section">
-        <h2 class="game-section__title"><%= genre %></h2>
+        <h1 class="game-section__title"><%= genre %></h1>
         <div class="game-grid">
             <% products.forEach((product, gridItemIndex) => { %>
                 <%- include("../partials/game-grid-item", { product, gridItemIndex }) %> 
