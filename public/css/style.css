@@ -183,6 +183,10 @@ body {
     font-weight: 700;
 }
 
+.sidebar__link--top {
+    line-height: 1;
+}
+
 .sidebar__link--active {
     opacity: 1;
 }
