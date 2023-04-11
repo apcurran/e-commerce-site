@@ -1,6 +1,7 @@
 "use strict";
 
 const mongoose = require("mongoose");
+const dateFormatter = new Intl.DateTimeFormat("en-US", { dateStyle: "long" });
 
 const OrderSchema = new mongoose.Schema({
     user_id: { type: String, required: true },
@@ -14,7 +15,7 @@ const OrderSchema = new mongoose.Schema({
 OrderSchema
     .virtual("dateFormatted")
     .get(function() {
-        return new Intl.DateTimeFormat("en-US", { dateStyle: "long" }).format(this.created_at);
+        return dateFormatter.format(this.created_at);
     });
 
 module.exports = mongoose.model("Order", OrderSchema);
