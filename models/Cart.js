@@ -52,7 +52,7 @@ function cartInitialize(sessionCart) {
  * @param {cart} cart
  * @param {product} productDetails
  * @param {string} cartItemId
- * @returns {cart}
+ * @returns {cart} modified cart
  */
 function cartAddItem(cart, productDetails, cartItemId) {
     let previousStoredItem = cart.cartItems.find((item) => item.itemDetails.id === cartItemId);
