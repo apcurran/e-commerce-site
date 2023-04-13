@@ -210,7 +210,6 @@ const postAddRating = async (req, res) => {
             user_id: req.user._id,
             user_rating: req.body.rating
         };
-
         product.ratings.push(newRating);
 
         await product.save();
