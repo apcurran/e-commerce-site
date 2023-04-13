@@ -2,7 +2,7 @@
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-const Cart = require("../models/Cart");
+const { Cart } = require("../models/Cart");
 const Order = require("../models/Order");
 
 const getCheckoutPreview = (req, res) => {
@@ -11,8 +11,9 @@ const getCheckoutPreview = (req, res) => {
     }
 
     const customerCart = req.session.cart;
+    const cartItems = customerCart.cartItems;
 
-    res.render("shop/checkout-preview", { title: "Checkout Preview", products: Cart.generateArray(customerCart), totalPrice: customerCart.totalPrice });
+    res.render("shop/checkout-preview", { title: "Checkout Preview", cartItems, totalPrice: customerCart.cartTotalPrice });
 };
 
 const getIncrease = (req, res) => {

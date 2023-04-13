@@ -7,27 +7,27 @@
     </a>
     <div class="checkout-grid">
         <section class="checkout-section">
-            <% if (locals.products) { %>
-                <% products.forEach(product => { %>
+            <% if (locals.cartItems) { %>
+                <% cartItems.forEach(cartItem => { %>
                     <article class="checkout-section__item">
                         <figure class="checkout-section__item__fig">
-                            <img class="checkout-section__item__img" src="<%= product.item.img_path %>" alt="<%= product.item.title %> cover" width="460" height="215">
+                            <img class="checkout-section__item__img" src="<%= cartItem.itemDetails.img_path %>" alt="<%= cartItem.itemDetails.title %> cover" width="460" height="215">
                         </figure>
                         <div class="checkout-section__item__right">
-                            <h3 class="checkout-section__item__right__title"><%= product.item.title %></h3>
+                            <h3 class="checkout-section__item__right__title"><%= cartItem.itemDetails.title %></h3>
                             <div class="checkout-section__item__right__qty-controls">
                                 <button class="checkout-section__item__right__qty-btn qty-btn-sub">
-                                    <a href="/reduce/<%= product.item._id %>">-</a>
+                                    <a href="/reduce/<%= cartItem.itemDetails._id %>">-</a>
                                 </button>
-                                <span class="checkout-section__item__right__qty"><%= product.qty %></span>
+                                <span class="checkout-section__item__right__qty"><%= cartItem.itemQuantity %></span>
                                 <button class="checkout-section__item__right__qty-btn qty-btn-add">
-                                    <a href="/increase/<%= product.item._id %>">+</a>
+                                    <a href="/increase/<%= cartItem.itemDetails._id %>">+</a>
                                 </button>
                             </div>
                             <button class="checkout-section__item__right__item-remove">
-                                <a class="checkout-section__item__right__item-remove-link" href="/remove/<%= product.item._id %>">Remove Game</a>
+                                <a class="checkout-section__item__right__item-remove-link" href="/remove/<%= cartItem.itemDetails._id %>">Remove Game</a>
                             </button>
-                            <p class="checkout-section__item__right__price">$<%= product.item.price %></p>
+                            <p class="checkout-section__item__right__price">$<%= cartItem.itemDetails.price %></p>
                         </div>
                     </article>
                 <% }); %>
