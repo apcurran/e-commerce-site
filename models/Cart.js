@@ -32,14 +32,11 @@
  */
 
 /**
- * @param {?cart} sessionCart
+ * @param {?cart} sessionCart pre-existing cart stored in session
  * @returns {cart}
  */
 function cartInitialize(sessionCart) {
-    // pre-existing cart stored in session
-    if (sessionCart) {
-        return sessionCart;
-    }
+    if (sessionCart) return sessionCart;
 
     return {
         cartItems: [],
