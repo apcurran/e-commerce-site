@@ -1,5 +1,23 @@
 "use strict";
 
+// updated implementation
+function cartInitialize(sessionCart) {
+    // pre-existing cart stored in session
+    if (sessionCart) {
+        return sessionCart;
+    }
+
+    return {
+        cartItems: [],
+        cartTotalQuantity: 0,
+        cartTotalPrice: 0
+    };
+}
+
+
+
+
+// old implementation
 module.exports = class Cart {
     constructor(oldCart) {
         this.items = oldCart.items || {};
