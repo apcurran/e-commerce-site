@@ -1,6 +1,40 @@
 "use strict";
 
-// updated implementation
+/**
+ * @typedef {{
+ *     id: string,
+ *     title: string,
+ *     genre: string,
+ *     price: number,
+ *     description: string,
+ *     img_path: string,
+ *     ratings: [{
+ *         user_id: string;
+ *         user_rating: number;
+ *     }]  
+ * }} product
+ */
+
+/**
+ * @typedef {{
+ *     itemDetails: product,
+ *     itemQuantity: number,
+ *     itemTotalPrice: number
+ * }} cartItem
+ */
+
+/**
+ * @typedef {{
+ *     cartItems: cartItem[],
+ *     cartTotalQuantity: number,
+ *     cartTotalPrice: number
+ * }} cart
+ */
+
+/**
+ * @param {?cart} sessionCart
+ * @returns {cart}
+ */
 function cartInitialize(sessionCart) {
     // pre-existing cart stored in session
     if (sessionCart) {
@@ -14,7 +48,32 @@ function cartInitialize(sessionCart) {
     };
 }
 
+/**
+ * @param {cart} cart
+ * @param {product} productDetails
+ * @param {string} cartItemId
+ * @returns {cart}
+ */
+function cartAddItem(cart, productDetails, cartItemId) {
+    let previousStoredItem = cart.cartItems.find((item) => item.itemDetails.id === cartItemId);
 
+    if (!previousStoredItem) {
+        let product = {
+            itemDetails: productDetails,
+            itemQuantity: 1,
+            itemPrice: productDetails.price
+        };
+        cart.cartItems.push(product);
+
+        return cart;
+    }
+
+    // update quantity
+    previousStoredItem.itemQuantity++;
+    // update item price
+    const updatedItemTotal = previousStoredItem.itemDetails.price * previousStoredItem.itemQuantity;
+    previousStoredItem.itemTotalPrice = updatedItemTotal;
+}
 
 
 // old implementation
