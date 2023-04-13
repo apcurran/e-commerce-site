@@ -3,7 +3,7 @@
 const mongoose = require("mongoose");
 
 const Product = require("../models/Product");
-const Cart = require("../models/Cart");
+const { Cart, cartInitialize, cartAddItem } = require("../models/Cart");
 const { gameValidation } = require("../validation/validate-game");
 const { checkRatingExistence } = require("../utils/check-rating-existence");
 const { GENERIC_ERR_MSG } = require("../utils/generic-err-msg");
@@ -166,16 +166,34 @@ const getGame = async (req, res) => {
     }
 };
 
+// OLD IMPLEMENTATION
+
+// const getAddToCart = async (req, res, next) => {
+//     try {
+//         const productId = req.params.id;
+//         // If a cart is already in the session retrieve the old cart, otherwise pass a new obj
+//         const cart = new Cart(req.session.cart ? req.session.cart : {});
+
+//         const product = await Product.findById(productId);
+
+//         cart.add(product, product.id);
+//         req.session.cart = cart;
+
+//         res.redirect("/");
+        
+//     } catch (err) {
+//         next(err);
+//     }
+// };
+
 const getAddToCart = async (req, res, next) => {
     try {
         const productId = req.params.id;
-        // If a cart is already in the session retrieve the old cart, otherwise pass a new obj
-        const cart = new Cart(req.session.cart ? req.session.cart : {});
-
         const product = await Product.findById(productId);
 
-        cart.add(product, product.id);
-        req.session.cart = cart;
+        const cart = cartInitialize(req.session.cart);
+        const updatedCart = cartAddItem(cart, product, product.id);
+        req.session.cart = updatedCart;
 
         res.redirect("/");
         

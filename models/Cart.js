@@ -32,7 +32,7 @@
  */
 
 /**
- * @param {?cart} sessionCart pre-existing cart stored in session
+ * @param {cart|null} sessionCart pre-existing cart stored in session
  * @returns {cart}
  */
 function cartInitialize(sessionCart) {
@@ -48,33 +48,40 @@ function cartInitialize(sessionCart) {
 /**
  * @param {cart} cart
  * @param {product} productDetails
- * @param {string} cartItemId
+ * @param {string} productId
  * @returns {cart} modified cart
  */
-function cartAddItem(cart, productDetails, cartItemId) {
-    let previousStoredItem = cart.cartItems.find((item) => item.itemDetails.id === cartItemId);
+function cartAddItem(cart, productDetails, productId) {
+    let previousStoredItemIndex = cart.cartItems.findIndex((item) => item.itemDetails.id === productId);
 
-    if (!previousStoredItem) {
+    if (previousStoredItemIndex === -1) {
         let product = {
             itemDetails: productDetails,
             itemQuantity: 1,
-            itemPrice: productDetails.price
+            itemTotalPrice: productDetails.price
         };
         cart.cartItems.push(product);
-
-        return cart;
+    } else {
+        // update ITEM quantity
+        cart.cartItems[previousStoredItemIndex].itemQuantity++;
+        // update ITEM price
+        const updatedItemTotal = cart[previousStoredItemIndex].itemDetails.price * cart[previousStoredItemIndex].itemQuantity;
+        cart.cartItems[previousStoredItemIndex].itemTotalPrice = updatedItemTotal;
     }
 
-    // update quantity
-    previousStoredItem.itemQuantity++;
-    // update item price
-    const updatedItemTotal = previousStoredItem.itemDetails.price * previousStoredItem.itemQuantity;
-    previousStoredItem.itemTotalPrice = updatedItemTotal;
+
+    const storedItem = cart.cartItems.find((item) => item.itemDetails.id === productId);
+    // update CART quantity
+    cart.cartTotalQuantity++;
+    // update CART price
+    cart.cartTotalPrice += storedItem.itemTotalPrice;
+
+    return cart;
 }
 
 
 // old implementation
-module.exports = class Cart {
+class Cart {
     constructor(oldCart) {
         this.items = oldCart.items || {};
         this.totalQty = oldCart.totalQty || 0;
@@ -134,4 +141,10 @@ module.exports = class Cart {
 
         return arr;
     }
+}
+
+module.exports = {
+    Cart,
+    cartInitialize,
+    cartAddItem,
 };
