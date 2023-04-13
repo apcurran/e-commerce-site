@@ -52,7 +52,7 @@ function cartInitialize(sessionCart) {
  * @returns {cart} modified cart
  */
 function cartAddItem(cart, productDetails, productId) {
-    let previousStoredItemIndex = cart.cartItems.findIndex((item) => item.itemDetails.id === productId);
+    let previousStoredItemIndex = cart.cartItems.findIndex((item) => item.itemDetails._id === productId);
 
     if (previousStoredItemIndex === -1) {
         let product = {
@@ -65,12 +65,11 @@ function cartAddItem(cart, productDetails, productId) {
         // update ITEM quantity
         cart.cartItems[previousStoredItemIndex].itemQuantity++;
         // update ITEM price
-        const updatedItemTotal = cart[previousStoredItemIndex].itemDetails.price * cart[previousStoredItemIndex].itemQuantity;
+        const updatedItemTotal = cart.cartItems[previousStoredItemIndex].itemDetails.price * cart.cartItems[previousStoredItemIndex].itemQuantity;
         cart.cartItems[previousStoredItemIndex].itemTotalPrice = updatedItemTotal;
     }
 
-
-    const storedItem = cart.cartItems.find((item) => item.itemDetails.id === productId);
+    const storedItem = cart.cartItems.find((item) => String(item.itemDetails._id) === productId);
     // update CART quantity
     cart.cartTotalQuantity++;
     // update CART price
