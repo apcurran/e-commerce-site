@@ -2,7 +2,7 @@
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-const { Cart } = require("../models/Cart");
+const { Cart, cartInitialize, cartRemoveItem } = require("../models/Cart");
 const Order = require("../models/Order");
 
 const getCheckoutPreview = (req, res) => {
@@ -38,13 +38,23 @@ const getReduce = (req, res) => {
     res.redirect("/checkout-preview");
 };
 
+// OLD IMPLEMENTATION
+// const getRemove = (req, res) => {
+//     const productId = req.params.id;
+//     const cart = new Cart(req.session.cart ? req.session.cart : {});
+
+//     cart.removeItem(productId);
+
+//     req.session.cart = cart;
+
+//     res.redirect("/checkout-preview");
+// };
+
 const getRemove = (req, res) => {
     const productId = req.params.id;
-    const cart = new Cart(req.session.cart ? req.session.cart : {});
-
-    cart.removeItem(productId);
-
-    req.session.cart = cart;
+    const cart = cartInitialize(req.session.cart);
+    const updatedCart = cartRemoveItem(cart, productId);
+    req.session.cart = updatedCart;
 
     res.redirect("/checkout-preview");
 };

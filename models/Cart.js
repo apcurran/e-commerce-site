@@ -78,6 +78,25 @@ function cartAddItem(cart, productDetails, productId) {
     return cart;
 }
 
+/**
+ * 
+ * @param {cart} cart 
+ * @param {string} productId 
+ * @returns {cart} modified cart after item removal
+ */
+function cartRemoveItem(cart, productId) {
+    const storedItemIndex = cart.cartItems.findIndex((item) => String(item.itemDetails._id) === productId);
+    const storedItem = cart.cartItems[storedItemIndex];
+
+    // update data
+    cart.cartTotalQuantity -= storedItem.itemQuantity;
+    cart.cartTotalPrice -= storedItem.itemTotalPrice;
+    // remove item from cart
+    cart.cartItems.splice(storedItemIndex, 1);
+
+    return cart;
+}
+
 
 // old implementation
 class Cart {
@@ -146,4 +165,5 @@ module.exports = {
     Cart,
     cartInitialize,
     cartAddItem,
+    cartRemoveItem,
 };
