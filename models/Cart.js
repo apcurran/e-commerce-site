@@ -98,7 +98,7 @@ function cartRemoveItem(cart, productId) {
 }
 
 
-// old implementation
+// OLD IMPLEMENTATION
 class Cart {
     constructor(oldCart) {
         this.items = oldCart.items || {};
