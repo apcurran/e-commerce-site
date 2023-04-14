@@ -2,7 +2,7 @@
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-const { Cart, cartInitialize, cartRemoveItem, cartIncrementByOne } = require("../models/Cart");
+const { Cart, cartInitialize, cartRemoveItem, cartIncrementByOne, cartDecrementByOne } = require("../models/Cart");
 const Order = require("../models/Order");
 
 const getCheckoutPreview = (req, res) => {
@@ -39,26 +39,12 @@ const getIncrease = (req, res) => {
 
 const getReduce = (req, res) => {
     const productId = req.params.id;
-    const cart = new Cart(req.session.cart ? req.session.cart : {});
-
-    cart.reduceByOne(productId);
-
-    req.session.cart = cart;
+    const cart = cartInitialize(req.session.cart);
+    const updatedCart = cartDecrementByOne(cart, productId);
+    req.session.cart = updatedCart;
 
     res.redirect("/checkout-preview");
 };
-
-// OLD IMPLEMENTATION
-// const getRemove = (req, res) => {
-//     const productId = req.params.id;
-//     const cart = new Cart(req.session.cart ? req.session.cart : {});
-
-//     cart.removeItem(productId);
-
-//     req.session.cart = cart;
-
-//     res.redirect("/checkout-preview");
-// };
 
 const getRemove = (req, res) => {
     const productId = req.params.id;

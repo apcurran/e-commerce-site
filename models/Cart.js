@@ -115,6 +115,30 @@ function cartIncrementByOne(cart, productId) {
     return cart;
 }
 
+/**
+ * 
+ * @param {cart} cart 
+ * @param {string} productId 
+ * @returns {cart}
+ */
+function cartDecrementByOne(cart, productId) {
+    const storedItemIndex = cart.cartItems.findIndex((item) => String(item.itemDetails._id) === productId);
+    const storedItem = cart.cartItems[storedItemIndex];
+    // adjust item quantity and item total price
+    cart.cartItems[storedItemIndex].itemQuantity--;
+    cart.cartItems[storedItemIndex].itemTotalPrice -= storedItem.itemDetails.price;
+    // adjust total cart quantity and total cart price
+    cart.cartTotalQuantity--;
+    cart.cartTotalPrice -= storedItem.itemDetails.price;
+
+    if (storedItem.itemQuantity <= 0) {
+        // remove item from cart
+        cart.cartItems.splice(storedItemIndex, 1);
+    }
+
+    return cart;
+}
+
 
 // OLD IMPLEMENTATION
 class Cart {
@@ -185,4 +209,5 @@ module.exports = {
     cartAddItem,
     cartRemoveItem,
     cartIncrementByOne,
+    cartDecrementByOne
 };
