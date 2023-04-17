@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 
 const User = require("../models/User");
 const Order = require("../models/Order");
-const { cartCalculateQuantity } = require("../models/Cart");
+const { cartCalculateQuantity, cartCalculateTotal, cartItemsInitialize } = require("../models/Cart");
 const { signupValidation } = require("../validation/validate-user");
 const { GENERIC_ERR_MSG } = require("../utils/generic-err-msg");
 
@@ -76,16 +76,20 @@ const postLogin = (req, res, next) => {
 
 const getProfile = async (req, res) => {
     try {
+        // TODO: add new cart logic
         const orders = await Order
                                 .find({ user_id: req.user._id })
                                 .sort({ created_at: -1 })
                                 .setOptions({ sanitizeFilter: true });
 
         for (let order of orders) {
-            order.items = Cart.generateArray(order.cart);
+            order.items = order.cart;
         }
+
+        const cartItems = cartItemsInitialize(req.session.cart);
+        const cartTotalQuantity = cartCalculateQuantity(cartItems);
         
-        res.render("user/profile", { title: "Profile", user: req.user, orders: orders });
+        res.render("user/profile", { title: "Profile", user: req.user, orders: orders, cartTotalQuantity });
 
     } catch (err) {
         console.error(err);
