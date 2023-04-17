@@ -22,7 +22,6 @@
  * }} cartItem
  */
 
-// NEW IMPLEMENTATION
 /**
  * @param {cartItem[]|null} sessionCartItems pre-existing cart stored in session
  * @returns {cartItem[]}
@@ -100,7 +99,6 @@ function cartDecrementByOne(cartItems, productId) {
 
     if (storedItem === undefined) return cartItems;
 
-    // adjust item quantity and item total price
     storedItem.itemQuantity--;
 
     if (storedItem.itemQuantity <= 0) {
