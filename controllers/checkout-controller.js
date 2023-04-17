@@ -2,24 +2,25 @@
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-const { cartInitialize, cartRemoveItem, cartIncrementByOne, cartDecrementByOne } = require("../models/Cart");
+const { cartItemsInitialize, cartRemoveItem, cartIncrementByOne, cartDecrementByOne, cartCalculateTotal, cartCalculateQuantity } = require("../models/Cart");
 const Order = require("../models/Order");
 
 const getCheckoutPreview = (req, res) => {
     if (!req.session.cart) {
-        return res.render("shop/checkout-preview", { title: "Checkout Preview" });
+        return res.render("shop/checkout-preview", { title: "Checkout Preview", cartTotalQuantity: 0 });
     }
 
-    const customerCart = req.session.cart;
-    const cartItems = customerCart.cartItems;
+    const cartItems = req.session.cart;
+    const cartTotalQuantity = cartCalculateQuantity(cartItems);
+    const cartTotal = cartCalculateTotal(cartItems);
 
-    res.render("shop/checkout-preview", { title: "Checkout Preview", cartItems, totalPrice: customerCart.cartTotalPrice });
+    res.render("shop/checkout-preview", { title: "Checkout Preview", cartItems, totalPrice: cartTotal, cartTotalQuantity });
 };
 
 const getIncrease = (req, res) => {
     const productId = req.params.id;
-    const cart = cartInitialize(req.session.cart);
-    const updatedCart = cartIncrementByOne(cart, productId);
+    const cartItems = cartItemsInitialize(req.session.cart);
+    const updatedCart = cartIncrementByOne(cartItems, productId);
     req.session.cart = updatedCart;
 
     res.redirect("/checkout-preview");
@@ -27,8 +28,8 @@ const getIncrease = (req, res) => {
 
 const getReduce = (req, res) => {
     const productId = req.params.id;
-    const cart = cartInitialize(req.session.cart);
-    const updatedCart = cartDecrementByOne(cart, productId);
+    const cartItems = cartItemsInitialize(req.session.cart);
+    const updatedCart = cartDecrementByOne(cartItems, productId);
     req.session.cart = updatedCart;
 
     res.redirect("/checkout-preview");
@@ -36,8 +37,8 @@ const getReduce = (req, res) => {
 
 const getRemove = (req, res) => {
     const productId = req.params.id;
-    const cart = cartInitialize(req.session.cart);
-    const updatedCart = cartRemoveItem(cart, productId);
+    const cartItems = cartItemsInitialize(req.session.cart);
+    const updatedCart = cartRemoveItem(cartItems, productId);
     req.session.cart = updatedCart;
 
     res.redirect("/checkout-preview");

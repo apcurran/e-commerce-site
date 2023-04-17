@@ -170,7 +170,7 @@ const getGame = async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        res.render("shop/product-page", { title: req.params.id, error: GENERIC_ERR_MSG });
+        res.render("shop/product-page", { title: req.params.id, error: GENERIC_ERR_MSG, cartTotalQuantity: 0 });
     }
 };
 

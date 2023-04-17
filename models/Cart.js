@@ -123,19 +123,17 @@ function cartDecrementByOne(cart, productId) {
 
 /**
  * @param {cartItem[]} cartItems 
- * @returns {[number, number]} cart quantity and cart grand total
+ * @returns {number} cart grand total
  */
-function cartCalculateCartDetails(cartItems) {
-    let cartQuantity = 0;
+function cartCalculateTotal(cartItems) {
     let grandTotal = 0;
 
     for (let cartItem of cartItems) {
-        cartQuantity += cartItem.itemQuantity;
         const itemTotal = cartItem.itemQuantity * cartItem.itemDetails.price;
         grandTotal += itemTotal;
     }
 
-    return [cartQuantity, grandTotal];
+    return grandTotal;
 }
 
 /**
@@ -275,6 +273,6 @@ module.exports = {
     cartRemoveItem,
     cartIncrementByOne,
     cartDecrementByOne,
-    cartCalculateCartDetails,
+    cartCalculateTotal,
     cartCalculateQuantity
 };
