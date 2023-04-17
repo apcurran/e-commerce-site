@@ -35,6 +35,8 @@
                     </svg>
                     <% if (session.cart) { %>
                         <span><%= session.cart.cartTotalQuantity %></span>
+                    <% } else { %>
+                        <span><%= "0" %></span>
                     <% } %> 
                 </a>
             </li>
