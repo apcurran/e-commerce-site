@@ -58,23 +58,20 @@ function cartAddItem(cartItems, productDetails, productId) {
 
 /**
  * 
- * @param {cart} cart 
+ * @param {cartItem[]} cartItems 
  * @param {string} productId 
- * @returns {cart} modified cart after item removal
+ * @returns {cartItem[]} modified cart after item removal
  */
-function cartRemoveItem(cart, productId) {
-    const storedItemIndex = cart.cartItems.findIndex((item) => String(item.itemDetails._id) === productId);
-    const storedItem = cart.cartItems[storedItemIndex];
+function cartRemoveItem(cartItems, productId) {
+    const storedItemIndex = cartItems.findIndex((item) => String(item.itemDetails._id) === productId);
+    const storedItem = cartItems[storedItemIndex];
 
-    if (storedItem === undefined) return cart;
+    if (storedItem === undefined) return cartItems;
 
-    // update data
-    cart.cartTotalQuantity -= storedItem.itemQuantity;
-    cart.cartTotalPrice -= storedItem.itemTotalPrice;
     // remove item from cart
-    cart.cartItems.splice(storedItemIndex, 1);
+    cartItems.splice(storedItemIndex, 1);
 
-    return cart;
+    return cartItems;
 }
 
 /**
