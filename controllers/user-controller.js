@@ -83,7 +83,9 @@ const getProfile = async (req, res) => {
                                 .setOptions({ sanitizeFilter: true });
 
         for (let order of orders) {
-            order.items = order.cart;
+            const cartItems = order.cart;
+            order.items = cartItems;
+            order.cartTotal = cartCalculateTotal(cartItems);
         }
 
         const cartItems = cartItemsInitialize(req.session.cart);

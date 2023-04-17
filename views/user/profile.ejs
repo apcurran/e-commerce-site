@@ -11,20 +11,20 @@
         <article class="profile-order">
             <h2 class="profile-order__title">Order Details <span class="profile-order__date"><%= order.dateFormatted %></span></h2>
             <ul class="profile-order__list">
-                <% order.items.forEach(item => { %>
+                <% order.items.forEach((item) => { %>
                     <li class="profile-order__item">
                         <div class="profile-order__item--left">
-                            <p class="profile-order__item--left__title"><%= item.item.title %></p>
-                            <p class="profile-order__item--left__qty">Qty: <%= item.qty %></p>
+                            <p class="profile-order__item--left__title"><%= item.itemDetails.title %></p>
+                            <p class="profile-order__item--left__qty">Qty: <%= item.itemQuantity %></p>
                         </div>
                         <div class="profile-order__item--right">
-                            <span>$<%= item.price %></span>
+                            <span>$<%= item.itemDetails.price %></span>
                         </div>
                     </li>
                 <% }); %> 
             </ul>
             <p class="profile-order__total">
-                <strong>Total Order Price: $<%= order.cart.totalPrice %></strong>
+                <strong>Total Order Price: $<%= order.cartTotal %></strong>
             </p>
         </article>
     <% }); %>
