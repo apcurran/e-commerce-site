@@ -3,7 +3,7 @@
 const mongoose = require("mongoose");
 
 const Product = require("../models/Product");
-const { cartItemsInitialize, cartAddItem } = require("../models/Cart");
+const { cartItemsInitialize, cartAddItem, cartCalculateCartDetails } = require("../models/Cart");
 const { gameValidation } = require("../validation/validate-game");
 const { checkRatingExistence } = require("../utils/check-rating-existence");
 const { GENERIC_ERR_MSG } = require("../utils/generic-err-msg");
@@ -41,6 +41,9 @@ const getGamesIndex = async (req, res) => {
         const nextPage = page + 1;
         const prevPage = page - 1;
 
+        const cartItems = cartItemsInitialize(req.session.cart);
+        const cartTotalQuantity = cartCalculateCartDetails(cartItems)[0];
+
         res.render("shop/index", {
             title: "Home",
             products: myProducts,
@@ -49,7 +52,8 @@ const getGamesIndex = async (req, res) => {
             nextPage,
             prevPage,
             genre: "all",
-            user: req.user
+            user: req.user,
+            cartTotalQuantity
         });
         
     } catch (err) {
@@ -149,6 +153,9 @@ const getGame = async (req, res) => {
             return res.render("shop/product-page", { title: `${product.title} Details`, product, genre: product.genre, noAverageRating: "No ratings yet."});
         }
 
+        const cartItems = cartItemsInitialize(req.session.cart);
+        const cartTotalQuantity = cartCalculateCartDetails(cartItems)[0];
+
         // Otherwise, output game data, rating, and num of ratings
         res.render("shop/product-page", {
             title: `${product.title} Details`,
@@ -156,7 +163,8 @@ const getGame = async (req, res) => {
             genre: product.genre,
             averageRating: product.avgRating,
             totalRatings: product.totalRatings,
-            currUserRatingExists
+            currUserRatingExists,
+            cartTotalQuantity
         });
 
     } catch (err) {
