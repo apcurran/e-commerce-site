@@ -9,10 +9,16 @@ const { signupValidation } = require("../validation/validate-user");
 const { GENERIC_ERR_MSG } = require("../utils/generic-err-msg");
 
 const getSignup = (req, res) => {
-    res.render("user/signup", { title: "Sign Up" });
+    const cartItems = cartItemsInitialize(req.session.cart);
+    const cartTotalQuantity = cartCalculateQuantity(cartItems);
+
+    res.render("user/signup", { title: "Sign Up", cartTotalQuantity });
 };
 
 const postSignup = async (req, res) => {
+    const cartItems = cartItemsInitialize(req.session.cart);
+    const cartTotalQuantity = cartCalculateQuantity(cartItems);
+
     try {
         // Validate incoming data
         await signupValidation(req.body);
@@ -31,7 +37,7 @@ const postSignup = async (req, res) => {
                                     .setOptions({ sanitizeFilter: true });
 
         if (emailExists) {
-            return res.render("user/signup", { title: "Sign Up", error: "Email already exists" });
+            return res.render("user/signup", { title: "Sign Up", error: "Email already exists", cartTotalQuantity });
         }
 
         // Hash password
@@ -53,12 +59,13 @@ const postSignup = async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        res.render("user/signup", { title: "Sign Up", error: GENERIC_ERR_MSG });
+        res.render("user/signup", { title: "Sign Up", error: GENERIC_ERR_MSG, cartTotalQuantity });
     }
 };
 
 const getLogin = (req, res) => {
-    const cartTotalQuantity = cartCalculateQuantity(req.session.cart);
+    const cartItems = cartItemsInitialize(req.session.cart);
+    const cartTotalQuantity = cartCalculateQuantity(cartItems);
 
     res.render("user/login", { title: "Log In", cartTotalQuantity });
 };
@@ -75,6 +82,9 @@ const postLogin = (req, res, next) => {
 };
 
 const getProfile = async (req, res) => {
+    const cartItems = cartItemsInitialize(req.session.cart);
+    const cartTotalQuantity = cartCalculateQuantity(cartItems);
+
     try {
         const orders = await Order
                                 .find({ user_id: req.user._id })
@@ -86,16 +96,13 @@ const getProfile = async (req, res) => {
             order.items = cartItems;
             order.cartTotal = cartCalculateTotal(cartItems);
         }
-
-        const cartItems = cartItemsInitialize(req.session.cart);
-        const cartTotalQuantity = cartCalculateQuantity(cartItems);
         
         res.render("user/profile", { title: "Profile", user: req.user, orders: orders, cartTotalQuantity });
 
     } catch (err) {
         console.error(err);
 
-        res.render("user/profile", { title: "Profile", user: req.user, error: GENERIC_ERR_MSG });
+        res.render("user/profile", { title: "Profile", user: req.user, error: GENERIC_ERR_MSG, cartTotalQuantity });
     }
 };
 
