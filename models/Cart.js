@@ -43,13 +43,13 @@ function cartAddItem(cartItems, productDetails, productId) {
     let previousStoredItemIndex = cartItems.findIndex((item) => String(item.itemDetails._id) === productId);
 
     if (previousStoredItemIndex === -1) {
+        // create a new item for cartItems
         let product = {
             itemDetails: productDetails,
             itemQuantity: 1,
         };
         cartItems.push(product);
     } else {
-        // update ITEM quantity
         cartItems[previousStoredItemIndex].itemQuantity++;
     }
 
