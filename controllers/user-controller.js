@@ -76,7 +76,6 @@ const postLogin = (req, res, next) => {
 
 const getProfile = async (req, res) => {
     try {
-        // TODO: add new cart logic
         const orders = await Order
                                 .find({ user_id: req.user._id })
                                 .sort({ created_at: -1 })
