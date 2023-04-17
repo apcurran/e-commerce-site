@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 
 const User = require("../models/User");
 const Order = require("../models/Order");
-const Cart = require("../models/Cart");
+const { cartCalculateQuantity } = require("../models/Cart");
 const { signupValidation } = require("../validation/validate-user");
 const { GENERIC_ERR_MSG } = require("../utils/generic-err-msg");
 
@@ -58,7 +58,9 @@ const postSignup = async (req, res) => {
 };
 
 const getLogin = (req, res) => {
-    res.render("user/login", { title: "Log In" });
+    const cartTotalQuantity = cartCalculateQuantity(req.session.cart);
+
+    res.render("user/login", { title: "Log In", cartTotalQuantity });
 };
 
 const postLogin = (req, res, next) => {
