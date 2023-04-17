@@ -50,9 +50,11 @@ const getCheckout = (req, res) => {
         return res.redirect("/checkout-preview");
     }
 
-    const cart = req.session.cart;
+    const cartItems = req.session.cart;
+    const cartTotalQuantity = cartCalculateQuantity(cartItems);
+    const cartTotal = cartCalculateTotal(cartItems);
 
-    res.render("shop/checkout", { title: "Checkout", total: cart.totalPrice });
+    res.render("shop/checkout", { title: "Checkout", total: cartTotal, cartTotalQuantity });
 };
 
 const postApiCreatePaymentIntent = async (req, res, next) => {
