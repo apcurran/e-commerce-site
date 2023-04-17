@@ -138,6 +138,20 @@ function cartCalculateCartDetails(cartItems) {
     return [cartQuantity, grandTotal];
 }
 
+/**
+ * @param {cartItem[]} cartItems 
+ * @returns {number} cart quantity
+ */
+function cartCalculateQuantity(cartItems) {
+    let cartQuantity = 0;
+
+    for (let cartItem of cartItems) {
+        cartQuantity += cartItem.itemQuantity;
+    }
+
+    return cartQuantity;
+}
+
 // OLD IMPLEMENTATION
 // /**
 //  * @param {cart|null} sessionCart pre-existing cart stored in session
@@ -261,5 +275,6 @@ module.exports = {
     cartRemoveItem,
     cartIncrementByOne,
     cartDecrementByOne,
-    cartCalculateCartDetails
+    cartCalculateCartDetails,
+    cartCalculateQuantity
 };

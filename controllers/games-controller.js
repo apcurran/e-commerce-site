@@ -3,7 +3,7 @@
 const mongoose = require("mongoose");
 
 const Product = require("../models/Product");
-const { cartItemsInitialize, cartAddItem, cartCalculateCartDetails } = require("../models/Cart");
+const { cartItemsInitialize, cartAddItem, cartCalculateQuantity } = require("../models/Cart");
 const { gameValidation } = require("../validation/validate-game");
 const { checkRatingExistence } = require("../utils/check-rating-existence");
 const { GENERIC_ERR_MSG } = require("../utils/generic-err-msg");
@@ -42,7 +42,7 @@ const getGamesIndex = async (req, res) => {
         const prevPage = page - 1;
 
         const cartItems = cartItemsInitialize(req.session.cart);
-        const cartTotalQuantity = cartCalculateCartDetails(cartItems)[0];
+        const cartTotalQuantity = cartCalculateQuantity(cartItems);
 
         res.render("shop/index", {
             title: "Home",
@@ -154,7 +154,7 @@ const getGame = async (req, res) => {
         }
 
         const cartItems = cartItemsInitialize(req.session.cart);
-        const cartTotalQuantity = cartCalculateCartDetails(cartItems)[0];
+        const cartTotalQuantity = cartCalculateQuantity(cartItems);
 
         // Otherwise, output game data, rating, and num of ratings
         res.render("shop/product-page", {
