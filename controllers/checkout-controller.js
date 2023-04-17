@@ -63,9 +63,10 @@ const postApiCreatePaymentIntent = async (req, res, next) => {
             return res.redirect("/checkout-preview");
         }
 
-        const cart = req.session.cart;
+        const cartItems = req.session.cart;
+        const cartTotal = cartCalculateTotal(cartItems);
         const paymentIntent = await stripe.paymentIntents.create({
-          amount: cart.totalPrice * 100,
+          amount: cartTotal * 100,
           currency: "usd"
         });
 
