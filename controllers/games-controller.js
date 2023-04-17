@@ -148,13 +148,19 @@ const getGame = async (req, res) => {
         const productRatingsArr = product.ratings;
         const currUserRatingExists = checkRatingExistence(currUserId, productRatingsArr);
 
-        // No game ratings yet? Output regular game data
-        if (product.avgRating === null) {
-            return res.render("shop/product-page", { title: `${product.title} Details`, product, genre: product.genre, noAverageRating: "No ratings yet."});
-        }
-
         const cartItems = cartItemsInitialize(req.session.cart);
         const cartTotalQuantity = cartCalculateQuantity(cartItems);
+
+        // No game ratings yet? Output regular game data
+        if (product.avgRating === null) {
+            return res.render("shop/product-page", {
+                title: `${product.title} Details`,
+                product,
+                genre: product.genre,
+                noAverageRating: "No ratings yet.",
+                cartTotalQuantity
+            });
+        }
 
         // Otherwise, output game data, rating, and num of ratings
         res.render("shop/product-page", {
