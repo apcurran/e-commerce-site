@@ -75,50 +75,40 @@ function cartRemoveItem(cartItems, productId) {
 }
 
 /**
- * @param {cart} cart
+ * @param {cartItem[]} cartItems
  * @param {string} productId 
- * @returns {cart}
+ * @returns {cartItem[]}
  */
-function cartIncrementByOne(cart, productId) {
-    const storedItemIndex = cart.cartItems.findIndex((item) => String(item.itemDetails._id) === productId);
-    const storedItem = cart.cartItems[storedItemIndex];
+function cartIncrementByOne(cartItems, productId) {
+    const storedItem = cartItems.find((item) => String(item.itemDetails._id) === productId);
 
-    if (storedItem === undefined) return cart;
+    if (storedItem === undefined) return cartItems;
     
-    // adjust item quantity and item total price
-    cart.cartItems[storedItemIndex].itemQuantity++;
-    cart.cartItems[storedItemIndex].itemTotalPrice += storedItem.itemDetails.price;
-    // adjust total cart quantity and total cart price
-    cart.cartTotalQuantity++;
-    cart.cartTotalPrice += storedItem.itemDetails.price;
+    storedItem.itemQuantity++;
 
-    return cart;
+    return cartItems;
 }
 
 /**
- * @param {cart} cart 
+ * @param {cartItem[]} cartItems 
  * @param {string} productId 
- * @returns {cart}
+ * @returns {cartItem[]}
  */
-function cartDecrementByOne(cart, productId) {
-    const storedItemIndex = cart.cartItems.findIndex((item) => String(item.itemDetails._id) === productId);
-    const storedItem = cart.cartItems[storedItemIndex];
+function cartDecrementByOne(cartItems, productId) {
+    const storedItemIndex = cartItems.findIndex((item) => String(item.itemDetails._id) === productId);
+    const storedItem = cartItems[storedItemIndex];
 
-    if (storedItem === undefined) return cart;
+    if (storedItem === undefined) return cartItems;
 
     // adjust item quantity and item total price
-    cart.cartItems[storedItemIndex].itemQuantity--;
-    cart.cartItems[storedItemIndex].itemTotalPrice -= storedItem.itemDetails.price;
-    // adjust total cart quantity and total cart price
-    cart.cartTotalQuantity--;
-    cart.cartTotalPrice -= storedItem.itemDetails.price;
+    storedItem.itemQuantity--;
 
     if (storedItem.itemQuantity <= 0) {
         // remove item from cart
-        cart.cartItems.splice(storedItemIndex, 1);
+        cartItems.splice(storedItemIndex, 1);
     }
 
-    return cart;
+    return cartItems;
 }
 
 /**
@@ -172,7 +162,7 @@ function cartCalculateQuantity(cartItems) {
 //  * @returns {cart} modified cart
 //  */
 // function cartAddItem(cart, productDetails, productId) {
-//     let previousStoredItemIndex = cart.cartItems.findIndex((item) => String(item.itemDetails._id) === productId);
+//     let previousStoredItemIndex = cartItems.findIndex((item) => String(item.itemDetails._id) === productId);
 
 //     if (previousStoredItemIndex === -1) {
 //         let product = {
@@ -180,20 +170,20 @@ function cartCalculateQuantity(cartItems) {
 //             itemQuantity: 1,
 //             itemTotalPrice: productDetails.price
 //         };
-//         cart.cartItems.push(product);
+//         cartItems.push(product);
 //     } else {
 //         // update ITEM quantity
-//         cart.cartItems[previousStoredItemIndex].itemQuantity++;
+//         cartItems[previousStoredItemIndex].itemQuantity++;
 //         // update ITEM price
-//         const updatedItemTotal = cart.cartItems[previousStoredItemIndex].itemDetails.price * cart.cartItems[previousStoredItemIndex].itemQuantity;
-//         cart.cartItems[previousStoredItemIndex].itemTotalPrice = updatedItemTotal;
+//         const updatedItemTotal = cartItems[previousStoredItemIndex].itemDetails.price * cartItems[previousStoredItemIndex].itemQuantity;
+//         cartItems[previousStoredItemIndex].itemTotalPrice = updatedItemTotal;
 //     }
 
-//     const storedItem = cart.cartItems.find((item) => String(item.itemDetails._id) === productId);
+//     const storedItem = cartItems.find((item) => String(item.itemDetails._id) === productId);
 //     // update CART quantity
-//     cart.cartTotalQuantity++;
+//     cartTotalQuantity++;
 //     // update CART price
-//     cart.cartTotalPrice += storedItem.itemTotalPrice;
+//     cartTotalPrice += storedItem.itemTotalPrice;
 
 //     return cart;
 // }
@@ -205,16 +195,16 @@ function cartCalculateQuantity(cartItems) {
 //  * @returns {cart} modified cart after item removal
 //  */
 // function cartRemoveItem(cart, productId) {
-//     const storedItemIndex = cart.cartItems.findIndex((item) => String(item.itemDetails._id) === productId);
-//     const storedItem = cart.cartItems[storedItemIndex];
+//     const storedItemIndex = cartItems.findIndex((item) => String(item.itemDetails._id) === productId);
+//     const storedItem = cartItems[storedItemIndex];
 
 //     if (storedItem === undefined) return cart;
 
 //     // update data
-//     cart.cartTotalQuantity -= storedItem.itemQuantity;
-//     cart.cartTotalPrice -= storedItem.itemTotalPrice;
+//     cartTotalQuantity -= storedItem.itemQuantity;
+//     cartTotalPrice -= storedItem.itemTotalPrice;
 //     // remove item from cart
-//     cart.cartItems.splice(storedItemIndex, 1);
+//     cartItems.splice(storedItemIndex, 1);
 
 //     return cart;
 // }
@@ -225,17 +215,17 @@ function cartCalculateQuantity(cartItems) {
 //  * @returns {cart}
 //  */
 // function cartIncrementByOne(cart, productId) {
-//     const storedItemIndex = cart.cartItems.findIndex((item) => String(item.itemDetails._id) === productId);
-//     const storedItem = cart.cartItems[storedItemIndex];
+//     const storedItemIndex = cartItems.findIndex((item) => String(item.itemDetails._id) === productId);
+//     const storedItem = cartItems[storedItemIndex];
 
 //     if (storedItem === undefined) return cart;
     
 //     // adjust item quantity and item total price
-//     cart.cartItems[storedItemIndex].itemQuantity++;
-//     cart.cartItems[storedItemIndex].itemTotalPrice += storedItem.itemDetails.price;
+//     cartItems[storedItemIndex].itemQuantity++;
+//     cartItems[storedItemIndex].itemTotalPrice += storedItem.itemDetails.price;
 //     // adjust total cart quantity and total cart price
-//     cart.cartTotalQuantity++;
-//     cart.cartTotalPrice += storedItem.itemDetails.price;
+//     cartTotalQuantity++;
+//     cartTotalPrice += storedItem.itemDetails.price;
 
 //     return cart;
 // }
@@ -247,21 +237,21 @@ function cartCalculateQuantity(cartItems) {
 //  * @returns {cart}
 //  */
 // function cartDecrementByOne(cart, productId) {
-//     const storedItemIndex = cart.cartItems.findIndex((item) => String(item.itemDetails._id) === productId);
-//     const storedItem = cart.cartItems[storedItemIndex];
+//     const storedItemIndex = cartItems.findIndex((item) => String(item.itemDetails._id) === productId);
+//     const storedItem = cartItems[storedItemIndex];
 
 //     if (storedItem === undefined) return cart;
 
 //     // adjust item quantity and item total price
-//     cart.cartItems[storedItemIndex].itemQuantity--;
-//     cart.cartItems[storedItemIndex].itemTotalPrice -= storedItem.itemDetails.price;
+//     cartItems[storedItemIndex].itemQuantity--;
+//     cartItems[storedItemIndex].itemTotalPrice -= storedItem.itemDetails.price;
 //     // adjust total cart quantity and total cart price
-//     cart.cartTotalQuantity--;
-//     cart.cartTotalPrice -= storedItem.itemDetails.price;
+//     cartTotalQuantity--;
+//     cartTotalPrice -= storedItem.itemDetails.price;
 
 //     if (storedItem.itemQuantity <= 0) {
 //         // remove item from cart
-//         cart.cartItems.splice(storedItemIndex, 1);
+//         cartItems.splice(storedItemIndex, 1);
 //     }
 
 //     return cart;
