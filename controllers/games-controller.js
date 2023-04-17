@@ -3,7 +3,7 @@
 const mongoose = require("mongoose");
 
 const Product = require("../models/Product");
-const { cartInitialize, cartAddItem } = require("../models/Cart");
+const { cartItemsInitialize, cartAddItem } = require("../models/Cart");
 const { gameValidation } = require("../validation/validate-game");
 const { checkRatingExistence } = require("../utils/check-rating-existence");
 const { GENERIC_ERR_MSG } = require("../utils/generic-err-msg");
@@ -170,9 +170,9 @@ const getAddToCart = async (req, res, next) => {
     try {
         const productId = req.params.id;
         const product = await Product.findById(productId);
-        const cart = cartInitialize(req.session.cart);
-        const updatedCart = cartAddItem(cart, product, product.id);
-        req.session.cart = updatedCart;
+        const cartItems = cartItemsInitialize(req.session.cart);
+        const updatedCartItems = cartAddItem(cartItems, product, product.id);
+        req.session.cart = updatedCartItems;
 
         res.redirect("/");
         

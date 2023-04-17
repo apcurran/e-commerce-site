@@ -19,64 +19,41 @@
  * @typedef {{
  *     itemDetails: product,
  *     itemQuantity: number,
- *     itemTotalPrice: number
  * }} cartItem
- */
-
-/**
- * @typedef {{
- *     cartItems: cartItem[],
- *     cartTotalQuantity: number,
- *     cartTotalPrice: number
- * }} cart
  */
 
 // NEW IMPLEMENTATION
 /**
- * @param {cart|null} sessionCart pre-existing cart stored in session
- * @returns {cart}
+ * @param {cartItem[]|null} sessionCartItems pre-existing cart stored in session
+ * @returns {cartItem[]}
  */
-function cartInitialize(sessionCart) {
-    if (sessionCart) return sessionCart;
+function cartItemsInitialize(sessionCartItems) {
+    if (sessionCartItems) return sessionCartItems;
 
-    return {
-        cartItems: [],
-        cartTotalQuantity: 0,
-        cartTotalPrice: 0
-    };
+    return [];
 }
 
 /**
- * @param {cart} cart
+ * @param {cartItem[]} cartItems
  * @param {product} productDetails
  * @param {string} productId
- * @returns {cart} modified cart
+ * @returns {cartItem[]} modified cart
  */
-function cartAddItem(cart, productDetails, productId) {
-    let previousStoredItemIndex = cart.cartItems.findIndex((item) => String(item.itemDetails._id) === productId);
+function cartAddItem(cartItems, productDetails, productId) {
+    let previousStoredItemIndex = cartItems.findIndex((item) => String(item.itemDetails._id) === productId);
 
     if (previousStoredItemIndex === -1) {
         let product = {
             itemDetails: productDetails,
             itemQuantity: 1,
-            itemTotalPrice: productDetails.price
         };
-        cart.cartItems.push(product);
+        cartItems.push(product);
     } else {
         // update ITEM quantity
-        cart.cartItems[previousStoredItemIndex].itemQuantity++;
-        // update ITEM price
-        const updatedItemTotal = cart.cartItems[previousStoredItemIndex].itemDetails.price * cart.cartItems[previousStoredItemIndex].itemQuantity;
-        cart.cartItems[previousStoredItemIndex].itemTotalPrice = updatedItemTotal;
+        cartItems[previousStoredItemIndex].itemQuantity++;
     }
 
-    const storedItem = cart.cartItems.find((item) => String(item.itemDetails._id) === productId);
-    // update CART quantity
-    cart.cartTotalQuantity++;
-    // update CART price
-    cart.cartTotalPrice += storedItem.itemTotalPrice;
-
-    return cart;
+    return cartItems;
 }
 
 /**
@@ -149,17 +126,19 @@ function cartDecrementByOne(cart, productId) {
 
 /**
  * @param {cartItem[]} cartItems 
- * @returns {number}
+ * @returns {[number, number]} cart quantity and cart grand total
  */
-function calculateTotal(cartItems) {
+function cartCalculateCartDetails(cartItems) {
+    let cartQuantity = 0;
     let grandTotal = 0;
 
     for (let cartItem of cartItems) {
+        cartQuantity += cartItem.itemQuantity;
         const itemTotal = cartItem.itemQuantity * cartItem.itemDetails.price;
         grandTotal += itemTotal;
     }
 
-    return grandTotal;
+    return [cartQuantity, grandTotal];
 }
 
 // OLD IMPLEMENTATION
@@ -280,9 +259,10 @@ function calculateTotal(cartItems) {
 // }
 
 module.exports = {
-    cartInitialize,
+    cartItemsInitialize,
     cartAddItem,
     cartRemoveItem,
     cartIncrementByOne,
-    cartDecrementByOne
+    cartDecrementByOne,
+    cartCalculateCartDetails
 };
