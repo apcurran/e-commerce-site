@@ -66,8 +66,10 @@ const getGamesIndex = async (req, res) => {
 const getGamesAction = async (req, res) => {
     try {
         const products = await Product.find({ genre: "action" }).select("-description -ratings").lean();
+        const cartItems = cartItemsInitialize(req.session.cart);
+        const cartTotalQuantity = cartCalculateQuantity(cartItems);
 
-        res.render("shop/index", { title: "Home", products, genre: "action" });
+        res.render("shop/index", { title: "Home", products, genre: "action", cartTotalQuantity });
         
     } catch (err) {
         console.error(err);
@@ -79,8 +81,10 @@ const getGamesAction = async (req, res) => {
 const getGamesAdventure = async (req, res) => {
     try {
         const products = await Product.find({ genre: "adventure" }).select("-description -ratings").lean();
+        const cartItems = cartItemsInitialize(req.session.cart);
+        const cartTotalQuantity = cartCalculateQuantity(cartItems);
 
-        res.render("shop/index", { title: "Home", products, genre: "adventure" });
+        res.render("shop/index", { title: "Home", products, genre: "adventure", cartTotalQuantity });
         
     } catch (err) {
         console.error(err);
@@ -92,8 +96,10 @@ const getGamesAdventure = async (req, res) => {
 const getGamesRpg = async (req, res) => {
     try {
         const products = await Product.find({ genre: "rpg" }).select("-description -ratings").lean();
+        const cartItems = cartItemsInitialize(req.session.cart);
+        const cartTotalQuantity = cartCalculateQuantity(cartItems);
 
-        res.render("shop/index", { title: "Home", products, genre: "rpg" });
+        res.render("shop/index", { title: "Home", products, genre: "rpg", cartTotalQuantity });
         
     } catch (err) {
         console.error(err);
@@ -105,8 +111,10 @@ const getGamesRpg = async (req, res) => {
 const getGamesSports = async (req, res) => {
     try {
         const products = await Product.find({ genre: "sports" }).select("-description -ratings").lean();
+        const cartItems = cartItemsInitialize(req.session.cart);
+        const cartTotalQuantity = cartCalculateQuantity(cartItems);
 
-        res.render("shop/index", { title: "Home", products, genre: "sports" });
+        res.render("shop/index", { title: "Home", products, genre: "sports", cartTotalQuantity });
         
     } catch (err) {
         console.error(err);
@@ -212,7 +220,7 @@ const postAddRating = async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        res.render("shop/product-page", { title: req.params.id, error: GENERIC_ERR_MSG });
+        res.render("shop/product-page", { title: req.params.id, error: GENERIC_ERR_MSG, cartTotalQuantity: 0 });
     }
 };
 
