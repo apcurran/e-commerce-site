@@ -24,7 +24,7 @@ const postSignup = async (req, res) => {
         await signupValidation(req.body);
 
     } catch (err) {
-        return res.render("user/signup", { title: "Sign Up", error: err.details[0].message });
+        return res.render("user/signup", { title: "Sign Up", error: err.details[0].message, cartTotalQuantity });
     }
 
     try {
