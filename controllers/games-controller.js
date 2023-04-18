@@ -124,6 +124,9 @@ const getGamesSports = async (req, res) => {
 };
 
 const getGame = async (req, res) => {
+    const cartItems = cartItemsInitialize(req.session.cart);
+    const cartTotalQuantity = cartCalculateQuantity(cartItems);
+
     try {
         const { id } = req.params;
         const prodId = mongoose.Types.ObjectId(id);
@@ -156,9 +159,6 @@ const getGame = async (req, res) => {
         const productRatingsArr = product.ratings;
         const currUserRatingExists = checkRatingExistence(currUserId, productRatingsArr);
 
-        const cartItems = cartItemsInitialize(req.session.cart);
-        const cartTotalQuantity = cartCalculateQuantity(cartItems);
-
         // No game ratings yet? Output regular game data
         if (product.avgRating === null) {
             return res.render("shop/product-page", {
@@ -184,7 +184,7 @@ const getGame = async (req, res) => {
     } catch (err) {
         console.error(err);
 
-        res.render("shop/product-page", { title: req.params.id, error: GENERIC_ERR_MSG, cartTotalQuantity: 0 });
+        res.render("shop/product-page", { title: req.params.id, error: GENERIC_ERR_MSG, cartTotalQuantity });
     }
 };
 
