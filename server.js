@@ -12,7 +12,6 @@ const flash = require("express-flash");
 const session = require("express-session");
 const passport = require("passport");
 const MongoStore = require("connect-mongo")(session);
-const shrinkRay = require("shrink-ray-current");
 const helmet = require("helmet");
 const csrf = require("csurf");
 
@@ -45,7 +44,6 @@ app.disable("x-powered-by");
 
 // Middleware
 app.use(helmet());
-app.use(shrinkRay());
 app.set("view engine", "ejs");
 app.set("layout", "layouts/layout");
 app.use(expressLayouts);
