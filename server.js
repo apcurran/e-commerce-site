@@ -4,7 +4,6 @@ require("dotenv").config();
 
 const express = require("express");
 const PORT = process.env.PORT || 5000;
-const morgan = require("morgan");
 const expressLayouts = require("express-ejs-layouts");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
@@ -28,7 +27,9 @@ const checkoutRouter = require("./routes/checkout-router");
 
 const app = express();
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV === "development") {
+    const morgan = require("morgan");
+
     app.use(morgan("dev"));
 }
 
