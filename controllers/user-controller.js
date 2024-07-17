@@ -97,12 +97,12 @@ const getProfile = async (req, res) => {
             order.cartTotal = cartCalculateTotal(cartItems);
         }
         
-        res.render("user/profile", { title: "Profile", user: req.user, orders: previousOrders, currentCartTotalQuantity });
+        res.render("user/profile", { title: "Profile", user: req.user, orders: previousOrders, cartTotalQuantity: currentCartTotalQuantity });
 
     } catch (err) {
         console.error(err);
 
-        res.render("user/profile", { title: "Profile", user: req.user, error: GENERIC_ERR_MSG, currentCartTotalQuantity });
+        res.render("user/profile", { title: "Profile", user: req.user, error: GENERIC_ERR_MSG, cartTotalQuantity: currentCartTotalQuantity });
     }
 };
 

@@ -7,7 +7,7 @@
             <li class="nav__list__item">
                 <a href="/" class="nav__list__link">Games</a>
             </li>
-            <% if (isLoggedIn) { %>
+            <% if (locals.isLoggedIn) { %>
                 <% if (currentUser.admin) { %>
                     <li class="nav__list__item">
                         <a href="/game/add" class="nav__list__link">Add Game</a>
