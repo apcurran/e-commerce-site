@@ -38,8 +38,6 @@ mongoose
     .connect(process.env.DB_URI, { autoIndex: false })
     .catch((err) => console.error(`Mongo error:, ${err}`));
 
-// csrf
-const csrfProtection = csrf();
 // reduce fingerprinting
 app.disable("x-powered-by");
 
@@ -87,6 +85,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 // Enable csrfProtection
+const csrfProtection = csrf();
 app.use(csrfProtection);
 
 // Global views variables
