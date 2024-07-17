@@ -82,27 +82,27 @@ const postLogin = (req, res, next) => {
 };
 
 const getProfile = async (req, res) => {
-    const cartItems = cartItemsInitialize(req.session.cart);
-    const cartTotalQuantity = cartCalculateQuantity(cartItems);
+    const currentCartItems = cartItemsInitialize(req.session.cart);
+    const currentCartTotalQuantity = cartCalculateQuantity(currentCartItems);
 
     try {
-        const orders = await Order
+        let previousOrders = await Order
                                 .find({ user_id: req.user._id })
                                 .sort({ created_at: -1 })
                                 .setOptions({ sanitizeFilter: true });
 
-        for (let order of orders) {
+        for (let order of previousOrders) {
             const cartItems = order.cart;
             order.items = cartItems;
             order.cartTotal = cartCalculateTotal(cartItems);
         }
         
-        res.render("user/profile", { title: "Profile", user: req.user, orders: orders, cartTotalQuantity });
+        res.render("user/profile", { title: "Profile", user: req.user, orders: previousOrders, currentCartTotalQuantity });
 
     } catch (err) {
         console.error(err);
 
-        res.render("user/profile", { title: "Profile", user: req.user, error: GENERIC_ERR_MSG, cartTotalQuantity });
+        res.render("user/profile", { title: "Profile", user: req.user, error: GENERIC_ERR_MSG, currentCartTotalQuantity });
     }
 };
 
