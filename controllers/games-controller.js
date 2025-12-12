@@ -308,7 +308,7 @@ const patchUpdateGame = async (req, res) => {
         };
 
         await Product
-                .findByIdAndUpdate(id, updatedProductInfo)
+                .findByIdAndUpdate(id, updatedProductInfo, { new: true })
                 .setOptions({ sanitizeFilter: true });
     
         res.redirect(`/games/${id}`);
