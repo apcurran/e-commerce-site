@@ -8,7 +8,7 @@ const { checkAuthenticated } = require("../config/check-auth");
 router.get("/checkout-preview", checkoutController.getCheckoutPreview);
 
 // Checkout-preview add one instance of an item to cart
-router.get("/increase/:id", checkoutController.getIncrease);
+router.post("/increase/:id", checkoutController.postIncrease);
 
 // Checkout-preview remove one instance of an item from cart
 router.get("/reduce/:id", checkoutController.getReduce);

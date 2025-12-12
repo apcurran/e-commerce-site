@@ -17,7 +17,7 @@ const getCheckoutPreview = (req, res) => {
     res.render("shop/checkout-preview", { title: "Checkout Preview", cartItems, totalPrice: cartTotal, cartTotalQuantity });
 };
 
-const getIncrease = (req, res) => {
+const postIncrease = (req, res) => {
     const productId = req.params.id;
     const cartItems = cartItemsInitialize(req.session.cart);
     const updatedCart = cartIncrementByOne(cartItems, productId);
@@ -100,7 +100,7 @@ const postApiSuccessfulOrder = async (req, res, next) => {
 
 module.exports = {
     getCheckoutPreview,
-    getIncrease,
+    postIncrease,
     getReduce,
     getRemove,
     getCheckout,
