@@ -2,7 +2,7 @@
   "name": "ecommerce-site",
   "version": "1.0.0",
   "engines": {
-    "node": "16.x"
+    "node": "24.x"
   },
   "description": "",
   "main": "server.js",
