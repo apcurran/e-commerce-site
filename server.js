@@ -37,7 +37,7 @@ if (!isProduction) {
 // DB Setup
 mongoose
     .connect(process.env.DB_URI, { autoIndex: false })
-    .catch((err) => console.error(`Mongo error:, ${err}`));
+    .catch((err) => console.error(`Mongo error: ${err}`));
 
 // reduce fingerprinting
 app.disable("x-powered-by");
