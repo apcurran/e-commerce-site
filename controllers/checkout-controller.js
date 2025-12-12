@@ -35,7 +35,7 @@ const postReduce = (req, res) => {
     res.redirect("/checkout-preview");
 };
 
-const getRemove = (req, res) => {
+const postRemove = (req, res) => {
     const productId = req.params.id;
     const cartItems = cartItemsInitialize(req.session.cart);
     const updatedCart = cartRemoveItem(cartItems, productId);
@@ -102,7 +102,7 @@ module.exports = {
     getCheckoutPreview,
     postIncrease,
     postReduce,
-    getRemove,
+    postRemove,
     getCheckout,
     postApiCreatePaymentIntent,
     postApiSuccessfulOrder

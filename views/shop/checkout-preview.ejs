@@ -26,9 +26,13 @@
                                     <button type="submit" class="checkout-section__item__right__qty-btn qty-btn-add">+</button>
                                 </form>
                             </div>
-                            <button class="checkout-section__item__right__item-remove">
+                            <form action="/remove/<%= cartItem.itemDetails._id %>" method="post">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <button type="submit" class="checkout-section__item__right__item-remove">Remove Game</button>
+                            </form>
+                            <!-- <button class="checkout-section__item__right__item-remove">
                                 <a class="checkout-section__item__right__item-remove-link" href="/remove/<%= cartItem.itemDetails._id %>">Remove Game</a>
-                            </button>
+                            </button> -->
                             <p class="checkout-section__item__right__price">$<%= cartItem.itemDetails.price %></p>
                         </div>
                     </article>
