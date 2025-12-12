@@ -11,7 +11,7 @@ router.get("/checkout-preview", checkoutController.getCheckoutPreview);
 router.post("/increase/:id", checkoutController.postIncrease);
 
 // Checkout-preview remove one instance of an item from cart
-router.get("/reduce/:id", checkoutController.getReduce);
+router.post("/reduce/:id", checkoutController.postReduce);
 
 // Checkout-preview remove one item and all of its quantity from cart
 router.get("/remove/:id", checkoutController.getRemove);

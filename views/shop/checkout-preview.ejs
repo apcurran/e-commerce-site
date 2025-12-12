@@ -16,9 +16,10 @@
                         <div class="checkout-section__item__right">
                             <h3 class="checkout-section__item__right__title"><%= cartItem.itemDetails.title %></h3>
                             <div class="checkout-section__item__right__qty-controls">
-                                <button class="checkout-section__item__right__qty-btn qty-btn-sub">
-                                    <a href="/reduce/<%= cartItem.itemDetails._id %>">-</a>
-                                </button>
+                                <form action="/reduce/<%= cartItem.itemDetails._id %>" method="post">
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                    <button type="submit" class="checkout-section__item__right__qty-btn qty-btn-sub">-</button>
+                                </form>
                                 <span class="checkout-section__item__right__qty"><%= cartItem.itemQuantity %></span>
                                 <form action="/increase/<%= cartItem.itemDetails._id %>" method="post">
                                     <input type="hidden" name="_csrf" value="<%= csrfToken %>">

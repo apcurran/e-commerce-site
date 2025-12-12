@@ -26,7 +26,7 @@ const postIncrease = (req, res) => {
     res.redirect("/checkout-preview");
 };
 
-const getReduce = (req, res) => {
+const postReduce = (req, res) => {
     const productId = req.params.id;
     const cartItems = cartItemsInitialize(req.session.cart);
     const updatedCart = cartDecrementByOne(cartItems, productId);
@@ -101,7 +101,7 @@ const postApiSuccessfulOrder = async (req, res, next) => {
 module.exports = {
     getCheckoutPreview,
     postIncrease,
-    getReduce,
+    postReduce,
     getRemove,
     getCheckout,
     postApiCreatePaymentIntent,
