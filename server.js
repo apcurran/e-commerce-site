@@ -7,7 +7,7 @@ const methodOverride = require("method-override");
 const flash = require("express-flash");
 const session = require("express-session");
 const passport = require("passport");
-const MongoStore = require("connect-mongo")(session);
+const { MongoStore } = require("connect-mongo");
 const helmet = require("helmet");
 const csrf = require("csurf");
 
@@ -36,7 +36,7 @@ if (!isProduction) {
 
 // DB Setup
 mongoose
-    .connect(process.env.DB_URI, { autoIndex: false })
+    .connect(process.env.DB_URI)
     .catch((err) => console.error(`Mongo error: ${err}`));
 
 // reduce fingerprinting
@@ -83,7 +83,9 @@ app.use(session({
     name: process.env.SESSION_NAME,
     resave: false,
     saveUninitialized: false,
-    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    store: MongoStore.create({
+        mongoUrl: process.env.DB_URI
+    }),
     cookie: cookieOptions
 }));
 // Passport Setup

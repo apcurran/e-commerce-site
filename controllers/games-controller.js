@@ -133,7 +133,7 @@ const getGame = async (req, res) => {
 
     try {
         const { id } = req.params;
-        const prodId = mongoose.Types.ObjectId(id);
+        const prodId = new mongoose.Types.ObjectId(id);
         const product = (await Product.aggregate([
             {
                 $match: { _id: prodId }
