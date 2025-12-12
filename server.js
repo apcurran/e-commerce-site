@@ -66,23 +66,27 @@ app.use(methodOverride("_method"));
 
 app.use(flash());
 // expires option should not be set directly; only use the maxAge option
-const devCookieOptions = {
-    maxAge: 120 * 60 * 1000
-};
-const prodCookieOptions = {
+let cookieOptions = {
     maxAge: 120 * 60 * 1000,
-    secure: true,
     httpOnly: true,
-    domain: process.env.COOKIE_DOMAIN,
     path: "/"
 };
+
+if (isProduction) {
+    cookieOptions = {
+        ...cookieOptions, // utilize base cookie options, then add more on top
+        secure: true,
+        domain: process.env.COOKIE_DOMAIN
+    };
+}
+
 app.use(session({
     secret: process.env.SESSION_SECRET,
     name: process.env.SESSION_NAME,
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
-    cookie: isProduction ? prodCookieOptions : devCookieOptions
+    cookie: cookieOptions
 }));
 // Passport Setup
 app.use(passport.initialize());
