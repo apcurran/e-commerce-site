@@ -1,7 +1,6 @@
 "use strict";
 
 const express = require("express");
-const PORT = process.env.PORT || 5000;
 const expressLayouts = require("express-ejs-layouts");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
@@ -11,6 +10,9 @@ const passport = require("passport");
 const MongoStore = require("connect-mongo")(session);
 const helmet = require("helmet");
 const csrf = require("csurf");
+
+const PORT = process.env.PORT || 5000;
+const isProduction = process.env.NODE_ENV === "production";
 
 const { GENERIC_ERR_MSG } = require("./utils/generic-err-msg");
 
@@ -24,8 +26,6 @@ const adminRouter = require("./routes/admin-router");
 const checkoutRouter = require("./routes/checkout-router");
 
 const app = express();
-
-const isProduction = process.env.NODE_ENV === "production";
 
 // dev environment only
 if (!isProduction) {
