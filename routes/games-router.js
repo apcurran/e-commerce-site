@@ -20,7 +20,7 @@ router.get("/games/sports", gamesController.getGamesSports);
 // GET Single Product
 router.get("/games/:id", gamesController.getGame);
 
-// GET Add game to cart
+// POST Add game to cart
 router.post("/add-to-cart/:id", gamesController.postAddToCart);
 
 // POST game rating
