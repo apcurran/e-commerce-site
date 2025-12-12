@@ -192,7 +192,7 @@ const getGame = async (req, res) => {
     }
 };
 
-const getAddToCart = async (req, res, next) => {
+const postAddToCart = async (req, res, next) => {
     try {
         const productId = req.params.id;
         const product = await Product.findById(productId);
@@ -344,7 +344,7 @@ module.exports = {
     getGamesRpg,
     getGamesSports,
     getGame,
-    getAddToCart,
+    postAddToCart,
     postAddRating,
     getAddGame,
     postAddGame,

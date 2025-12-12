@@ -27,7 +27,10 @@ const checkoutRouter = require("./routes/checkout-router");
 
 const app = express();
 
-if (process.env.NODE_ENV === "development") {
+const isProduction = process.env.NODE_ENV === "production";
+
+// dev environment only
+if (!isProduction) {
     const morgan = require("morgan");
 
     app.use(morgan("dev"));
@@ -47,7 +50,7 @@ app.set("view engine", "ejs");
 app.set("layout", "layouts/layout");
 app.use(expressLayouts);
 
-if (process.env.NODE_ENV !== "production") {
+if (!isProduction) {
     // Disable caching
     app.use(express.static("public"));
 } else {
@@ -79,7 +82,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
-    cookie: process.env.NODE_ENV === "dev" ? devCookieOptions : prodCookieOptions
+    cookie: isProduction ? prodCookieOptions : devCookieOptions
 }));
 // Passport Setup
 app.use(passport.initialize());

@@ -386,7 +386,9 @@ body {
     position: relative;
     padding: .6rem 1.25rem;
     margin-bottom: 1.25rem;
+    border: none;
     
+    cursor: pointer;
     letter-spacing: .08em;
     background-color: var(--submit-btn-bg-clr);
     color: #fff;

@@ -59,7 +59,10 @@
                     </form>
                 <% } %>
             <% } %>
-            <a href="/add-to-cart/<%= product._id %>" class="game-details__add-btn">Add to Cart</a>
+            <form action="/add-to-cart/<%= product._id %>" method="post">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button type="submit" class="game-details__add-btn">Add to Cart</button>
+            </form>
             <% if (isLoggedIn && currentUser.admin) { %>
                 <div class="game-details__update-container">
                     <a href="/games/<%= product._id %>/update" class="game-details__update-link">

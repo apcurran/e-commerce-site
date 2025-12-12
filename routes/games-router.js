@@ -21,7 +21,7 @@ router.get("/games/sports", gamesController.getGamesSports);
 router.get("/games/:id", gamesController.getGame);
 
 // GET Add game to cart
-router.get("/add-to-cart/:id", gamesController.getAddToCart);
+router.post("/add-to-cart/:id", gamesController.postAddToCart);
 
 // POST game rating
 router.post("/games/:id/add-rating", checkAuthenticated, gamesController.postAddRating);
