@@ -1,10 +1,11 @@
 "use strict";
 
+const bcrypt = require("bcrypt");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+
 const User = require("../models/User");
 const { loginValidation } = require("../validation/validate-user");
-const bcrypt = require("bcrypt");
 
 async function authenticateUser(req, email, password, done) {
     try {
