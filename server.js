@@ -43,7 +43,46 @@ mongoose
 app.disable("x-powered-by");
 
 // Middleware
-app.use(helmet());
+// allow Stripe API and Google Fonts to load properly
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      useDefaults: true,
+      directives: {
+        scriptSrc: ["'self'", "https://js.stripe.com"],
+        frameSrc: [
+          "'self'",
+          "https://js.stripe.com",
+          "https://hooks.stripe.com"
+        ],
+        connectSrc: [
+          "'self'",
+          "https://api.stripe.com",
+          "https://hooks.stripe.com"
+        ],
+        styleSrc: [
+          "'self'",
+          "'unsafe-inline'",
+          "https://fonts.googleapis.com"
+        ],
+        styleSrcElem: [
+          "'self'",
+          "https://fonts.googleapis.com"
+        ],
+        fontSrc: [
+          "'self'",
+          "https://fonts.gstatic.com"
+        ],
+        imgSrc: [
+          "'self'",
+          "data:",
+          "https://*.stripe.com",
+          "https://res.cloudinary.com"
+        ]
+      }
+    }
+  })
+);
 app.set("view engine", "ejs");
 app.set("layout", "layouts/layout");
 app.use(expressLayouts);
