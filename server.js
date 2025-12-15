@@ -9,7 +9,7 @@ const session = require("express-session");
 const passport = require("passport");
 const { MongoStore } = require("connect-mongo");
 const helmet = require("helmet");
-const csrf = require("csurf");
+const csrf = require("@dr.pogodin/csurf");
 
 const PORT = process.env.PORT || 5000;
 const isProduction = process.env.NODE_ENV === "production";
