@@ -29,22 +29,27 @@ const postSignup = async (req, res) => {
     try {
         // Validate incoming data
         await signupValidation(req.body);
-
     } catch (err) {
-        return res.render("admin/signup", { title: "Sign Up", error: err.details[0].message });
+        return res.render("admin/signup", {
+            title: "Sign Up",
+            error: err.details[0].message,
+        });
     }
 
     try {
-        const { first_name, last_name, email, password, admin_secret } = req.body;
+        const { first_name, last_name, email, password, admin_secret } =
+            req.body;
 
         // Check if user is already in db
-        const emailExists = await User
-                                    .findOne({ email })
-                                    .lean()
-                                    .setOptions({ sanitizeFilter: true });
+        const emailExists = await User.findOne({ email })
+            .lean()
+            .setOptions({ sanitizeFilter: true });
 
         if (emailExists) {
-            return res.render("admin/signup", { title: "Sign Up", error: "Email already exists" });
+            return res.render("admin/signup", {
+                title: "Sign Up",
+                error: "Email already exists",
+            });
         }
 
         // Hash password
@@ -53,7 +58,10 @@ const postSignup = async (req, res) => {
 
         // Admin
         if (admin_secret !== process.env.ADMIN_SECRET) {
-            return res.render("admin/signup", { title: "Sign Up", error: "Incorrect admin secret" });
+            return res.render("admin/signup", {
+                title: "Sign Up",
+                error: "Incorrect admin secret",
+            });
         }
 
         // Create a new admin user
@@ -62,17 +70,19 @@ const postSignup = async (req, res) => {
             last_name,
             email,
             password: hashedPassword,
-            admin: true
+            admin: true,
         });
 
         await user.save();
 
         res.redirect("/admin/login");
-        
     } catch (err) {
         console.error(err);
 
-        res.render("admin/signup", { title: "Sign Up", error: GENERIC_ERR_MSG });
+        res.render("admin/signup", {
+            title: "Sign Up",
+            error: GENERIC_ERR_MSG,
+        });
     }
 };
 
@@ -80,5 +90,5 @@ module.exports = {
     getLogin,
     postLogin,
     getSignup,
-    postSignup
+    postSignup,
 };

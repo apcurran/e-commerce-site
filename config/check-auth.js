@@ -28,4 +28,8 @@ function checkAdminAuthenticated(req, res, next) {
     return res.redirect("/admin/login");
 }
 
-module.exports = { checkAuthenticated, checkNotAuthenticated, checkAdminAuthenticated };
+module.exports = {
+    checkAuthenticated,
+    checkNotAuthenticated,
+    checkAdminAuthenticated,
+};

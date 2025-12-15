@@ -19,8 +19,16 @@ router.post("/remove/:id", checkoutController.postRemove);
 // AUTH Protected Routes
 router.get("/checkout", checkAuthenticated, checkoutController.getCheckout);
 
-router.post("/api/create-payment-intent", checkAuthenticated, checkoutController.postApiCreatePaymentIntent);
+router.post(
+    "/api/create-payment-intent",
+    checkAuthenticated,
+    checkoutController.postApiCreatePaymentIntent,
+);
 
-router.post("/api/successful-order", checkAuthenticated, checkoutController.postApiSuccessfulOrder);
+router.post(
+    "/api/successful-order",
+    checkAuthenticated,
+    checkoutController.postApiSuccessfulOrder,
+);
 
 module.exports = router;

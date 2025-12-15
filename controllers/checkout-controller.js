@@ -3,19 +3,34 @@
 const Stripe = require("stripe");
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
-const { cartItemsInitialize, cartRemoveItem, cartIncrementByOne, cartDecrementByOne, cartCalculateTotal, cartCalculateQuantity } = require("../models/Cart");
+const {
+    cartItemsInitialize,
+    cartRemoveItem,
+    cartIncrementByOne,
+    cartDecrementByOne,
+    cartCalculateTotal,
+    cartCalculateQuantity,
+} = require("../models/Cart");
 const Order = require("../models/Order");
 
 const getCheckoutPreview = (req, res) => {
     if (!req.session.cart) {
-        return res.render("shop/checkout-preview", { title: "Checkout Preview", cartTotalQuantity: 0 });
+        return res.render("shop/checkout-preview", {
+            title: "Checkout Preview",
+            cartTotalQuantity: 0,
+        });
     }
 
     const cartItems = req.session.cart;
     const cartTotalQuantity = cartCalculateQuantity(cartItems);
     const cartTotal = cartCalculateTotal(cartItems);
 
-    res.render("shop/checkout-preview", { title: "Checkout Preview", cartItems, totalPrice: cartTotal, cartTotalQuantity });
+    res.render("shop/checkout-preview", {
+        title: "Checkout Preview",
+        cartItems,
+        totalPrice: cartTotal,
+        cartTotalQuantity,
+    });
 };
 
 const postIncrease = (req, res) => {
@@ -55,7 +70,11 @@ const getCheckout = (req, res) => {
     const cartTotalQuantity = cartCalculateQuantity(cartItems);
     const cartTotal = cartCalculateTotal(cartItems);
 
-    res.render("shop/checkout", { title: "Checkout", total: cartTotal, cartTotalQuantity });
+    res.render("shop/checkout", {
+        title: "Checkout",
+        total: cartTotal,
+        cartTotalQuantity,
+    });
 };
 
 const postApiCreatePaymentIntent = async (req, res, next) => {
@@ -67,12 +86,11 @@ const postApiCreatePaymentIntent = async (req, res, next) => {
         const cartItems = req.session.cart;
         const cartTotal = cartCalculateTotal(cartItems);
         const paymentIntent = await stripe.paymentIntents.create({
-          amount: cartTotal * 100,
-          currency: "usd"
+            amount: cartTotal * 100,
+            currency: "usd",
         });
 
         res.send({ clientSecret: paymentIntent.client_secret });
-        
     } catch (err) {
         next(err);
     }
@@ -86,14 +104,13 @@ const postApiSuccessfulOrder = async (req, res, next) => {
             cart: cart,
             first_name: req.body.first_name,
             last_name: req.body.last_name,
-            payment_id: req.body.payment_id
+            payment_id: req.body.payment_id,
         });
-        
+
         await order.save();
 
         req.session.cart = null;
         res.status(201).end();
-
     } catch (err) {
         next(err);
     }
@@ -106,5 +123,5 @@ module.exports = {
     postRemove,
     getCheckout,
     postApiCreatePaymentIntent,
-    postApiSuccessfulOrder
+    postApiSuccessfulOrder,
 };

@@ -9,13 +9,11 @@ const OrderSchema = new mongoose.Schema({
     last_name: { type: String, required: true },
     cart: { type: Object, required: true },
     payment_id: { type: String, required: true },
-    created_at: { type: Date, default: Date.now }
+    created_at: { type: Date, default: Date.now },
 });
 
-OrderSchema
-    .virtual("dateFormatted")
-    .get(function() {
-        return dateFormatter.format(this.created_at);
-    });
+OrderSchema.virtual("dateFormatted").get(function () {
+    return dateFormatter.format(this.created_at);
+});
 
 module.exports = mongoose.model("Order", OrderSchema);

@@ -4,7 +4,11 @@ const bcrypt = require("bcrypt");
 
 const User = require("../models/User");
 const Order = require("../models/Order");
-const { cartCalculateQuantity, cartCalculateTotal, cartItemsInitialize } = require("../models/Cart");
+const {
+    cartCalculateQuantity,
+    cartCalculateTotal,
+    cartItemsInitialize,
+} = require("../models/Cart");
 const { signupValidation } = require("../validation/validate-user");
 const { GENERIC_ERR_MSG } = require("../utils/generic-err-msg");
 
@@ -22,22 +26,28 @@ const postSignup = async (req, res) => {
     try {
         // Validate incoming data
         await signupValidation(req.body);
-
     } catch (err) {
-        return res.render("user/signup", { title: "Sign Up", error: err.details[0].message, cartTotalQuantity });
+        return res.render("user/signup", {
+            title: "Sign Up",
+            error: err.details[0].message,
+            cartTotalQuantity,
+        });
     }
 
     try {
         const { first_name, last_name, email, password } = req.body;
 
         // Check if user is already in db
-        const emailExists = await User
-                                    .findOne({ email })
-                                    .lean()
-                                    .setOptions({ sanitizeFilter: true });
+        const emailExists = await User.findOne({ email })
+            .lean()
+            .setOptions({ sanitizeFilter: true });
 
         if (emailExists) {
-            return res.render("user/signup", { title: "Sign Up", error: "Email already exists", cartTotalQuantity });
+            return res.render("user/signup", {
+                title: "Sign Up",
+                error: "Email already exists",
+                cartTotalQuantity,
+            });
         }
 
         // Hash password
@@ -49,17 +59,20 @@ const postSignup = async (req, res) => {
             first_name,
             last_name,
             email,
-            password: hashedPassword
+            password: hashedPassword,
         });
 
         await user.save();
 
         res.redirect("/user/login");
-        
     } catch (err) {
         console.error(err);
 
-        res.render("user/signup", { title: "Sign Up", error: GENERIC_ERR_MSG, cartTotalQuantity });
+        res.render("user/signup", {
+            title: "Sign Up",
+            error: GENERIC_ERR_MSG,
+            cartTotalQuantity,
+        });
     }
 };
 
@@ -86,23 +99,31 @@ const getProfile = async (req, res) => {
     const currentCartTotalQuantity = cartCalculateQuantity(currentCartItems);
 
     try {
-        let previousOrders = await Order
-                                .find({ user_id: req.user._id })
-                                .sort({ created_at: -1 })
-                                .setOptions({ sanitizeFilter: true });
+        let previousOrders = await Order.find({ user_id: req.user._id })
+            .sort({ created_at: -1 })
+            .setOptions({ sanitizeFilter: true });
 
         for (let order of previousOrders) {
             const cartItems = order.cart;
             order.items = cartItems;
             order.cartTotal = cartCalculateTotal(cartItems);
         }
-        
-        res.render("user/profile", { title: "Profile", user: req.user, orders: previousOrders, cartTotalQuantity: currentCartTotalQuantity });
 
+        res.render("user/profile", {
+            title: "Profile",
+            user: req.user,
+            orders: previousOrders,
+            cartTotalQuantity: currentCartTotalQuantity,
+        });
     } catch (err) {
         console.error(err);
 
-        res.render("user/profile", { title: "Profile", user: req.user, error: GENERIC_ERR_MSG, cartTotalQuantity: currentCartTotalQuantity });
+        res.render("user/profile", {
+            title: "Profile",
+            user: req.user,
+            error: GENERIC_ERR_MSG,
+            cartTotalQuantity: currentCartTotalQuantity,
+        });
     }
 };
 
@@ -120,5 +141,5 @@ module.exports = {
     getLogin,
     postLogin,
     getProfile,
-    getLogout
+    getLogout,
 };

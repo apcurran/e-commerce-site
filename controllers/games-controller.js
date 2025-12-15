@@ -3,7 +3,11 @@
 const mongoose = require("mongoose");
 
 const Product = require("../models/Product");
-const { cartItemsInitialize, cartAddItem, cartCalculateQuantity } = require("../models/Cart");
+const {
+    cartItemsInitialize,
+    cartAddItem,
+    cartCalculateQuantity,
+} = require("../models/Cart");
 const { gameValidation } = require("../validation/validate-game");
 const { checkRatingExistence } = require("../utils/check-rating-existence");
 const { GENERIC_ERR_MSG } = require("../utils/generic-err-msg");
@@ -16,24 +20,24 @@ const getGamesIndex = async (req, res) => {
         // Pagination
         const page = Number(req.query.page) || 1;
         const itemsPerPage = 9;
-        const skipAmt = ((page - 1) * itemsPerPage);
+        const skipAmt = (page - 1) * itemsPerPage;
 
         // Aggregate Option
         const productsAgg = await Product.aggregate([
             {
                 $facet: {
-                    "products_data": [
-                        { $skip: skipAmt},
+                    products_data: [
+                        { $skip: skipAmt },
                         { $limit: itemsPerPage },
-                        { $project: { description: 0, ratings: 0 } } // exclude description and ratings fields
+                        { $project: { description: 0, ratings: 0 } }, // exclude description and ratings fields
                     ],
-                    "total_products": [
+                    total_products: [
                         {
-                            $count: "products_count"
-                        }
-                    ]
-                }
-            }
+                            $count: "products_count",
+                        },
+                    ],
+                },
+            },
         ]);
 
         const myProducts = productsAgg[0].products_data;
@@ -53,13 +57,16 @@ const getGamesIndex = async (req, res) => {
             prevPage,
             genre: "all",
             user: req.user,
-            cartTotalQuantity
+            cartTotalQuantity,
         });
-        
     } catch (err) {
         console.error(err);
 
-        res.render("shop/index", { title: "Home", error: GENERIC_ERR_MSG, cartTotalQuantity });
+        res.render("shop/index", {
+            title: "Home",
+            error: GENERIC_ERR_MSG,
+            cartTotalQuantity,
+        });
     }
 };
 
@@ -68,14 +75,24 @@ const getGamesAction = async (req, res) => {
     const cartTotalQuantity = cartCalculateQuantity(cartItems);
 
     try {
-        const products = await Product.find({ genre: "action" }).select("-description -ratings").lean();
+        const products = await Product.find({ genre: "action" })
+            .select("-description -ratings")
+            .lean();
 
-        res.render("shop/index", { title: "Home", products, genre: "action", cartTotalQuantity });
-        
+        res.render("shop/index", {
+            title: "Home",
+            products,
+            genre: "action",
+            cartTotalQuantity,
+        });
     } catch (err) {
         console.error(err);
 
-        res.render("shop/index", { title: "Home", error: GENERIC_ERR_MSG, cartTotalQuantity });
+        res.render("shop/index", {
+            title: "Home",
+            error: GENERIC_ERR_MSG,
+            cartTotalQuantity,
+        });
     }
 };
 
@@ -84,14 +101,24 @@ const getGamesAdventure = async (req, res) => {
     const cartTotalQuantity = cartCalculateQuantity(cartItems);
 
     try {
-        const products = await Product.find({ genre: "adventure" }).select("-description -ratings").lean();
+        const products = await Product.find({ genre: "adventure" })
+            .select("-description -ratings")
+            .lean();
 
-        res.render("shop/index", { title: "Home", products, genre: "adventure", cartTotalQuantity });
-        
+        res.render("shop/index", {
+            title: "Home",
+            products,
+            genre: "adventure",
+            cartTotalQuantity,
+        });
     } catch (err) {
         console.error(err);
 
-        res.render("shop/index", { title: "Home", error: GENERIC_ERR_MSG, cartTotalQuantity});
+        res.render("shop/index", {
+            title: "Home",
+            error: GENERIC_ERR_MSG,
+            cartTotalQuantity,
+        });
     }
 };
 
@@ -100,14 +127,24 @@ const getGamesRpg = async (req, res) => {
     const cartTotalQuantity = cartCalculateQuantity(cartItems);
 
     try {
-        const products = await Product.find({ genre: "rpg" }).select("-description -ratings").lean();
+        const products = await Product.find({ genre: "rpg" })
+            .select("-description -ratings")
+            .lean();
 
-        res.render("shop/index", { title: "Home", products, genre: "rpg", cartTotalQuantity });
-        
+        res.render("shop/index", {
+            title: "Home",
+            products,
+            genre: "rpg",
+            cartTotalQuantity,
+        });
     } catch (err) {
         console.error(err);
 
-        res.render("shop/index", { title: "Home", error: GENERIC_ERR_MSG, cartTotalQuantity });
+        res.render("shop/index", {
+            title: "Home",
+            error: GENERIC_ERR_MSG,
+            cartTotalQuantity,
+        });
     }
 };
 
@@ -116,14 +153,24 @@ const getGamesSports = async (req, res) => {
     const cartTotalQuantity = cartCalculateQuantity(cartItems);
 
     try {
-        const products = await Product.find({ genre: "sports" }).select("-description -ratings").lean();
+        const products = await Product.find({ genre: "sports" })
+            .select("-description -ratings")
+            .lean();
 
-        res.render("shop/index", { title: "Home", products, genre: "sports", cartTotalQuantity });
-        
+        res.render("shop/index", {
+            title: "Home",
+            products,
+            genre: "sports",
+            cartTotalQuantity,
+        });
     } catch (err) {
         console.error(err);
 
-        res.render("shop/index", { title: "Home", error: GENERIC_ERR_MSG, cartTotalQuantity });
+        res.render("shop/index", {
+            title: "Home",
+            error: GENERIC_ERR_MSG,
+            cartTotalQuantity,
+        });
     }
 };
 
@@ -134,34 +181,39 @@ const getGame = async (req, res) => {
     try {
         const { id } = req.params;
         const prodId = new mongoose.Types.ObjectId(id);
-        const product = (await Product.aggregate([
-            {
-                $match: { _id: prodId }
-            },
-            {
-                $unwind: {
-                    "path": "$ratings",
-                    "preserveNullAndEmptyArrays": true // still returns a document if ratings field is empty
-                }
-            },
-            {
-                $group: {
-                    _id: "$_id",
-                    title: { $first: "$title" },
-                    genre: { $first: "$genre" },
-                    price: { $first: "$price" },
-                    description: { $first: "$description" },
-                    img_path: { $first: "$img_path" },
-                    avgRating: { $avg: "$ratings.user_rating" },
-                    ratings: { $push: "$ratings" },
-                    totalRatings: { $sum: 1 }
-                }
-            }
-        ]))[0];
-        
+        const product = (
+            await Product.aggregate([
+                {
+                    $match: { _id: prodId },
+                },
+                {
+                    $unwind: {
+                        path: "$ratings",
+                        preserveNullAndEmptyArrays: true, // still returns a document if ratings field is empty
+                    },
+                },
+                {
+                    $group: {
+                        _id: "$_id",
+                        title: { $first: "$title" },
+                        genre: { $first: "$genre" },
+                        price: { $first: "$price" },
+                        description: { $first: "$description" },
+                        img_path: { $first: "$img_path" },
+                        avgRating: { $avg: "$ratings.user_rating" },
+                        ratings: { $push: "$ratings" },
+                        totalRatings: { $sum: 1 },
+                    },
+                },
+            ])
+        )[0];
+
         const currUserId = req.user ? req.user._id.toString() : null;
         const productRatingsArr = product.ratings;
-        const currUserRatingExists = checkRatingExistence(currUserId, productRatingsArr);
+        const currUserRatingExists = checkRatingExistence(
+            currUserId,
+            productRatingsArr,
+        );
 
         // No game ratings yet? Output regular game data
         if (product.avgRating === null) {
@@ -170,7 +222,7 @@ const getGame = async (req, res) => {
                 product,
                 genre: product.genre,
                 noAverageRating: "No ratings yet.",
-                cartTotalQuantity
+                cartTotalQuantity,
             });
         }
 
@@ -182,13 +234,16 @@ const getGame = async (req, res) => {
             averageRating: product.avgRating,
             totalRatings: product.totalRatings,
             currUserRatingExists,
-            cartTotalQuantity
+            cartTotalQuantity,
         });
-
     } catch (err) {
         console.error(err);
 
-        res.render("shop/product-page", { title: req.params.id, error: GENERIC_ERR_MSG, cartTotalQuantity });
+        res.render("shop/product-page", {
+            title: req.params.id,
+            error: GENERIC_ERR_MSG,
+            cartTotalQuantity,
+        });
     }
 };
 
@@ -201,7 +256,6 @@ const postAddToCart = async (req, res, next) => {
         req.session.cart = updatedCartItems;
 
         res.redirect("/");
-        
     } catch (err) {
         next(err);
     }
@@ -213,21 +267,24 @@ const postAddRating = async (req, res) => {
         const product = await Product.findById(productId).select("ratings");
         const newRating = {
             user_id: req.user._id,
-            user_rating: req.body.rating
+            user_rating: req.body.rating,
         };
         product.ratings.push(newRating);
 
         await product.save();
 
         res.redirect(`/games/${productId}`);
-
     } catch (err) {
         console.error(err);
 
         const cartItems = cartItemsInitialize(req.session.cart);
         const cartTotalQuantity = cartCalculateQuantity(cartItems);
 
-        res.render("shop/product-page", { title: req.params.id, error: GENERIC_ERR_MSG, cartTotalQuantity });
+        res.render("shop/product-page", {
+            title: req.params.id,
+            error: GENERIC_ERR_MSG,
+            cartTotalQuantity,
+        });
     }
 };
 
@@ -241,9 +298,12 @@ const postAddGame = async (req, res) => {
 
     try {
         await gameValidation(req.body);
-
     } catch (err) {
-        return res.render("admin/add-game", { title: "New Game", error: err.details[0].message, cartTotalQuantity });
+        return res.render("admin/add-game", {
+            title: "New Game",
+            error: err.details[0].message,
+            cartTotalQuantity,
+        });
     }
 
     try {
@@ -254,17 +314,20 @@ const postAddGame = async (req, res) => {
             genre,
             price,
             description,
-            img_path
+            img_path,
         });
 
         await product.save();
 
         res.redirect("/");
-
     } catch (err) {
         console.error(err);
 
-        res.render("admin/add-game", { title: "New Game", error: GENERIC_ERR_MSG, cartTotalQuantity });
+        res.render("admin/add-game", {
+            title: "New Game",
+            error: GENERIC_ERR_MSG,
+            cartTotalQuantity,
+        });
     }
 };
 
@@ -275,13 +338,21 @@ const getUpdateGame = async (req, res) => {
     try {
         const { id } = req.params;
         var product = await Product.findById(id).lean();
-    
-        res.render("admin/update-game", { title: "Update Game", product: product, cartTotalQuantity });
-        
+
+        res.render("admin/update-game", {
+            title: "Update Game",
+            product: product,
+            cartTotalQuantity,
+        });
     } catch (err) {
         console.error(err);
 
-        res.render("admin/update-game", { title: "Update Game", product: product, error: GENERIC_ERR_MSG, cartTotalQuantity });
+        res.render("admin/update-game", {
+            title: "Update Game",
+            product: product,
+            error: GENERIC_ERR_MSG,
+            cartTotalQuantity,
+        });
     }
 };
 
@@ -291,9 +362,12 @@ const patchUpdateGame = async (req, res) => {
 
     try {
         await gameValidation(req.body);
-
     } catch (err) {
-        return res.render("admin/update-game", { title: "Update Game", error: err.details[0].message, cartTotalQuantity });
+        return res.render("admin/update-game", {
+            title: "Update Game",
+            error: err.details[0].message,
+            cartTotalQuantity,
+        });
     }
 
     try {
@@ -304,19 +378,23 @@ const patchUpdateGame = async (req, res) => {
             genre,
             price,
             description,
-            img_path
+            img_path,
         };
 
-        await Product
-                .findByIdAndUpdate(id, updatedProductInfo, { new: true })
-                .setOptions({ sanitizeFilter: true });
-    
+        await Product.findByIdAndUpdate(id, updatedProductInfo, {
+            new: true,
+        }).setOptions({ sanitizeFilter: true });
+
         res.redirect(`/games/${id}`);
-        
     } catch (err) {
         console.error(err);
 
-        res.render("admin/update-game", { title: "Update Game", product: updatedProductInfo, error: GENERIC_ERR_MSG, cartTotalQuantity });
+        res.render("admin/update-game", {
+            title: "Update Game",
+            product: updatedProductInfo,
+            error: GENERIC_ERR_MSG,
+            cartTotalQuantity,
+        });
     }
 };
 
@@ -326,14 +404,17 @@ const deleteGame = async (req, res) => {
         await Product.findByIdAndDelete(id);
 
         res.redirect("/");
-
     } catch (err) {
         console.error(err);
 
         const cartItems = cartItemsInitialize(req.session.cart);
         const cartTotalQuantity = cartCalculateQuantity(cartItems);
 
-        res.render("shop/product-page", { title: req.params.id, error: GENERIC_ERR_MSG, cartTotalQuantity });
+        res.render("shop/product-page", {
+            title: req.params.id,
+            error: GENERIC_ERR_MSG,
+            cartTotalQuantity,
+        });
     }
 };
 
@@ -350,5 +431,5 @@ module.exports = {
     postAddGame,
     getUpdateGame,
     patchUpdateGame,
-    deleteGame
+    deleteGame,
 };

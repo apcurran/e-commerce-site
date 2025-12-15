@@ -24,18 +24,34 @@ router.get("/games/:id", gamesController.getGame);
 router.post("/add-to-cart/:id", gamesController.postAddToCart);
 
 // POST game rating
-router.post("/games/:id/add-rating", checkAuthenticated, gamesController.postAddRating);
+router.post(
+    "/games/:id/add-rating",
+    checkAuthenticated,
+    gamesController.postAddRating,
+);
 
 //// ADMIN PROTECTED ROUTES ////
 router.get("/game/add", checkAdminAuthenticated, gamesController.getAddGame);
 
 router.post("/game/add", checkAdminAuthenticated, gamesController.postAddGame);
 
-router.get("/games/:id/update", checkAdminAuthenticated, gamesController.getUpdateGame);
+router.get(
+    "/games/:id/update",
+    checkAdminAuthenticated,
+    gamesController.getUpdateGame,
+);
 
-router.patch("/games/:id/update", checkAdminAuthenticated, gamesController.patchUpdateGame);
+router.patch(
+    "/games/:id/update",
+    checkAdminAuthenticated,
+    gamesController.patchUpdateGame,
+);
 
 // DELETE Single Product
-router.delete("/games/:id", checkAdminAuthenticated, gamesController.deleteGame);
+router.delete(
+    "/games/:id",
+    checkAdminAuthenticated,
+    gamesController.deleteGame,
+);
 
 module.exports = router;

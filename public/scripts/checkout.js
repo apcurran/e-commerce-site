@@ -1,6 +1,8 @@
 "use strict";
 
-const stripe = Stripe("pk_test_51GyOBXEFSgPrRFzWmUBqUfL9lNgsZR7qWlzKEQe7hTRs48845plWirspdaEqDps99uKE3MumJXsyjJPlSXoCGgOR0089tYnp4V");
+const stripe = Stripe(
+    "pk_test_51GyOBXEFSgPrRFzWmUBqUfL9lNgsZR7qWlzKEQe7hTRs48845plWirspdaEqDps99uKE3MumJXsyjJPlSXoCGgOR0089tYnp4V",
+);
 const form = document.querySelector(".checkout-form");
 const csrfToken = document.getElementById("csrf-token").value;
 
@@ -13,14 +15,13 @@ async function fetchPaymentIntent() {
     try {
         const options = {
             headers: {
-                "CSRF-Token": csrfToken
+                "CSRF-Token": csrfToken,
             },
-            method: "POST"
+            method: "POST",
         };
 
         const result = await fetch(PAYMENT_INTENT_API_URL, options);
         var data = await result.json();
-        
     } catch (err) {
         console.error(err);
     }
@@ -30,19 +31,19 @@ async function fetchPaymentIntent() {
 
     const style = {
         base: {
-          color: "#32325d",
-          fontFamily: "Muli, Arial, sans-serif",
-          fontSmoothing: "antialiased",
-          fontSize: "16px",
-          "::placeholder": {
-            color: "#32325d"
-          }
+            color: "#32325d",
+            fontFamily: "Muli, Arial, sans-serif",
+            fontSmoothing: "antialiased",
+            fontSize: "16px",
+            "::placeholder": {
+                color: "#32325d",
+            },
         },
         invalid: {
-          fontFamily: "Muli, Arial, sans-serif",
-          color: "#fa755a",
-          iconColor: "#fa755a"
-        }
+            fontFamily: "Muli, Arial, sans-serif",
+            color: "#fa755a",
+            iconColor: "#fa755a",
+        },
     };
 
     const card = elements.create("card", { style });
@@ -67,17 +68,15 @@ async function payWithCard(stripe, card, clientSecret) {
     try {
         var result = await stripe.confirmCardPayment(clientSecret, {
             payment_method: {
-                card
-            }
+                card,
+            },
         });
-        
     } catch (err) {
         console.error(err);
     }
-    
-    
+
     const resultMsgPara = document.querySelector(".result-message");
-    
+
     if (result.error) {
         resultMsgPara.textContent = result.error.message;
     } else {
@@ -85,7 +84,8 @@ async function payWithCard(stripe, card, clientSecret) {
 
         document.getElementById("submit").disabled = true;
 
-        resultMsgPara.textContent = "Payment success! An email with the download code for your games will be sent shortly.";
+        resultMsgPara.textContent =
+            "Payment success! An email with the download code for your games will be sent shortly.";
 
         const homeLink = document.createElement("a");
         homeLink.classList.add("checkout__link", "underline");
@@ -106,18 +106,17 @@ async function sendSuccessfulOrderInfo(paymentId) {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "CSRF-Token": csrfToken
+                "CSRF-Token": csrfToken,
             },
             body: JSON.stringify({
                 first_name: firstName,
                 last_name: lastName,
                 email: email,
-                payment_id: paymentId
-            })
+                payment_id: paymentId,
+            }),
         };
 
         await fetch(SUCCESS_API_URL, options);
-
     } catch (err) {
         console.error(err);
     }

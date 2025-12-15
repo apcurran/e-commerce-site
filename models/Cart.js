@@ -11,7 +11,7 @@
  *     ratings: [{
  *         user_id: string;
  *         user_rating: number;
- *     }]  
+ *     }]
  * }} product
  */
 
@@ -39,7 +39,9 @@ function cartItemsInitialize(sessionCartItems) {
  * @returns {cartItem[]} modified cart
  */
 function cartAddItem(cartItems, productDetails, productId) {
-    let previousStoredItemIndex = cartItems.findIndex((item) => String(item.itemDetails._id) === productId);
+    let previousStoredItemIndex = cartItems.findIndex(
+        (item) => String(item.itemDetails._id) === productId,
+    );
 
     if (previousStoredItemIndex === -1) {
         // create a new item for cartItems
@@ -56,13 +58,15 @@ function cartAddItem(cartItems, productDetails, productId) {
 }
 
 /**
- * 
- * @param {cartItem[]} cartItems 
- * @param {string} productId 
+ *
+ * @param {cartItem[]} cartItems
+ * @param {string} productId
  * @returns {cartItem[]} modified cart after item removal
  */
 function cartRemoveItem(cartItems, productId) {
-    const storedItemIndex = cartItems.findIndex((item) => String(item.itemDetails._id) === productId);
+    const storedItemIndex = cartItems.findIndex(
+        (item) => String(item.itemDetails._id) === productId,
+    );
     const storedItem = cartItems[storedItemIndex];
 
     if (storedItem === undefined) return cartItems;
@@ -75,26 +79,30 @@ function cartRemoveItem(cartItems, productId) {
 
 /**
  * @param {cartItem[]} cartItems
- * @param {string} productId 
+ * @param {string} productId
  * @returns {cartItem[]}
  */
 function cartIncrementByOne(cartItems, productId) {
-    const storedItem = cartItems.find((item) => String(item.itemDetails._id) === productId);
+    const storedItem = cartItems.find(
+        (item) => String(item.itemDetails._id) === productId,
+    );
 
     if (storedItem === undefined) return cartItems;
-    
+
     storedItem.itemQuantity++;
 
     return cartItems;
 }
 
 /**
- * @param {cartItem[]} cartItems 
- * @param {string} productId 
+ * @param {cartItem[]} cartItems
+ * @param {string} productId
  * @returns {cartItem[]}
  */
 function cartDecrementByOne(cartItems, productId) {
-    const storedItemIndex = cartItems.findIndex((item) => String(item.itemDetails._id) === productId);
+    const storedItemIndex = cartItems.findIndex(
+        (item) => String(item.itemDetails._id) === productId,
+    );
     const storedItem = cartItems[storedItemIndex];
 
     if (storedItem === undefined) return cartItems;
@@ -110,7 +118,7 @@ function cartDecrementByOne(cartItems, productId) {
 }
 
 /**
- * @param {cartItem[]} cartItems 
+ * @param {cartItem[]} cartItems
  * @returns {number} cart grand total
  */
 function cartCalculateTotal(cartItems) {
@@ -125,7 +133,7 @@ function cartCalculateTotal(cartItems) {
 }
 
 /**
- * @param {cartItem[]} cartItems 
+ * @param {cartItem[]} cartItems
  * @returns {number} cart quantity
  */
 function cartCalculateQuantity(cartItems) {
@@ -145,5 +153,5 @@ module.exports = {
     cartIncrementByOne,
     cartDecrementByOne,
     cartCalculateTotal,
-    cartCalculateQuantity
+    cartCalculateQuantity,
 };

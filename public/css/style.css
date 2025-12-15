@@ -18,7 +18,7 @@
     --submit-btn-bg-clr: #046586;
     --dark-red: #9b2c2c;
 
-    --fz-small: .875rem;
+    --fz-small: 0.875rem;
     --fz-med: 1.125rem;
     --fz-large: 1.75rem;
 }
@@ -47,7 +47,7 @@ input,
 select,
 textarea,
 button {
-    font-family: 'Muli', sans-serif;
+    font-family: "Muli", sans-serif;
     font-size: var(--fz-med);
 }
 
@@ -57,7 +57,11 @@ button {
 }
 
 .underline--indigo {
-    background-image: linear-gradient(180deg, transparent 70%, rgba(101,125,225,.4) 0);
+    background-image: linear-gradient(
+        180deg,
+        transparent 70%,
+        rgba(101, 125, 225, 0.4) 0
+    );
 }
 
 .uppercase {
@@ -81,7 +85,7 @@ body {
 .header {
     padding: 1.35rem 0;
 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, .135);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.135);
     background-color: #fff;
 }
 
@@ -118,7 +122,7 @@ body {
 
 .nav__list__link {
     display: inline-block;
-    padding: .25rem 0;
+    padding: 0.25rem 0;
 }
 
 .wrapper {
@@ -132,8 +136,8 @@ body {
 }
 
 .cart-icon {
-    margin-right: .25rem;
-    opacity: .6;
+    margin-right: 0.25rem;
+    opacity: 0.6;
     transition: opacity 120ms ease-in-out;
 }
 
@@ -169,19 +173,19 @@ body {
 }
 
 .sidebar__list--top {
-    padding-bottom: .75rem;
+    padding-bottom: 0.75rem;
     border-bottom: 1px solid var(--light-grey);
 }
 
 .sidebar__list--bottom {
-    padding-top: .75rem;
+    padding-top: 0.75rem;
 }
 
 .sidebar__link {
     display: inline-block;
-    padding: .5rem 1.25rem .5rem .25rem;
+    padding: 0.5rem 1.25rem 0.5rem 0.25rem;
     width: 100%;
-    opacity: .6;
+    opacity: 0.6;
     font-weight: 700;
 }
 
@@ -201,7 +205,7 @@ body {
 .game-section__title {
     margin-bottom: 1.15rem;
     text-transform: uppercase;
-    letter-spacing: .08em;
+    letter-spacing: 0.08em;
     color: var(--dark-indigo);
 }
 
@@ -238,7 +242,7 @@ body {
 }
 
 .game-card__title {
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
     font-size: var(--fz-med);
 }
 
@@ -246,7 +250,7 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: .5rem .875rem;
+    padding: 0.5rem 0.875rem;
     margin-bottom: 1rem;
     border-radius: 500px;
     background-color: var(--light-blue);
@@ -270,8 +274,8 @@ body {
 }
 
 .pagination__link {
-    margin: 0 .5rem;
-    padding: 0 .25rem;
+    margin: 0 0.5rem;
+    padding: 0 0.25rem;
 }
 
 /* Mobile FAB */
@@ -280,11 +284,11 @@ body {
     display: none;
     bottom: 2rem;
     right: 2rem;
-    padding: .875rem;
+    padding: 0.875rem;
     border: none;
     border-radius: 50%;
     background-color: var(--dark-indigo);
-    box-shadow: 0 7px 11px hsla(237, 52%, 28%, .21);
+    box-shadow: 0 7px 11px hsla(237, 52%, 28%, 0.21);
     cursor: pointer;
 }
 
@@ -325,7 +329,7 @@ body {
 }
 
 .game-details__right__list__item {
-    margin-bottom: .25rem;
+    margin-bottom: 0.25rem;
 }
 
 .game-details__right__rating-exists-notification {
@@ -344,7 +348,7 @@ body {
 
 .list--bottom {
     padding-top: 1rem;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
 }
 
 .game-rating-item {
@@ -369,9 +373,9 @@ body {
 }
 
 .game-details__right__form__select {
-    padding: .25rem;
+    padding: 0.25rem;
     border-radius: 4px;
-    margin-right: .25rem;
+    margin-right: 0.25rem;
 }
 
 .game-details__right__form__submit {
@@ -384,12 +388,12 @@ body {
 .game-details__add-btn {
     display: inline-block;
     position: relative;
-    padding: .6rem 1.25rem;
+    padding: 0.6rem 1.25rem;
     margin-bottom: 1.25rem;
     border: none;
-    
+
     cursor: pointer;
-    letter-spacing: .08em;
+    letter-spacing: 0.08em;
     background-color: var(--submit-btn-bg-clr);
     color: #fff;
     text-transform: uppercase;
@@ -398,7 +402,7 @@ body {
 
 /* Shiny Layer */
 .game-details__add-btn:before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -432,11 +436,11 @@ body {
 
 .game-details__update-link,
 .game-details__delete-btn {
-    padding: .6rem 1.25rem;
+    padding: 0.6rem 1.25rem;
     border: 1px solid var(--light-grey);
     background: none;
     text-transform: uppercase;
-    letter-spacing: .08em;
+    letter-spacing: 0.08em;
     cursor: pointer;
 }
 
@@ -449,8 +453,8 @@ body {
 
 .game-details__update-link svg,
 .game-details__delete-btn svg {
-    margin-right: .5rem;
-    opacity: .65;
+    margin-right: 0.5rem;
+    opacity: 0.65;
 }
 
 .game-details__delete-btn {
@@ -469,9 +473,9 @@ body {
     max-width: 62rem;
     display: grid;
     grid-template-columns: 1.2fr 1fr;
- 
+
     border-radius: 10px;
-    box-shadow: 0 20px 18px -15px rgba(0, 0, 0, .16);
+    box-shadow: 0 20px 18px -15px rgba(0, 0, 0, 0.16);
 }
 
 .user-card__title {
@@ -496,9 +500,9 @@ body {
 
 .user-card__form__input {
     display: block;
-    padding: .5rem .75rem;
+    padding: 0.5rem 0.75rem;
     margin-bottom: 1rem;
-    
+
     border: 1px solid var(--light-grey);
     border-radius: 4px;
 }
@@ -514,22 +518,22 @@ body {
 .user-card__form-submit {
     /* Align this flex item btn to left */
     align-self: flex-start;
-    padding: .75rem 1.1rem;
+    padding: 0.75rem 1.1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     text-transform: uppercase;
-    letter-spacing: .08em;
+    letter-spacing: 0.08em;
     border: none;
     background-color: #046586;
     color: #fff;
     cursor: pointer;
-    box-shadow: 0 10px 16px -7px rgba(4, 101, 134, .55);
+    box-shadow: 0 10px 16px -7px rgba(4, 101, 134, 0.55);
 }
 
 .user-card__form-submit__span {
-    margin-right: .4rem;
+    margin-right: 0.4rem;
 }
 
 .icon-arrow {
@@ -554,7 +558,7 @@ body {
     justify-content: center;
     align-items: center;
 
-    background-color: #CBD5E0;
+    background-color: #cbd5e0;
 }
 
 .footer__title {
@@ -584,7 +588,7 @@ body {
 }
 
 .checkout__link__icon {
-    margin-right: .25rem;
+    margin-right: 0.25rem;
 }
 
 .checkout-section__item {
@@ -599,7 +603,7 @@ body {
 .checkout-section__item__right__item-remove {
     background: none;
     border: none;
-    padding: .5rem 0;
+    padding: 0.5rem 0;
 
     cursor: pointer;
     font-weight: 700;
@@ -617,13 +621,13 @@ body {
 .checkout-section__item__right__title {
     font-weight: 700;
     font-size: var(--fz-med);
-    margin-bottom: .25rem;
+    margin-bottom: 0.25rem;
 }
 
 .checkout-section__item__right__qty-controls {
     display: flex;
     align-items: center;
-    gap: .5rem;
+    gap: 0.5rem;
     margin-bottom: 1.25rem;
 }
 
@@ -636,11 +640,11 @@ body {
 }
 
 .qty-btn-sub {
-    padding: .5rem .5rem .5rem 0;
+    padding: 0.5rem 0.5rem 0.5rem 0;
 }
 
 .qty-btn-add {
-    padding: .5rem;
+    padding: 0.5rem;
 }
 
 .order-summary {
@@ -654,7 +658,7 @@ body {
     border-collapse: collapse;
     border-spacing: 0;
     border-color: transparent;
-    margin-bottom: .75rem;
+    margin-bottom: 0.75rem;
 }
 
 th {
@@ -669,13 +673,13 @@ th {
 }
 
 .order-summary__table__row-header {
-    padding: 1.25rem .5rem 1.25rem 2rem;
+    padding: 1.25rem 0.5rem 1.25rem 2rem;
     text-align: left;
     background-color: #fff;
 }
 
 .order-summary__table__row-value {
-    padding: 1.25rem 2rem 1.25rem .5rem;
+    padding: 1.25rem 2rem 1.25rem 0.5rem;
     text-align: right;
     background-color: #fff;
 }
@@ -695,9 +699,9 @@ th {
 
 .order-summary__btn__link {
     display: block;
-    padding: .75rem 1.25rem;
+    padding: 0.75rem 1.25rem;
 
-    letter-spacing: .08em;
+    letter-spacing: 0.08em;
     background-color: var(--submit-btn-bg-clr);
     color: #fff;
     text-transform: uppercase;
@@ -723,11 +727,11 @@ th {
 }
 
 .checkout-form__label {
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
 }
 
 .checkout-form__input {
-    padding: .75rem 1rem;
+    padding: 0.75rem 1rem;
     border: 2px solid #e2e8f0;
     border-radius: 4px;
     outline: none;
@@ -739,10 +743,10 @@ th {
 }
 
 .checkout-form__submit {
-    padding: .75rem 1.25rem;
+    padding: 0.75rem 1.25rem;
     background-color: var(--submit-btn-bg-clr);
     color: #fff;
-    letter-spacing: .08em;
+    letter-spacing: 0.08em;
     border: none;
     cursor: pointer;
     margin-bottom: 1rem;
@@ -755,7 +759,7 @@ th {
 }
 
 .result-message {
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
     color: var(--dark-indigo);
 }
 
@@ -783,13 +787,13 @@ th {
 }
 
 .form-group__label {
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
 }
 
 .form-group__input,
 .form-group__select,
 .form-group__textarea {
-    padding: .75rem 1rem;
+    padding: 0.75rem 1rem;
     border: 2px solid #e2e8f0;
     border-radius: 4px;
     outline: none;
@@ -805,18 +809,18 @@ th {
 .form__submit {
     /* Align this flex item btn to left */
     align-self: flex-start;
-    padding: .75rem 1.1rem;
+    padding: 0.75rem 1.1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     text-transform: uppercase;
-    letter-spacing: .08em;
+    letter-spacing: 0.08em;
     border: none;
     background-color: #046586;
     color: #fff;
     cursor: pointer;
-    box-shadow: 0 10px 16px -7px rgba(4, 101, 134, .55);
+    box-shadow: 0 10px 16px -7px rgba(4, 101, 134, 0.55);
 }
 
 /* Profile Orders */
@@ -828,7 +832,7 @@ th {
 
 .profile-orders-container {
     background-color: #fff;
-    box-shadow: 0 5px 9px rgba(0, 0, 0, .16);
+    box-shadow: 0 5px 9px rgba(0, 0, 0, 0.16);
     border-radius: 4px;
 }
 
@@ -847,7 +851,7 @@ th {
 
 .profile-order__date {
     display: inline-block;
-    margin-left: .5rem;
+    margin-left: 0.5rem;
     font-size: var(--fz-small);
     color: hsl(214, 6%, 45%);
 }
@@ -866,7 +870,7 @@ th {
 }
 
 .profile-order__item--left__title {
-    margin-bottom: .25rem;
+    margin-bottom: 0.25rem;
     font-weight: 700;
     color: var(--dark-indigo);
 }
@@ -902,13 +906,13 @@ th {
 }
 
 .main__desc-404 {
-    font-size: calc(1.05rem + .15vw);
+    font-size: calc(1.05rem + 0.15vw);
 }
 
 .main__img-404 {
     width: 100%;
     height: auto;
-    filter: brightness(.625);
+    filter: brightness(0.625);
 }
 
 /* Smaller Device Screens */
@@ -968,7 +972,7 @@ th {
     }
 
     .nav__logo-link {
-        margin-bottom: .75rem;
+        margin-bottom: 0.75rem;
     }
 
     .main--game {

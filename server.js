@@ -45,43 +45,37 @@ app.disable("x-powered-by");
 // Middleware
 // allow Stripe API and Google Fonts to load properly
 app.use(
-  helmet({
-    contentSecurityPolicy: {
-      useDefaults: true,
-      directives: {
-        scriptSrc: ["'self'", "https://js.stripe.com"],
-        frameSrc: [
-          "'self'",
-          "https://js.stripe.com",
-          "https://hooks.stripe.com"
-        ],
-        connectSrc: [
-          "'self'",
-          "https://api.stripe.com",
-          "https://hooks.stripe.com"
-        ],
-        styleSrc: [
-          "'self'",
-          "'unsafe-inline'",
-          "https://fonts.googleapis.com"
-        ],
-        styleSrcElem: [
-          "'self'",
-          "https://fonts.googleapis.com"
-        ],
-        fontSrc: [
-          "'self'",
-          "https://fonts.gstatic.com"
-        ],
-        imgSrc: [
-          "'self'",
-          "data:",
-          "https://*.stripe.com",
-          "https://res.cloudinary.com"
-        ]
-      }
-    }
-  })
+    helmet({
+        contentSecurityPolicy: {
+            useDefaults: true,
+            directives: {
+                scriptSrc: ["'self'", "https://js.stripe.com"],
+                frameSrc: [
+                    "'self'",
+                    "https://js.stripe.com",
+                    "https://hooks.stripe.com",
+                ],
+                connectSrc: [
+                    "'self'",
+                    "https://api.stripe.com",
+                    "https://hooks.stripe.com",
+                ],
+                styleSrc: [
+                    "'self'",
+                    "'unsafe-inline'",
+                    "https://fonts.googleapis.com",
+                ],
+                styleSrcElem: ["'self'", "https://fonts.googleapis.com"],
+                fontSrc: ["'self'", "https://fonts.gstatic.com"],
+                imgSrc: [
+                    "'self'",
+                    "data:",
+                    "https://*.stripe.com",
+                    "https://res.cloudinary.com",
+                ],
+            },
+        },
+    }),
 );
 app.set("view engine", "ejs");
 app.set("layout", "layouts/layout");
@@ -106,27 +100,29 @@ app.use(flash());
 let cookieOptions = {
     maxAge: 120 * 60 * 1000,
     httpOnly: true,
-    path: "/"
+    path: "/",
 };
 
 if (isProduction) {
     cookieOptions = {
         ...cookieOptions, // utilize base cookie options, then add more on top
         secure: true,
-        domain: process.env.COOKIE_DOMAIN
+        domain: process.env.COOKIE_DOMAIN,
     };
 }
 
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    name: process.env.SESSION_NAME,
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({
-        mongoUrl: process.env.DB_URI
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        name: process.env.SESSION_NAME,
+        resave: false,
+        saveUninitialized: false,
+        store: MongoStore.create({
+            mongoUrl: process.env.DB_URI,
+        }),
+        cookie: cookieOptions,
     }),
-    cookie: cookieOptions
-}));
+);
 // Passport Setup
 app.use(passport.initialize());
 app.use(passport.session());
@@ -158,7 +154,10 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
     console.error(err);
 
-    res.status(500).render("error", { title: "Server Error", error: GENERIC_ERR_MSG });
+    res.status(500).render("error", {
+        title: "Server Error",
+        error: GENERIC_ERR_MSG,
+    });
 });
 
 app.listen(PORT, () => console.log(`Server running on port, ${PORT}.`));

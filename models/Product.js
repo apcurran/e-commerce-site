@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 const RatingsSchema = new mongoose.Schema({
     user_id: { type: String, required: true },
-    user_rating: { type: Number, required: true }
+    user_rating: { type: Number, required: true },
 });
 
 const ProductSchema = new mongoose.Schema({
@@ -13,7 +13,7 @@ const ProductSchema = new mongoose.Schema({
     price: { type: Number, min: 1, required: true },
     description: { type: String, required: true },
     img_path: { type: String, required: true },
-    ratings: [RatingsSchema]
+    ratings: [RatingsSchema],
 });
 
 module.exports = mongoose.model("Product", ProductSchema);

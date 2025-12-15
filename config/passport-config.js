@@ -10,7 +10,6 @@ const { loginValidation } = require("../validation/validate-user");
 async function authenticateUser(req, email, password, done) {
     try {
         await loginValidation(req.body);
-
     } catch (err) {
         return done(null, false, { message: err.details[0].message });
     }
@@ -30,7 +29,6 @@ async function authenticateUser(req, email, password, done) {
 
         // Otherwise, the user is valid
         return done(null, user);
-        
     } catch (err) {
         console.error(err);
         return done(err);
@@ -40,7 +38,6 @@ async function authenticateUser(req, email, password, done) {
 async function authenticateAdmin(req, email, password, done) {
     try {
         await loginValidation(req.body);
-
     } catch (err) {
         return done(null, false, { message: err.details[0].message });
     }
@@ -64,15 +61,34 @@ async function authenticateAdmin(req, email, password, done) {
 
         // Otherwise, the user is valid
         return done(null, user);
-        
     } catch (err) {
         console.error(err);
         return done(err);
     }
 }
 
-passport.use("local.login", new LocalStrategy({ usernameField: "email", passwordField: "password", passReqToCallback: true }, authenticateUser));
-passport.use("local.adminLogin", new LocalStrategy({ usernameField: "email", passwordField: "password", passReqToCallback: true }, authenticateAdmin));
+passport.use(
+    "local.login",
+    new LocalStrategy(
+        {
+            usernameField: "email",
+            passwordField: "password",
+            passReqToCallback: true,
+        },
+        authenticateUser,
+    ),
+);
+passport.use(
+    "local.adminLogin",
+    new LocalStrategy(
+        {
+            usernameField: "email",
+            passwordField: "password",
+            passReqToCallback: true,
+        },
+        authenticateAdmin,
+    ),
+);
 
 passport.serializeUser((user, done) => {
     done(null, user.id);

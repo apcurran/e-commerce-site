@@ -1,40 +1,40 @@
 {
-  "name": "ecommerce-site",
-  "version": "1.0.0",
-  "engines": {
-    "node": "24.x"
-  },
-  "description": "",
-  "main": "server.js",
-  "scripts": {
-    "lint": "npx oxlint .",
-    "lint:fix": "npx oxlint --fix .",
-    "format": "npx prettier --write .",
-    "start": "node --env-file=.env server.js",
-    "dev": "node --watch --env-file=.env server.js"
-  },
-  "author": "Alex Curran",
-  "license": "ISC",
-  "dependencies": {
-    "@dr.pogodin/csurf": "^1.16.6",
-    "@hapi/joi": "^17.1.1",
-    "bcrypt": "^6.0.0",
-    "connect-mongo": "^6.0.0",
-    "ejs": "^3.1.10",
-    "express": "^5.2.1",
-    "express-ejs-layouts": "^2.5.1",
-    "express-flash": "0.0.2",
-    "express-session": "^1.18.2",
-    "helmet": "^8.1.0",
-    "method-override": "^3.0.0",
-    "mongoose": "^9.0.1",
-    "passport": "^0.7.0",
-    "passport-local": "^1.0.0",
-    "stripe": "^20.0.0"
-  },
-  "devDependencies": {
-    "morgan": "^1.10.1",
-    "oxlint": "^1.33.0",
-    "prettier": "3.7.4"
-  }
+    "name": "ecommerce-site",
+    "version": "1.0.0",
+    "engines": {
+        "node": "24.x"
+    },
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+        "lint": "npx oxlint .",
+        "lint:fix": "npx oxlint --fix .",
+        "format": "npx prettier --write .",
+        "start": "node --env-file=.env server.js",
+        "dev": "node --watch --env-file=.env server.js"
+    },
+    "author": "Alex Curran",
+    "license": "ISC",
+    "dependencies": {
+        "@dr.pogodin/csurf": "^1.16.6",
+        "@hapi/joi": "^17.1.1",
+        "bcrypt": "^6.0.0",
+        "connect-mongo": "^6.0.0",
+        "ejs": "^3.1.10",
+        "express": "^5.2.1",
+        "express-ejs-layouts": "^2.5.1",
+        "express-flash": "0.0.2",
+        "express-session": "^1.18.2",
+        "helmet": "^8.1.0",
+        "method-override": "^3.0.0",
+        "mongoose": "^9.0.1",
+        "passport": "^0.7.0",
+        "passport-local": "^1.0.0",
+        "stripe": "^20.0.0"
+    },
+    "devDependencies": {
+        "morgan": "^1.10.1",
+        "oxlint": "^1.33.0",
+        "prettier": "3.7.4"
+    }
 }

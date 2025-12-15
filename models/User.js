@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema({
     email: { type: String, min: 1, max: 100, required: true },
     password: { type: String, min: 6, max: 100, required: true },
     admin: { type: Boolean, default: false },
-    admin_secret: { type: String }
+    admin_secret: { type: String },
 });
 
 module.exports = mongoose.model("User", UserSchema);
