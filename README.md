@@ -4,7 +4,7 @@
 
 ## Features:
 
-- Utilizes the Express JS framework, EJS templating, and MongoDB for the database
+- Utilizes the Express JS framework, EJS templating, and MongoDB (Mongoose) for the database
 
 - Full sign up, log in, and log out functionality with Passport JS for Auth
 
