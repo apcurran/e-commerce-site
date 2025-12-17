@@ -13,7 +13,14 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         required: true,
         enum: {
-            values: ["action", "adventure", "rpg", "sports", "horror", "fantasy"],
+            values: [
+                "action",
+                "adventure",
+                "rpg",
+                "sports",
+                "horror",
+                "fantasy",
+            ],
             message: "{VALUE} is not a valid genre",
         },
     },
