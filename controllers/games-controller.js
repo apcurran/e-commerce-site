@@ -93,6 +93,7 @@ const getGamesByGenre = async (req, res) => {
             title: "Home",
             error: GENERIC_ERR_MSG,
             cartTotalQuantity,
+            products: [],
         });
     }
 };
