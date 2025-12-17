@@ -9,13 +9,8 @@ const { checkAuthenticated } = require("../config/check-auth");
 // GET Page Views
 router.get("/", gamesController.getGamesIndex);
 
-router.get("/games/action", gamesController.getGamesAction);
-
-router.get("/games/adventure", gamesController.getGamesAdventure);
-
-router.get("/games/rpg", gamesController.getGamesRpg);
-
-router.get("/games/sports", gamesController.getGamesSports);
+// GET Games page by genre
+router.get("/games/:genre", gamesController.getGamesByGenre);
 
 // GET Single Product
 router.get("/games/:id", gamesController.getGame);
