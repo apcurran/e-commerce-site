@@ -80,10 +80,18 @@ const getGamesByGenre = async (req, res) => {
             .select("-description -ratings")
             .lean();
 
+        let viewErrorMessage = null;
+
+        // pass an error to the view engine
+        if (products.length === 0) {
+            viewErrorMessage = `No games were found with the given ${genre} genre.`;
+        }
+
         res.render("shop/index", {
             title: "Home",
             products,
             genre,
+            error: viewErrorMessage,
             cartTotalQuantity,
         });
     } catch (err) {
@@ -91,9 +99,9 @@ const getGamesByGenre = async (req, res) => {
 
         res.render("shop/index", {
             title: "Home",
+            products: [],
             error: GENERIC_ERR_MSG,
             cartTotalQuantity,
-            products: [],
         });
     }
 };
