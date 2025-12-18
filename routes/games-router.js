@@ -9,11 +9,11 @@ const { checkAuthenticated } = require("../config/check-auth");
 // GET Page Views
 router.get("/", gamesController.getGamesIndex);
 
-// GET Games page by genre
-router.get("/games/:genre", gamesController.getGamesByGenre);
-
 // GET Single Product
 router.get("/games/:id", gamesController.getGame);
+
+// GET Games page by genre
+router.get("/category/:genre", gamesController.getGamesByGenre);
 
 // POST Add game to cart
 router.post("/add-to-cart/:id", gamesController.postAddToCart);

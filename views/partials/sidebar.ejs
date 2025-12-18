@@ -2,21 +2,42 @@
     <ul class="sidebar__list sidebar__list--top">
         <li class="sidebar__item">
             <!-- Scroll to top anchor elem -->
-            <a href="/" id="top" class="sidebar__link sidebar__link--top <%= genre === 'all' ? 'sidebar__link--active' : '' %>">All Games</a>
+            <a
+                href="/"
+                id="top"
+                class="sidebar__link sidebar__link--top <%= genre === 'all' ? 'sidebar__link--active' : '' %>"
+                >All Games</a
+            >
         </li>
     </ul>
     <ul class="sidebar__list sidebar__list--bottom">
         <li class="sidebar__item">
-            <a href="/games/action" class="sidebar__link <%= genre === 'action' ? 'sidebar__link--active' : '' %>">Action</a>
+            <a
+                href="/category/action"
+                class="sidebar__link <%= genre === 'action' ? 'sidebar__link--active' : '' %>"
+                >Action</a
+            >
         </li>
         <li class="sidebar__item">
-            <a href="/games/adventure" class="sidebar__link  <%= genre === 'adventure' ? 'sidebar__link--active' : '' %>">Adventure</a>
+            <a
+                href="/category/adventure"
+                class="sidebar__link <%= genre === 'adventure' ? 'sidebar__link--active' : '' %>"
+                >Adventure</a
+            >
         </li>
         <li class="sidebar__item">
-            <a href="/games/rpg" class="sidebar__link  <%= genre === 'rpg' ? 'sidebar__link--active' : '' %>">RPG</a>
+            <a
+                href="/category/rpg"
+                class="sidebar__link <%= genre === 'rpg' ? 'sidebar__link--active' : '' %>"
+                >RPG</a
+            >
         </li>
         <li class="sidebar__item">
-            <a href="/games/sports" class="sidebar__link  <%= genre === 'sports' ? 'sidebar__link--active' : '' %>">Sports</a>
+            <a
+                href="/category/sports"
+                class="sidebar__link <%= genre === 'sports' ? 'sidebar__link--active' : '' %>"
+                >Sports</a
+            >
         </li>
     </ul>
 </aside>
