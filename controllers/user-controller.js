@@ -99,7 +99,7 @@ export const getProfile = async (req, res) => {
 
     try {
         let previousOrders = await Order.find({ user_id: req.user._id })
-            .toSorted({ created_at: -1 })
+            .sort({ created_at: -1 }) // oxlint-disable-line
             .setOptions({ sanitizeFilter: true });
 
         for (let order of previousOrders) {
