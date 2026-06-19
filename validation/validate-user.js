@@ -1,8 +1,6 @@
-"use strict";
+import Joi from "@hapi/joi";
 
-const Joi = require("@hapi/joi");
-
-function signupValidation(data) {
+export function signupValidation(data) {
     const schema = Joi.object({
         first_name: Joi.string().min(1).required(),
         last_name: Joi.string().min(1).required(),
@@ -15,7 +13,7 @@ function signupValidation(data) {
     return schema.validateAsync(data, { escapeHtml: true });
 }
 
-function loginValidation(data) {
+export function loginValidation(data) {
     const schema = Joi.object({
         email: Joi.string().min(4).email().required(),
         password: Joi.string().min(6).required(),
@@ -24,5 +22,3 @@ function loginValidation(data) {
 
     return schema.validateAsync(data, { escapeHtml: true });
 }
-
-module.exports = { signupValidation, loginValidation };

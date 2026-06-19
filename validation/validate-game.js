@@ -1,8 +1,6 @@
-"use strict";
+import Joi from "@hapi/joi";
 
-const Joi = require("@hapi/joi");
-
-function gameValidation(data) {
+export function gameValidation(data) {
     const schema = Joi.object({
         title: Joi.string().min(1).required(),
         genre: Joi.string().min(1).required(),
@@ -14,5 +12,3 @@ function gameValidation(data) {
 
     return schema.validateAsync(data, { escapeHtml: true });
 }
-
-module.exports = { gameValidation };
