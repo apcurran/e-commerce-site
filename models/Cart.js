@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * @typedef {{
  *     id: string,
@@ -26,7 +24,7 @@
  * @param {cartItem[]|null} sessionCartItems pre-existing cart stored in session
  * @returns {cartItem[]}
  */
-function cartItemsInitialize(sessionCartItems) {
+export function cartItemsInitialize(sessionCartItems) {
     if (sessionCartItems) return sessionCartItems;
 
     return [];
@@ -38,7 +36,7 @@ function cartItemsInitialize(sessionCartItems) {
  * @param {string} productId
  * @returns {cartItem[]} modified cart
  */
-function cartAddItem(cartItems, productDetails, productId) {
+export function cartAddItem(cartItems, productDetails, productId) {
     let previousStoredItemIndex = cartItems.findIndex(
         (item) => String(item.itemDetails._id) === productId,
     );
@@ -58,12 +56,11 @@ function cartAddItem(cartItems, productDetails, productId) {
 }
 
 /**
- *
  * @param {cartItem[]} cartItems
  * @param {string} productId
  * @returns {cartItem[]} modified cart after item removal
  */
-function cartRemoveItem(cartItems, productId) {
+export function cartRemoveItem(cartItems, productId) {
     const storedItemIndex = cartItems.findIndex(
         (item) => String(item.itemDetails._id) === productId,
     );
@@ -82,7 +79,7 @@ function cartRemoveItem(cartItems, productId) {
  * @param {string} productId
  * @returns {cartItem[]}
  */
-function cartIncrementByOne(cartItems, productId) {
+export function cartIncrementByOne(cartItems, productId) {
     const storedItem = cartItems.find(
         (item) => String(item.itemDetails._id) === productId,
     );
@@ -99,7 +96,7 @@ function cartIncrementByOne(cartItems, productId) {
  * @param {string} productId
  * @returns {cartItem[]}
  */
-function cartDecrementByOne(cartItems, productId) {
+export function cartDecrementByOne(cartItems, productId) {
     const storedItemIndex = cartItems.findIndex(
         (item) => String(item.itemDetails._id) === productId,
     );
@@ -121,7 +118,7 @@ function cartDecrementByOne(cartItems, productId) {
  * @param {cartItem[]} cartItems
  * @returns {number} cart grand total
  */
-function cartCalculateTotal(cartItems) {
+export function cartCalculateTotal(cartItems) {
     let grandTotal = 0;
 
     for (let cartItem of cartItems) {
@@ -136,7 +133,7 @@ function cartCalculateTotal(cartItems) {
  * @param {cartItem[]} cartItems
  * @returns {number} cart quantity
  */
-function cartCalculateQuantity(cartItems) {
+export function cartCalculateQuantity(cartItems) {
     let cartQuantity = 0;
 
     for (let cartItem of cartItems) {
@@ -145,13 +142,3 @@ function cartCalculateQuantity(cartItems) {
 
     return cartQuantity;
 }
-
-module.exports = {
-    cartItemsInitialize,
-    cartAddItem,
-    cartRemoveItem,
-    cartIncrementByOne,
-    cartDecrementByOne,
-    cartCalculateTotal,
-    cartCalculateQuantity,
-};

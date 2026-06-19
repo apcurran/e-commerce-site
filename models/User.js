@@ -1,6 +1,4 @@
-"use strict";
-
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema({
     first_name: { type: String, min: 1, max: 200, required: true },
@@ -11,4 +9,6 @@ const UserSchema = new mongoose.Schema({
     admin_secret: { type: String },
 });
 
-module.exports = mongoose.model("User", UserSchema);
+const User = mongoose.model("User", UserSchema);
+
+export default User;

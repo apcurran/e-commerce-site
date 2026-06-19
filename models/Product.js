@@ -1,6 +1,4 @@
-"use strict";
-
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const RatingsSchema = new mongoose.Schema({
     user_id: { type: String, required: true },
@@ -30,4 +28,6 @@ const ProductSchema = new mongoose.Schema({
     ratings: [RatingsSchema],
 });
 
-module.exports = mongoose.model("Product", ProductSchema);
+const Product = mongoose.model("Product", ProductSchema);
+
+export default Product;
