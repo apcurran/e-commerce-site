@@ -1,6 +1,4 @@
-"use strict";
-
-function checkAuthenticated(req, res, next) {
+export function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
     }
@@ -10,7 +8,7 @@ function checkAuthenticated(req, res, next) {
     return res.redirect("/user/login");
 }
 
-function checkNotAuthenticated(req, res, next) {
+export function checkNotAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return res.redirect("/");
     }
@@ -18,7 +16,7 @@ function checkNotAuthenticated(req, res, next) {
     return next();
 }
 
-function checkAdminAuthenticated(req, res, next) {
+export function checkAdminAuthenticated(req, res, next) {
     if (req.isAuthenticated() && req.user.admin) {
         return next();
     }
@@ -27,9 +25,3 @@ function checkAdminAuthenticated(req, res, next) {
 
     return res.redirect("/admin/login");
 }
-
-module.exports = {
-    checkAuthenticated,
-    checkNotAuthenticated,
-    checkAdminAuthenticated,
-};

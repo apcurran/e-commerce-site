@@ -1,13 +1,12 @@
-"use strict";
+import bcrypt from "bcrypt";
+import passport from "passport";
 
-const bcrypt = require("bcrypt");
-const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
+import User from "../models/User.js";
+import { loginValidation } from "../validation/validate-user.js";
 
-const User = require("../models/User");
-const { loginValidation } = require("../validation/validate-user");
+import { Strategy as LocalStrategy } from "passport-local";
 
-async function authenticateUser(req, email, password, done) {
+export async function authenticateUser(req, email, password, done) {
     try {
         await loginValidation(req.body);
     } catch (err) {
@@ -35,7 +34,7 @@ async function authenticateUser(req, email, password, done) {
     }
 }
 
-async function authenticateAdmin(req, email, password, done) {
+export async function authenticateAdmin(req, email, password, done) {
     try {
         await loginValidation(req.body);
     } catch (err) {
