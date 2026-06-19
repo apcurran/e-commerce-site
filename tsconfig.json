@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "module": "NodeNext",
+        "moduleResolution": "nodenext",
+        "target": "esnext",
+        "allowJs": true,
+        "checkJs": true,
+        "noEmit": true
+    },
+    "exclude": ["node_modules", "client"]
+}
