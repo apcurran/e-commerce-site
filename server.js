@@ -1,36 +1,32 @@
-"use strict";
+import express from "express";
+import expressLayouts from "express-ejs-layouts";
+import mongoose from "mongoose";
+import methodOverride from "method-override";
+import flash from "express-flash";
+import session from "express-session";
+import passport from "passport";
+import { MongoStore } from "connect-mongo";
+import helmet from "helmet";
+import csrf from "@dr.pogodin/csurf";
 
-const express = require("express");
-const expressLayouts = require("express-ejs-layouts");
-const mongoose = require("mongoose");
-const methodOverride = require("method-override");
-const flash = require("express-flash");
-const session = require("express-session");
-const passport = require("passport");
-const { MongoStore } = require("connect-mongo");
-const helmet = require("helmet");
-const csrf = require("@dr.pogodin/csurf");
+import { GENERIC_ERR_MSG } from "./utils/generic-err-msg.js";
+import gamesRouter from "./routes/games-router.js";
+import userRouter from "./routes/user-router.js";
+import adminRouter from "./routes/admin-router.js";
+import checkoutRouter from "./routes/checkout-router.js";
+// Initialize Passport
+import "./config/passport-config.js";
 
 const PORT = process.env.PORT || 5000;
 const isProduction = process.env.NODE_ENV === "production";
 
-const { GENERIC_ERR_MSG } = require("./utils/generic-err-msg");
-
-// Initialize Passport
-require("./config/passport-config");
-
 // Routers
-const gamesRouter = require("./routes/games-router");
-const userRouter = require("./routes/user-router");
-const adminRouter = require("./routes/admin-router");
-const checkoutRouter = require("./routes/checkout-router");
-
 const app = express();
 
 // dev environment only
 if (!isProduction) {
-    const morgan = require("morgan");
-
+    // top-level await async import
+    const { default: morgan } = await import("morgan");
     app.use(morgan("dev"));
 }
 
