@@ -1,15 +1,12 @@
-"use strict";
+import express from "express";
+import passport from "passport";
 
-const express = require("express");
+import * as adminController from "../controllers/admin-controller.js";
+import { checkNotAuthenticated } from "../config/check-auth.js";
+
 const router = express.Router();
-const passport = require("passport");
-const adminController = require("../controllers/admin-controller");
-const { checkNotAuthenticated } = require("../config/check-auth");
 
-// GET Admin Log In
 router.get("/login", checkNotAuthenticated, adminController.getLogin);
-
-// POST Admin Log In
 router.post(
     "/login",
     checkNotAuthenticated,
@@ -19,11 +16,7 @@ router.post(
     }),
     adminController.postLogin,
 );
-
-// GET Admin Sign Up
 router.get("/signup", checkNotAuthenticated, adminController.getSignup);
-
-// POST Admin Sign Up
 router.post("/signup", checkNotAuthenticated, adminController.postSignup);
 
-module.exports = router;
+export default router;
