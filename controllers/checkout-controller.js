@@ -1,19 +1,18 @@
-"use strict";
+import Stripe from "stripe";
 
-const Stripe = require("stripe");
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-
-const {
+import {
     cartItemsInitialize,
     cartRemoveItem,
     cartIncrementByOne,
     cartDecrementByOne,
     cartCalculateTotal,
     cartCalculateQuantity,
-} = require("../models/Cart");
-const Order = require("../models/Order");
+} from "../models/Cart.js";
+import Order from "../models/Order.js";
 
-const getCheckoutPreview = (req, res) => {
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
+export const getCheckoutPreview = (req, res) => {
     if (!req.session.cart) {
         return res.render("shop/checkout-preview", {
             title: "Checkout Preview",
@@ -33,7 +32,7 @@ const getCheckoutPreview = (req, res) => {
     });
 };
 
-const postIncrease = (req, res) => {
+export const postIncrease = (req, res) => {
     const productId = req.params.id;
     const cartItems = cartItemsInitialize(req.session.cart);
     const updatedCart = cartIncrementByOne(cartItems, productId);
@@ -42,7 +41,7 @@ const postIncrease = (req, res) => {
     res.redirect("/checkout-preview");
 };
 
-const postReduce = (req, res) => {
+export const postReduce = (req, res) => {
     const productId = req.params.id;
     const cartItems = cartItemsInitialize(req.session.cart);
     const updatedCart = cartDecrementByOne(cartItems, productId);
@@ -51,7 +50,7 @@ const postReduce = (req, res) => {
     res.redirect("/checkout-preview");
 };
 
-const postRemove = (req, res) => {
+export const postRemove = (req, res) => {
     const productId = req.params.id;
     const cartItems = cartItemsInitialize(req.session.cart);
     const updatedCart = cartRemoveItem(cartItems, productId);
@@ -60,7 +59,7 @@ const postRemove = (req, res) => {
     res.redirect("/checkout-preview");
 };
 
-const getCheckout = (req, res) => {
+export const getCheckout = (req, res) => {
     // reload the page if the cart is empty
     if (!req.session.cart) {
         return res.redirect("/checkout-preview");
@@ -77,7 +76,7 @@ const getCheckout = (req, res) => {
     });
 };
 
-const postApiCreatePaymentIntent = async (req, res, next) => {
+export const postApiCreatePaymentIntent = async (req, res, next) => {
     try {
         if (!req.session.cart) {
             return res.redirect("/checkout-preview");
@@ -96,7 +95,7 @@ const postApiCreatePaymentIntent = async (req, res, next) => {
     }
 };
 
-const postApiSuccessfulOrder = async (req, res, next) => {
+export const postApiSuccessfulOrder = async (req, res, next) => {
     try {
         const cart = req.session.cart;
         const order = new Order({
@@ -114,14 +113,4 @@ const postApiSuccessfulOrder = async (req, res, next) => {
     } catch (err) {
         next(err);
     }
-};
-
-module.exports = {
-    getCheckoutPreview,
-    postIncrease,
-    postReduce,
-    postRemove,
-    getCheckout,
-    postApiCreatePaymentIntent,
-    postApiSuccessfulOrder,
 };

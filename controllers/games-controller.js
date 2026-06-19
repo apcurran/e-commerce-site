@@ -1,18 +1,17 @@
-"use strict";
+import mongoose from "mongoose";
 
-const mongoose = require("mongoose");
-
-const Product = require("../models/Product");
-const {
+import Product from "../models/Product.js";
+import {
     cartItemsInitialize,
     cartAddItem,
     cartCalculateQuantity,
-} = require("../models/Cart");
-const { gameValidation } = require("../validation/validate-game");
-const { checkRatingExistence } = require("../utils/check-rating-existence");
-const { GENERIC_ERR_MSG } = require("../utils/generic-err-msg");
+} from "../models/Cart.js";
 
-const getGamesIndex = async (req, res) => {
+import { gameValidation } from "../validation/validate-game.js";
+import { checkRatingExistence } from "../utils/check-rating-existence.js";
+import { GENERIC_ERR_MSG } from "../utils/generic-err-msg.js";
+
+export const getGamesIndex = async (req, res) => {
     const cartItems = cartItemsInitialize(req.session.cart);
     const cartTotalQuantity = cartCalculateQuantity(cartItems);
 
@@ -70,7 +69,7 @@ const getGamesIndex = async (req, res) => {
     }
 };
 
-const getGamesByGenre = async (req, res) => {
+export const getGamesByGenre = async (req, res) => {
     const cartItems = cartItemsInitialize(req.session.cart);
     const cartTotalQuantity = cartCalculateQuantity(cartItems);
     const { genre } = req.params;
@@ -106,7 +105,7 @@ const getGamesByGenre = async (req, res) => {
     }
 };
 
-const getGame = async (req, res) => {
+export const getGame = async (req, res) => {
     const cartItems = cartItemsInitialize(req.session.cart);
     const cartTotalQuantity = cartCalculateQuantity(cartItems);
 
@@ -180,7 +179,7 @@ const getGame = async (req, res) => {
     }
 };
 
-const postAddToCart = async (req, res, next) => {
+export const postAddToCart = async (req, res, next) => {
     try {
         const productId = req.params.id;
         const product = await Product.findById(productId);
@@ -194,7 +193,7 @@ const postAddToCart = async (req, res, next) => {
     }
 };
 
-const postAddRating = async (req, res) => {
+export const postAddRating = async (req, res) => {
     try {
         const productId = req.params.id;
         const product = await Product.findById(productId).select("ratings");
@@ -221,11 +220,11 @@ const postAddRating = async (req, res) => {
     }
 };
 
-const getAddGame = (req, res) => {
+export const getAddGame = (req, res) => {
     res.render("admin/add-game", { title: "New Game" });
 };
 
-const postAddGame = async (req, res) => {
+export const postAddGame = async (req, res) => {
     const cartItems = cartItemsInitialize(req.session.cart);
     const cartTotalQuantity = cartCalculateQuantity(cartItems);
 
@@ -264,7 +263,7 @@ const postAddGame = async (req, res) => {
     }
 };
 
-const getUpdateGame = async (req, res) => {
+export const getUpdateGame = async (req, res) => {
     const cartItems = cartItemsInitialize(req.session.cart);
     const cartTotalQuantity = cartCalculateQuantity(cartItems);
 
@@ -289,7 +288,7 @@ const getUpdateGame = async (req, res) => {
     }
 };
 
-const patchUpdateGame = async (req, res) => {
+export const patchUpdateGame = async (req, res) => {
     const cartItems = cartItemsInitialize(req.session.cart);
     const cartTotalQuantity = cartCalculateQuantity(cartItems);
 
@@ -331,7 +330,7 @@ const patchUpdateGame = async (req, res) => {
     }
 };
 
-const deleteGame = async (req, res) => {
+export const deleteGame = async (req, res) => {
     try {
         const { id } = req.params;
         await Product.findByIdAndDelete(id);
@@ -349,17 +348,4 @@ const deleteGame = async (req, res) => {
             cartTotalQuantity,
         });
     }
-};
-
-module.exports = {
-    getGamesIndex,
-    getGamesByGenre,
-    getGame,
-    postAddToCart,
-    postAddRating,
-    getAddGame,
-    postAddGame,
-    getUpdateGame,
-    patchUpdateGame,
-    deleteGame,
 };

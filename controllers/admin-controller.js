@@ -1,16 +1,15 @@
-"use strict";
+import bcrypt from "bcrypt";
 
-const bcrypt = require("bcrypt");
+import User from "../models/User.js";
 
-const { signupValidation } = require("../validation/validate-user");
-const User = require("../models/User");
-const { GENERIC_ERR_MSG } = require("../utils/generic-err-msg");
+import { signupValidation } from "../validation/validate-user.js";
+import { GENERIC_ERR_MSG } from "../utils/generic-err-msg.js";
 
-const getLogin = (req, res) => {
+export const getLogin = (req, res) => {
     res.render("admin/login", { title: "Admin Log In" });
 };
 
-const postLogin = (req, res) => {
+export const postLogin = (req, res) => {
     if (req.session.oldUrl) {
         const oldUrl = req.session.oldUrl;
 
@@ -21,11 +20,11 @@ const postLogin = (req, res) => {
     }
 };
 
-const getSignup = (req, res) => {
+export const getSignup = (req, res) => {
     res.render("admin/signup", { title: "Sign Up" });
 };
 
-const postSignup = async (req, res) => {
+export const postSignup = async (req, res) => {
     try {
         // Validate incoming data
         await signupValidation(req.body);
@@ -84,11 +83,4 @@ const postSignup = async (req, res) => {
             error: GENERIC_ERR_MSG,
         });
     }
-};
-
-module.exports = {
-    getLogin,
-    postLogin,
-    getSignup,
-    postSignup,
 };

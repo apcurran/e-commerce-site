@@ -1,25 +1,24 @@
-"use strict";
+import bcrypt from "bcrypt";
 
-const bcrypt = require("bcrypt");
-
-const User = require("../models/User");
-const Order = require("../models/Order");
-const {
+import User from "../models/User.js";
+import Order from "../models/Order.js";
+import {
     cartCalculateQuantity,
     cartCalculateTotal,
     cartItemsInitialize,
-} = require("../models/Cart");
-const { signupValidation } = require("../validation/validate-user");
-const { GENERIC_ERR_MSG } = require("../utils/generic-err-msg");
+} from "../models/Cart.js";
 
-const getSignup = (req, res) => {
+import { signupValidation } from "../validation/validate-user.js";
+import { GENERIC_ERR_MSG } from "../utils/generic-err-msg.js";
+
+export const getSignup = (req, res) => {
     const cartItems = cartItemsInitialize(req.session.cart);
     const cartTotalQuantity = cartCalculateQuantity(cartItems);
 
     res.render("user/signup", { title: "Sign Up", cartTotalQuantity });
 };
 
-const postSignup = async (req, res) => {
+export const postSignup = async (req, res) => {
     const cartItems = cartItemsInitialize(req.session.cart);
     const cartTotalQuantity = cartCalculateQuantity(cartItems);
 
@@ -76,14 +75,14 @@ const postSignup = async (req, res) => {
     }
 };
 
-const getLogin = (req, res) => {
+export const getLogin = (req, res) => {
     const cartItems = cartItemsInitialize(req.session.cart);
     const cartTotalQuantity = cartCalculateQuantity(cartItems);
 
     res.render("user/login", { title: "Log In", cartTotalQuantity });
 };
 
-const postLogin = (req, res, next) => {
+export const postLogin = (req, res, next) => {
     if (req.session.oldUrl) {
         const oldUrl = req.session.oldUrl;
 
@@ -94,13 +93,13 @@ const postLogin = (req, res, next) => {
     }
 };
 
-const getProfile = async (req, res) => {
+export const getProfile = async (req, res) => {
     const currentCartItems = cartItemsInitialize(req.session.cart);
     const currentCartTotalQuantity = cartCalculateQuantity(currentCartItems);
 
     try {
         let previousOrders = await Order.find({ user_id: req.user._id })
-            .sort({ created_at: -1 })
+            .toSorted({ created_at: -1 })
             .setOptions({ sanitizeFilter: true });
 
         for (let order of previousOrders) {
@@ -127,19 +126,10 @@ const getProfile = async (req, res) => {
     }
 };
 
-const getLogout = (req, res, next) => {
+export const getLogout = (req, res, next) => {
     req.logOut((err) => {
         if (err) return next(err);
 
         res.redirect("/");
     });
-};
-
-module.exports = {
-    getSignup,
-    postSignup,
-    getLogin,
-    postLogin,
-    getProfile,
-    getLogout,
 };
