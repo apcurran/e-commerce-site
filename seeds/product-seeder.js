@@ -1,3 +1,7 @@
+import mongoose from "mongoose";
+
+import Product from "../models/Product.js";
+
 // Specified database as argument - e.g.: node product-seeder.js mongodb+srv://cooluser:coolpassword@cluster0-mbdj7.mongodb.net/my_cool_project?retryWrites=true'
 
 // Get arguments passed on command line
@@ -8,10 +12,6 @@ if (!userArgs[0].startsWith('mongodb')) {
     return
 }
 */
-
-const Product = require("../models/Product");
-const mongoose = require("mongoose");
-
 var mongoDB = userArgs[0];
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = global.Promise;
